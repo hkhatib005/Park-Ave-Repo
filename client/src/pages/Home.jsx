@@ -16,7 +16,7 @@ const press = [
   { name: 'Vogue', quote: '"The finest jewellery boutique in Manhattan"' },
   { name: 'Town & Country', quote: '"A gem on Park Avenue"' },
   { name: 'New York Times', quote: '"Unrivaled craftsmanship since 1987"' },
-  { name: 'Harper\'s Bazaar', quote: '"Where NYC's elite shop for luxury"' },
+  { name: "Harper's Bazaar", quote: '"Where NYC\'s elite shop for luxury"' },
 ];
 
 export default function Home() {
