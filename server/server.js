@@ -18,4 +18,9 @@ app.use('/api/contact', require('./routes/contact'));
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok', time: new Date().toISOString() }));
 
-app.listen(PORT, () => console.log(`Park Ave Jewelry API running on port ${PORT}`));
+// Serve built React frontend in production
+const clientDist = path.join(__dirname, '../client/dist');
+app.use(express.static(clientDist));
+app.get('*', (req, res) => res.sendFile(path.join(clientDist, 'index.html')));
+
+app.listen(PORT, () => console.log(`Park Ave Jewelry running on port ${PORT}`));
