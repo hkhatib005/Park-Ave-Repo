@@ -1,0 +1,196 @@
+import { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { getProduct, getProducts } from '../utils/api';
+import { useCart } from '../context/CartContext';
+import ProductCard from '../components/ProductCard';
+
+export default function Product() {
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [related, setRelated] = useState([]);
+  const [activeImg, setActiveImg] = useState(0);
+  const [qty, setQty] = useState(1);
+  const [added, setAdded] = useState(false);
+  const { addItem } = useCart();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    getProduct(id).then(({ data }) => {
+      setProduct(data);
+      setActiveImg(0);
+      getProducts({ category: data.category, limit: 4 })
+        .then(r => setRelated(r.data.filter(p => p.id !== data.id).slice(0, 4)));
+    }).catch(() => {});
+  }, [id]);
+
+  const handleAdd = () => {
+    if (!product || product.in_stock === 0) return;
+    addItem(product, qty);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2500);
+  };
+
+  if (!product) return (
+    <div className="pt-20 min-h-screen flex items-center justify-center">
+      <div className="w-10 h-10 border-2 border-[#C9A84C] border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+
+  const images = product.images?.length ? product.images : [null];
+  const hasDiscount = product.compare_price && product.compare_price > product.price;
+
+  return (
+    <div className="pt-20 min-h-screen page-enter">
+      {/* Breadcrumb */}
+      <div className="max-w-7xl mx-auto px-6 py-4">
+        <nav className="flex items-center gap-2 text-[#555] text-xs">
+          <Link to="/" className="hover:text-[#C9A84C] transition-colors">Home</Link>
+          <span>/</span>
+          <Link to="/shop" className="hover:text-[#C9A84C] transition-colors">Shop</Link>
+          <span>/</span>
+          <Link to={`/shop?category=${product.category}`} className="hover:text-[#C9A84C] transition-colors">{product.category}</Link>
+          <span>/</span>
+          <span className="text-[#888]">{product.name}</span>
+        </nav>
+      </div>
+
+      {/* Main product */}
+      <div className="max-w-7xl mx-auto px-6 pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+
+          {/* Images */}
+          <div>
+            <div className="aspect-square bg-[#111] mb-3 overflow-hidden">
+              {images[activeImg] ? (
+                <img
+                  src={images[activeImg]}
+                  alt={product.name}
+                  className="w-full h-full object-cover transition-opacity duration-300"
+                />
+              ) : (
+                <div className="w-full h-full product-placeholder flex items-center justify-center">
+                  <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="0.5" opacity="0.3">
+                    <polygon points="12,2 22,8 22,16 12,22 2,16 2,8"/>
+                  </svg>
+                </div>
+              )}
+            </div>
+            {images.length > 1 && (
+              <div className="grid grid-cols-5 gap-2">
+                {images.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveImg(i)}
+                    className={`aspect-square bg-[#111] overflow-hidden border-2 transition-colors ${activeImg === i ? 'border-[#C9A84C]' : 'border-transparent'}`}
+                  >
+                    {img && <img src={img} alt="" className="w-full h-full object-cover" />}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Info */}
+          <div className="lg:pt-4">
+            <p className="section-label">{product.category}</p>
+            <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-2 leading-tight">
+              {product.name}
+            </h1>
+            {product.material && (
+              <p className="text-[#666] text-sm mb-4">{product.material}</p>
+            )}
+            {product.sku && (
+              <p className="text-[#444] text-xs tracking-wider mb-6">SKU: {product.sku}</p>
+            )}
+
+            {/* Price */}
+            <div className="flex items-baseline gap-4 mb-6">
+              <span className="font-display text-3xl font-bold text-[#C9A84C]">
+                ${product.price.toLocaleString()}
+              </span>
+              {hasDiscount && (
+                <span className="text-[#555] text-lg line-through">
+                  ${product.compare_price.toLocaleString()}
+                </span>
+              )}
+            </div>
+
+            <div className="w-full h-px bg-[#1e1e1e] mb-6" />
+
+            {/* Description */}
+            {product.description && (
+              <p className="text-[#888] text-sm leading-relaxed mb-8">
+                {product.description}
+              </p>
+            )}
+
+            {/* Qty + Add */}
+            {product.in_stock !== 0 ? (
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center border border-[#2a2a2a]">
+                    <button onClick={() => setQty(q => Math.max(1, q - 1))} className="w-10 h-10 flex items-center justify-center text-[#666] hover:text-white transition-colors">−</button>
+                    <span className="text-white w-10 text-center text-sm">{qty}</span>
+                    <button onClick={() => setQty(q => q + 1)} className="w-10 h-10 flex items-center justify-center text-[#666] hover:text-white transition-colors">+</button>
+                  </div>
+                  <p className="text-[#555] text-xs">{product.stock_qty} in stock</p>
+                </div>
+
+                <button
+                  onClick={handleAdd}
+                  className={`w-full py-4 text-xs tracking-[3px] uppercase font-bold transition-all duration-300 ${
+                    added
+                      ? 'bg-[#3fb950] text-black'
+                      : 'bg-[#C9A84C] text-black hover:bg-[#E2C47A] hover:shadow-[0_0_40px_rgba(201,168,76,0.25)]'
+                  }`}
+                >
+                  {added ? '✓ Added to Cart' : 'Add to Cart'}
+                </button>
+                <Link to="/contact" className="btn-outline-gold w-full text-center block">
+                  Inquire About This Piece
+                </Link>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div className="w-full py-4 text-center text-xs tracking-[3px] uppercase bg-[#1a1a1a] text-[#555] border border-[#2a2a2a]">
+                  Sold Out
+                </div>
+                <Link to="/contact" className="btn-outline-gold w-full text-center block">
+                  Join the Waitlist
+                </Link>
+              </div>
+            )}
+
+            {/* Trust signals */}
+            <div className="mt-8 pt-8 border-t border-[#1e1e1e] grid grid-cols-2 gap-4">
+              {[
+                { icon: '🔒', text: 'Secure checkout' },
+                { icon: '💎', text: 'GIA certified stones' },
+                { icon: '🚚', text: 'Free insured shipping' },
+                { icon: '↩️', text: '30-day returns' },
+              ].map(t => (
+                <div key={t.text} className="flex items-center gap-2">
+                  <span className="text-sm">{t.icon}</span>
+                  <span className="text-[#666] text-xs">{t.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Related products */}
+        {related.length > 0 && (
+          <div className="mt-24">
+            <div className="text-center mb-10">
+              <p className="section-label">You May Also Like</p>
+              <h2 className="font-display text-3xl font-bold text-white">Related Pieces</h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#1e1e1e]">
+              {related.map(p => <ProductCard key={p.id} product={p} />)}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
