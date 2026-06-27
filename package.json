@@ -1,6 +1,9 @@
 {
   "name": "park-ave-jewelry",
   "version": "1.0.0",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "postinstall": "cd server && npm install && cd ../client && npm install && npm run build",
     "build": "cd server && npm install && cd ../client && npm install && npm run build",
