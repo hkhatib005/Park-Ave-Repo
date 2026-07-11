@@ -65,12 +65,12 @@ export default function AdminProducts() {
   );
 
   return (
-    <div className="min-h-screen bg-[#080808]">
+    <div className="min-h-screen bg-[#071009]">
       {/* Nav */}
-      <nav className="bg-[#0e0e0e] border-b border-[#1e1e1e] px-6 h-14 flex items-center justify-between">
+      <nav className="bg-[#0c1714] border-b border-[#1b2e25] px-6 h-14 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Link to="/admin/dashboard" className="text-[#555] hover:text-white text-xs tracking-widest uppercase transition-colors">← Dashboard</Link>
-          <div className="h-4 w-px bg-[#2a2a2a]" />
+          <div className="h-4 w-px bg-[#24402f]" />
           <span className="text-white text-sm font-semibold">Products</span>
         </div>
         <button onClick={openNew} className="btn-gold py-2 px-5 text-xs">+ Add Product</button>
@@ -88,10 +88,10 @@ export default function AdminProducts() {
         </div>
 
         {/* Table */}
-        <div className="bg-[#111] border border-[#1e1e1e] overflow-x-auto">
+        <div className="bg-[#0f1d17] border border-[#1b2e25] overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-[#1a1a1a]">
+              <tr className="border-b border-[#182a20]">
                 {['Product', 'Category', 'Price', 'Stock', 'Featured', 'Actions'].map(h => (
                   <th key={h} className="px-5 py-3 text-left text-[#444] text-[10px] tracking-[2px] uppercase font-medium">{h}</th>
                 ))}
@@ -99,10 +99,10 @@ export default function AdminProducts() {
             </thead>
             <tbody>
               {filtered.map(p => (
-                <tr key={p.id} className="border-b border-[#1a1a1a] hover:bg-[#0e0e0e] transition-colors">
+                <tr key={p.id} className="border-b border-[#182a20] hover:bg-[#0c1714] transition-colors">
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-[#0a0a0a] flex-shrink-0 overflow-hidden">
+                      <div className="w-10 h-10 bg-[#0a1512] flex-shrink-0 overflow-hidden">
                         {p.images?.[0] ? <img src={p.images[0]} alt="" className="w-full h-full object-cover" /> : <div className="w-full h-full product-placeholder" />}
                       </div>
                       <div>
@@ -122,12 +122,12 @@ export default function AdminProducts() {
                     </span>
                   </td>
                   <td className="px-5 py-3">
-                    {p.featured ? <span className="text-[#C9A84C] text-lg">★</span> : <span className="text-[#2a2a2a] text-lg">☆</span>}
+                    {p.featured ? <span className="text-[#C9A84C] text-lg">★</span> : <span className="text-[#24402f] text-lg">☆</span>}
                   </td>
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-2">
                       <button onClick={() => openEdit(p)} className="text-[#555] hover:text-[#C9A84C] text-xs tracking-widest uppercase transition-colors">Edit</button>
-                      <span className="text-[#2a2a2a]">|</span>
+                      <span className="text-[#24402f]">|</span>
                       <button onClick={() => handleDelete(p.id)} className="text-[#555] hover:text-[#f85149] text-xs tracking-widest uppercase transition-colors">Delete</button>
                     </div>
                   </td>
@@ -144,8 +144,8 @@ export default function AdminProducts() {
       {/* Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-start justify-center overflow-y-auto py-10 px-4">
-          <div className="bg-[#0e0e0e] border border-[#1e1e1e] w-full max-w-xl">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-[#1e1e1e]">
+          <div className="bg-[#0c1714] border border-[#1b2e25] w-full max-w-xl">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[#1b2e25]">
               <h2 className="font-display text-xl font-bold text-white">{editing ? 'Edit Product' : 'New Product'}</h2>
               <button onClick={() => setShowForm(false)} className="text-[#555] hover:text-white transition-colors">✕</button>
             </div>

@@ -40,11 +40,11 @@ export default function AdminOrders() {
   const filtered = filter === 'all' ? orders : orders.filter(o => o.status === filter);
 
   return (
-    <div className="min-h-screen bg-[#080808]">
-      <nav className="bg-[#0e0e0e] border-b border-[#1e1e1e] px-6 h-14 flex items-center justify-between">
+    <div className="min-h-screen bg-[#071009]">
+      <nav className="bg-[#0c1714] border-b border-[#1b2e25] px-6 h-14 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Link to="/admin/dashboard" className="text-[#555] hover:text-white text-xs tracking-widest uppercase transition-colors">← Dashboard</Link>
-          <div className="h-4 w-px bg-[#2a2a2a]" />
+          <div className="h-4 w-px bg-[#24402f]" />
           <span className="text-white text-sm font-semibold">Orders</span>
         </div>
         <span className="text-[#555] text-xs">{orders.length} total orders</span>
@@ -58,7 +58,7 @@ export default function AdminOrders() {
               key={s}
               onClick={() => setFilter(s)}
               className={`flex-shrink-0 px-4 py-1.5 text-[10px] tracking-[2px] uppercase border transition-colors ${
-                filter === s ? 'border-[#C9A84C] text-[#C9A84C]' : 'border-[#2a2a2a] text-[#555] hover:text-white hover:border-[#555]'
+                filter === s ? 'border-[#C9A84C] text-[#C9A84C]' : 'border-[#24402f] text-[#555] hover:text-white hover:border-[#555]'
               }`}
             >
               {s}
@@ -77,7 +77,7 @@ export default function AdminOrders() {
                 key={o.id}
                 onClick={() => setSelected(o)}
                 className={`w-full text-left p-4 border transition-colors ${
-                  selected?.id === o.id ? 'border-[#C9A84C] bg-[#111]' : 'border-[#1e1e1e] bg-[#111] hover:border-[#2a2a2a]'
+                  selected?.id === o.id ? 'border-[#C9A84C] bg-[#0f1d17]' : 'border-[#1b2e25] bg-[#0f1d17] hover:border-[#24402f]'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
@@ -103,7 +103,7 @@ export default function AdminOrders() {
                 Select an order to view details
               </div>
             ) : (
-              <div className="bg-[#111] border border-[#1e1e1e] p-6">
+              <div className="bg-[#0f1d17] border border-[#1b2e25] p-6">
                 <div className="flex items-start justify-between mb-6">
                   <div>
                     <h2 className="font-display text-xl font-bold text-white">{selected.order_number}</h2>
@@ -137,7 +137,7 @@ export default function AdminOrders() {
                   <h3 className="text-[#444] text-[10px] tracking-[2px] uppercase mb-3">Order Items</h3>
                   <div className="space-y-2">
                     {selected.items?.map((item, i) => (
-                      <div key={i} className="flex justify-between text-sm py-2 border-b border-[#1a1a1a]">
+                      <div key={i} className="flex justify-between text-sm py-2 border-b border-[#182a20]">
                         <span className="text-[#888]">{item.name} × {item.qty}</span>
                         <span className="text-[#C9A84C]">${(item.price * item.qty).toLocaleString()}</span>
                       </div>
@@ -151,7 +151,7 @@ export default function AdminOrders() {
 
                 {/* Notes */}
                 {selected.notes && (
-                  <div className="mb-5 p-3 bg-[#0a0a0a] border border-[#1e1e1e]">
+                  <div className="mb-5 p-3 bg-[#0a1512] border border-[#1b2e25]">
                     <p className="text-[#444] text-[10px] tracking-[2px] uppercase mb-1">Notes</p>
                     <p className="text-[#888] text-xs">{selected.notes}</p>
                   </div>
@@ -167,7 +167,7 @@ export default function AdminOrders() {
                         onClick={() => changePayment(selected.id, p)}
                         disabled={selected.payment_status === p}
                         className={`text-[10px] tracking-[2px] uppercase px-3 py-1.5 border transition-colors disabled:opacity-30 disabled:cursor-default ${
-                          selected.payment_status === p ? PAYMENT_COLORS[p] : 'border-[#2a2a2a] text-[#555] hover:border-[#555] hover:text-white'
+                          selected.payment_status === p ? PAYMENT_COLORS[p] : 'border-[#24402f] text-[#555] hover:border-[#555] hover:text-white'
                         }`}
                       >
                         {p}
@@ -188,7 +188,7 @@ export default function AdminOrders() {
                         className={`text-[10px] tracking-[2px] uppercase px-3 py-1.5 border transition-colors disabled:opacity-30 disabled:cursor-default ${
                           selected.status === s
                             ? `border-[#C9A84C] text-[#C9A84C]`
-                            : 'border-[#2a2a2a] text-[#555] hover:border-[#555] hover:text-white'
+                            : 'border-[#24402f] text-[#555] hover:border-[#555] hover:text-white'
                         }`}
                       >
                         {s}

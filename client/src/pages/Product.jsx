@@ -60,7 +60,7 @@ export default function Product() {
 
           {/* Images */}
           <div>
-            <div className="aspect-square bg-[#111] mb-3 overflow-hidden">
+            <div className="aspect-square bg-[#0f1d17] mb-3 overflow-hidden">
               {images[activeImg] ? (
                 <img
                   src={images[activeImg]}
@@ -81,7 +81,7 @@ export default function Product() {
                   <button
                     key={i}
                     onClick={() => setActiveImg(i)}
-                    className={`aspect-square bg-[#111] overflow-hidden border-2 transition-colors ${activeImg === i ? 'border-[#C9A84C]' : 'border-transparent'}`}
+                    className={`aspect-square bg-[#0f1d17] overflow-hidden border-2 transition-colors ${activeImg === i ? 'border-[#C9A84C]' : 'border-transparent'}`}
                   >
                     {img && <img src={img} alt="" className="w-full h-full object-cover" />}
                   </button>
@@ -96,6 +96,14 @@ export default function Product() {
             <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-2 leading-tight">
               {product.name}
             </h1>
+            <div className="flex items-center gap-2 mb-3">
+              <div className="flex text-[#C9A84C]">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                ))}
+              </div>
+              <span className="text-[#888] text-xs">5.0 · 93 Google Reviews</span>
+            </div>
             {product.material && (
               <p className="text-[#666] text-sm mb-4">{product.material}</p>
             )}
@@ -115,7 +123,7 @@ export default function Product() {
               )}
             </div>
 
-            <div className="w-full h-px bg-[#1e1e1e] mb-6" />
+            <div className="w-full h-px bg-[#1b2e25] mb-6" />
 
             {/* Description */}
             {product.description && (
@@ -128,12 +136,14 @@ export default function Product() {
             {product.in_stock !== 0 ? (
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center border border-[#2a2a2a]">
+                  <div className="flex items-center border border-[#24402f]">
                     <button onClick={() => setQty(q => Math.max(1, q - 1))} className="w-10 h-10 flex items-center justify-center text-[#666] hover:text-white transition-colors">−</button>
                     <span className="text-white w-10 text-center text-sm">{qty}</span>
                     <button onClick={() => setQty(q => q + 1)} className="w-10 h-10 flex items-center justify-center text-[#666] hover:text-white transition-colors">+</button>
                   </div>
-                  <p className="text-[#555] text-xs">{product.stock_qty} in stock</p>
+                  <p className={`text-xs font-medium ${product.stock_qty <= 3 ? 'text-[#d29922]' : 'text-[#555]'}`}>
+                    {product.stock_qty <= 3 ? `Only ${product.stock_qty} left in stock` : `${product.stock_qty} in stock`}
+                  </p>
                 </div>
 
                 <button
@@ -152,7 +162,7 @@ export default function Product() {
               </div>
             ) : (
               <div className="space-y-4">
-                <div className="w-full py-4 text-center text-xs tracking-[3px] uppercase bg-[#1a1a1a] text-[#555] border border-[#2a2a2a]">
+                <div className="w-full py-4 text-center text-xs tracking-[3px] uppercase bg-[#182a20] text-[#555] border border-[#24402f]">
                   Sold Out
                 </div>
                 <Link to="/contact" className="btn-outline-gold w-full text-center block">
@@ -162,12 +172,12 @@ export default function Product() {
             )}
 
             {/* Trust signals */}
-            <div className="mt-8 pt-8 border-t border-[#1e1e1e] grid grid-cols-2 gap-4">
+            <div className="mt-8 pt-8 border-t border-[#1b2e25] grid grid-cols-2 gap-4">
               {[
                 { icon: '🔒', text: 'Secure checkout' },
                 { icon: '💎', text: 'GIA certified stones' },
                 { icon: '🚚', text: 'Free insured shipping' },
-                { icon: '↩️', text: '30-day returns' },
+                { icon: '↩️', text: 'Store credit returns' },
               ].map(t => (
                 <div key={t.text} className="flex items-center gap-2">
                   <span className="text-sm">{t.icon}</span>
@@ -185,7 +195,7 @@ export default function Product() {
               <p className="section-label">You May Also Like</p>
               <h2 className="font-display text-3xl font-bold text-white">Related Pieces</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#1e1e1e]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#1b2e25]">
               {related.map(p => <ProductCard key={p.id} product={p} />)}
             </div>
           </div>

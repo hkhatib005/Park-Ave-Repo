@@ -56,7 +56,7 @@ export default function Account() {
                     <p key={i} className="text-[#888] text-sm">{item.name} × {item.qty}</p>
                   ))}
                 </div>
-                <div className="flex items-center justify-between pt-3 border-t border-[#1a1a1a]">
+                <div className="flex items-center justify-between pt-3 border-t border-[#182a20]">
                   <span className="text-[#555] text-xs">{new Date(o.created_at).toLocaleDateString()}</span>
                   <span className="text-white font-semibold">${o.total.toLocaleString()}</span>
                 </div>

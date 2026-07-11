@@ -18,11 +18,12 @@ export default function ProductCard({ product }) {
   const discountPct = hasDiscount
     ? Math.round((1 - product.price / product.compare_price) * 100)
     : null;
+  const lowStock = product.in_stock !== 0 && product.stock_qty != null && product.stock_qty <= 3;
 
   return (
     <div className="card-luxury group relative flex flex-col">
       {/* Image */}
-      <Link to={`/product/${product.id}`} className="block relative overflow-hidden aspect-[3/4] bg-[#111]">
+      <Link to={`/product/${product.id}`} className="block relative overflow-hidden aspect-[3/4] bg-[#0f1d17]">
         {image ? (
           <img
             src={image}
@@ -44,13 +45,18 @@ export default function ProductCard({ product }) {
             </span>
           )}
           {discountPct && (
-            <span className="bg-[#0a0a0a] text-[#C9A84C] border border-[#C9A84C]/30 text-[9px] tracking-[2px] uppercase font-bold px-2 py-1">
+            <span className="bg-[#0a1512] text-[#C9A84C] border border-[#C9A84C]/30 text-[9px] tracking-[2px] uppercase font-bold px-2 py-1">
               -{discountPct}%
             </span>
           )}
           {product.in_stock === 0 && (
-            <span className="bg-[#1e1e1e] text-[#666] text-[9px] tracking-[2px] uppercase font-bold px-2 py-1">
+            <span className="bg-[#1b2e25] text-[#666] text-[9px] tracking-[2px] uppercase font-bold px-2 py-1">
               Sold Out
+            </span>
+          )}
+          {lowStock && (
+            <span className="bg-[#0a1512] text-[#d29922] border border-[#d29922]/30 text-[9px] tracking-[2px] uppercase font-bold px-2 py-1">
+              Only {product.stock_qty} Left
             </span>
           )}
         </div>

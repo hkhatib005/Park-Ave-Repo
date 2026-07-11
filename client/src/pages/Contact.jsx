@@ -25,7 +25,7 @@ export default function Contact() {
   return (
     <div className="pt-20 page-enter">
       {/* Header */}
-      <div className="py-20 px-6 bg-[#080808] border-b border-[#1e1e1e] text-center relative overflow-hidden">
+      <div className="py-20 px-6 bg-[#071009] border-b border-[#1b2e25] text-center relative overflow-hidden">
         <div className="absolute inset-0" style={{ backgroundImage: `radial-gradient(ellipse at center, rgba(201,168,76,0.05) 0%, transparent 70%)` }} />
         <div className="relative z-10">
           <p className="section-label">Get In Touch</p>
@@ -64,7 +64,7 @@ export default function Contact() {
                   },
                 ].map(c => (
                   <div key={c.label} className="flex gap-4">
-                    <div className="w-10 h-10 border border-[#2a2a2a] flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 border border-[#24402f] flex items-center justify-center flex-shrink-0">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5">
                         {c.icon}
                       </svg>
@@ -78,7 +78,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="border-t border-[#1e1e1e] pt-8">
+            <div className="border-t border-[#1b2e25] pt-8">
               <h3 className="text-white text-xs tracking-[3px] uppercase font-semibold mb-4">Hours</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
@@ -96,7 +96,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="border-t border-[#1e1e1e] pt-8">
+            <div className="border-t border-[#1b2e25] pt-8">
               <h3 className="text-white text-xs tracking-[3px] uppercase font-semibold mb-4">Enquiry Types</h3>
               <div className="space-y-2">
                 {['Product Enquiry', 'Custom Jewellery', 'Watch Consultation', 'Repairs & Restoration', 'Corporate Gifts'].map(t => (
