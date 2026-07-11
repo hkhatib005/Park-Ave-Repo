@@ -94,10 +94,10 @@ if (!contactCols.includes('read')) db.exec('ALTER TABLE contacts ADD COLUMN read
 
 // Seed admin — credentials come from env, never hardcoded/displayed in the app.
 // If ADMIN_PASSWORD isn't set, generate one and print it once to the server console.
-const adminEmail = process.env.ADMIN_EMAIL || 'admin@parkavejewelers.com';
+const adminEmail = (process.env.ADMIN_EMAIL || 'admin@parkavejewelers.com').trim().toLowerCase();
 const existingAdmin = db.prepare('SELECT id FROM admins WHERE email = ?').get(adminEmail);
 if (!existingAdmin) {
-  const password = process.env.ADMIN_PASSWORD || crypto.randomBytes(9).toString('base64url');
+  const password = process.env.ADMIN_PASSWORD?.trim() || crypto.randomBytes(9).toString('base64url');
   const hash = bcrypt.hashSync(password, 12);
   db.prepare('INSERT INTO admins (email, password) VALUES (?, ?)').run(adminEmail, hash);
   console.log('='.repeat(60));
