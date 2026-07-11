@@ -32,7 +32,7 @@ export default function Home() {
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-[#0a0a0a]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a1512] to-[#0a1512]" />
         <div className="absolute inset-0"
           style={{
             backgroundImage: `radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.06) 0%, transparent 60%),
@@ -74,7 +74,7 @@ export default function Home() {
       </section>
 
       {/* GOOGLE REVIEWS BAR */}
-      <div className="border-y border-[#1e1e1e] bg-[#080808] py-6">
+      <div className="border-y border-[#1b2e25] bg-[#071009] py-6">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3 flex-shrink-0">
@@ -103,14 +103,14 @@ export default function Home() {
             <h2 className="section-title">Our Collections</h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-[#1e1e1e]">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-[#1b2e25]">
             {categories.map(cat => (
               <Link
                 key={cat.name}
                 to={`/shop?category=${cat.name}`}
-                className="group bg-[#0a0a0a] p-6 flex flex-col items-center text-center hover:bg-[#111] transition-colors duration-300"
+                className="group bg-[#0a1512] p-6 flex flex-col items-center text-center hover:bg-[#0f1d17] transition-colors duration-300"
               >
-                <div className="w-14 h-14 border border-[#2a2a2a] group-hover:border-[#C9A84C] rounded-full flex items-center justify-center text-2xl mb-4 transition-colors duration-300">
+                <div className="w-14 h-14 border border-[#24402f] group-hover:border-[#C9A84C] rounded-full flex items-center justify-center text-2xl mb-4 transition-colors duration-300">
                   {cat.icon}
                 </div>
                 <h3 className="text-white text-sm font-semibold mb-1 group-hover:text-[#C9A84C] transition-colors duration-300">
@@ -125,7 +125,7 @@ export default function Home() {
 
       {/* FEATURED PRODUCTS */}
       {featured.length > 0 && (
-        <section className="py-24 px-6 bg-[#080808]">
+        <section className="py-24 px-6 bg-[#071009]">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-end justify-between mb-12">
               <div>
@@ -137,7 +137,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#1e1e1e]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#1b2e25]">
               {featured.slice(0, 8).map(p => (
                 <ProductCard key={p.id} product={p} />
               ))}
@@ -152,7 +152,7 @@ export default function Home() {
 
       {/* CRAFTSMANSHIP BANNER */}
       <section className="relative py-32 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#111] to-[#0a0a0a]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1512] via-[#0f1d17] to-[#0a1512]" />
         <div className="absolute inset-0" style={{
           backgroundImage: `radial-gradient(ellipse at center, rgba(201,168,76,0.08) 0%, transparent 70%)`
         }} />
@@ -184,7 +184,7 @@ export default function Home() {
       </section>
 
       {/* CUSTOM ORDERS */}
-      <section className="py-20 px-6 bg-[#080808]">
+      <section className="py-20 px-6 bg-[#071009]">
         <div className="max-w-7xl mx-auto">
           <div className="border border-[#C9A84C]/20 p-12 md:p-16 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[#C9A84C]/5 to-transparent" />

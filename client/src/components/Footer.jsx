@@ -23,7 +23,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#080808] border-t border-[#1e1e1e]">
+    <footer className="bg-[#071009] border-t border-[#1b2e25]">
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
@@ -130,7 +130,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-[#1e1e1e] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-[#1b2e25] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[#444] text-xs">
             © {new Date().getFullYear()} Park Ave Jewelers. All rights reserved.
           </p>

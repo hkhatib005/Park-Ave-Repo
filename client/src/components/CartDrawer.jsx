@@ -15,10 +15,10 @@ export default function CartDrawer() {
       )}
 
       {/* Drawer */}
-      <div className={`fixed top-0 right-0 h-full w-full max-w-md bg-[#0e0e0e] border-l border-[#1e1e1e] z-50 flex flex-col transform transition-transform duration-400 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed top-0 right-0 h-full w-full max-w-md bg-[#0c1714] border-l border-[#1b2e25] z-50 flex flex-col transform transition-transform duration-400 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
 
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-[#1e1e1e]">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-[#1b2e25]">
           <div>
             <h2 className="font-display text-xl font-bold text-white">Your Cart</h2>
             <p className="text-[#555] text-xs mt-0.5">{count} {count === 1 ? 'item' : 'items'}</p>
@@ -53,9 +53,9 @@ export default function CartDrawer() {
           ) : (
             <div className="space-y-4">
               {items.map(item => (
-                <div key={item.id} className="flex gap-4 py-4 border-b border-[#1a1a1a]">
+                <div key={item.id} className="flex gap-4 py-4 border-b border-[#182a20]">
                   {/* Image */}
-                  <div className="w-20 h-20 bg-[#111] flex-shrink-0 overflow-hidden">
+                  <div className="w-20 h-20 bg-[#0f1d17] flex-shrink-0 overflow-hidden">
                     {item.images?.[0] ? (
                       <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
                     ) : (
@@ -71,7 +71,7 @@ export default function CartDrawer() {
                     <p className="text-[#555] text-xs mb-3">{item.category}</p>
                     <div className="flex items-center justify-between">
                       {/* Qty */}
-                      <div className="flex items-center gap-2 border border-[#2a2a2a]">
+                      <div className="flex items-center gap-2 border border-[#24402f]">
                         <button
                           onClick={() => updateQty(item.id, item.qty - 1)}
                           className="w-7 h-7 flex items-center justify-center text-[#666] hover:text-white transition-colors"
@@ -109,7 +109,7 @@ export default function CartDrawer() {
 
         {/* Footer */}
         {items.length > 0 && (
-          <div className="px-6 py-6 border-t border-[#1e1e1e]">
+          <div className="px-6 py-6 border-t border-[#1b2e25]">
             <div className="flex justify-between items-center mb-2">
               <span className="text-[#666] text-sm">Subtotal</span>
               <span className="text-white font-semibold">${total.toLocaleString()}</span>
