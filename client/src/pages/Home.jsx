@@ -12,11 +12,10 @@ const categories = [
   { name: 'Custom Jewellery', icon: '🎨', desc: 'Bespoke pieces made for you' },
 ];
 
-const press = [
-  { name: 'Vogue', quote: '"The finest jewellery boutique in Manhattan"' },
-  { name: 'Town & Country', quote: '"A gem on Park Avenue"' },
-  { name: 'New York Times', quote: '"Unrivaled craftsmanship since 1987"' },
-  { name: "Harper's Bazaar", quote: '"Where NYC\'s elite shop for luxury"' },
+const reviews = [
+  { quote: '"Beautiful selection, great prices, and amazing customer service."' },
+  { quote: '"Great service and staff know what they\'re talking about."' },
+  { quote: '"Very nice people, fast service and kind with their customers."' },
 ];
 
 export default function Home() {
@@ -46,7 +45,7 @@ export default function Home() {
         <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-[#C9A84C]/20 to-transparent mr-16 hidden lg:block" />
 
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-          <p className="section-label mb-6 animate-fade-in">New York City · Est. 1987</p>
+          <p className="section-label mb-6 animate-fade-in">New York City · Diamond District</p>
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] tracking-tight mb-6">
             Where Luxury
             <br />
@@ -54,7 +53,7 @@ export default function Home() {
           </h1>
           <div className="divider-gold" />
           <p className="text-[#888] text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-            Park Avenue's finest collection of diamonds, fine jewellery, and luxury timepieces.
+            Manhattan's Diamond District, home to our finest collection of diamonds, fine jewellery, and luxury timepieces.
             Curated for those who demand only the extraordinary.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -74,16 +73,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PRESS BAR */}
-      <div className="border-y border-[#1e1e1e] bg-[#080808] py-5">
+      {/* GOOGLE REVIEWS BAR */}
+      <div className="border-y border-[#1e1e1e] bg-[#080808] py-6">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between gap-8 overflow-x-auto no-scrollbar">
-            {press.map(p => (
-              <div key={p.name} className="flex-shrink-0 text-center">
-                <p className="font-display text-[#888] text-sm italic">{p.quote}</p>
-                <p className="text-[#C9A84C] text-[10px] tracking-[3px] uppercase mt-1">— {p.name}</p>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <div className="flex text-[#C9A84C]">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                ))}
               </div>
-            ))}
+              <span className="text-white text-sm font-semibold">5.0</span>
+              <span className="text-[#555] text-sm">· 93 Google Reviews</span>
+            </div>
+            <div className="flex items-center gap-8 overflow-x-auto no-scrollbar min-w-0">
+              {reviews.map((r, i) => (
+                <p key={i} className="flex-shrink-0 font-display text-[#888] text-sm italic max-w-xs text-center">{r.quote}</p>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -157,13 +164,13 @@ export default function Home() {
           </h2>
           <div className="divider-gold" />
           <p className="text-[#888] text-base leading-relaxed mb-10 max-w-xl mx-auto">
-            From our studio on Park Avenue, each jewel is sourced, certified, and set by master craftsmen
-            with decades of experience. We stand behind every piece with our lifetime guarantee.
+            From our booth in Manhattan's historic Diamond District, each jewel is sourced, certified, and
+            set by master craftsmen. We stand behind every piece with our lifetime guarantee.
           </p>
           <div className="grid grid-cols-3 gap-8 mb-10">
             {[
-              { num: '35+', label: 'Years of Excellence' },
-              { num: '10K+', label: 'Happy Clients' },
+              { num: '5.0★', label: 'Google Rating' },
+              { num: '93+', label: 'Five-Star Reviews' },
               { num: '100%', label: 'Certified Stones' },
             ].map(s => (
               <div key={s.label}>

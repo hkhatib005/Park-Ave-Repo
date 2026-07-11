@@ -50,17 +50,17 @@ export default function Contact() {
                   {
                     icon: <><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></>,
                     label: 'Address',
-                    value: '520 Park Avenue\nNew York, NY 10022'
+                    value: '25 W 47th St, Booth #8\nNew York, NY 10036'
                   },
                   {
                     icon: <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.61 4.9 2 2 0 0 1 3.59 2.72h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 10.1a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>,
                     label: 'Phone',
-                    value: '(212) 555-0192'
+                    value: '(917) 599-3862'
                   },
                   {
                     icon: <><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></>,
                     label: 'Email',
-                    value: 'info@parkavejewelry.com'
+                    value: 'Parkavejewelers1@gmail.com'
                   },
                 ].map(c => (
                   <div key={c.label} className="flex gap-4">
@@ -83,15 +83,15 @@ export default function Contact() {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-[#666]">Mon – Fri</span>
-                  <span className="text-white">10am – 7pm</span>
+                  <span className="text-white">10am – 5:30pm</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-[#666]">Saturday</span>
-                  <span className="text-white">10am – 6pm</span>
+                  <span className="text-white">Closed</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-[#666]">Sunday</span>
-                  <span className="text-white">12pm – 5pm</span>
+                  <span className="text-white">Closed</span>
                 </div>
               </div>
             </div>
