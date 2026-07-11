@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
-const path = require('path');
 const auth = require('../middleware/auth');
+const { UPLOADS_DIR } = require('../config');
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ const MIME_EXT = {
 };
 
 const storage = multer.diskStorage({
-  destination: path.join(__dirname, '../uploads'),
+  destination: UPLOADS_DIR,
   filename: (req, file, cb) => {
     const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
     // Extension is derived from the verified mimetype, never the client-supplied filename.
