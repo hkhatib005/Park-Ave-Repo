@@ -1,9 +1,13 @@
 const Database = require('better-sqlite3');
+const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
-const DB_PATH = path.join(__dirname, 'park_ave.db');
+// DB_PATH lets the database live on a mounted persistent disk in production
+// (e.g. Render's ephemeral filesystem wipes local files on every redeploy).
+const DB_PATH = process.env.DB_PATH || path.join(__dirname, 'park_ave.db');
+fs.mkdirSync(path.dirname(DB_PATH), { recursive: true });
 const db = new Database(DB_PATH);
 
 db.pragma('journal_mode = WAL');
