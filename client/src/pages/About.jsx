@@ -2,7 +2,7 @@ export default function About() {
   return (
     <div className="pt-20 page-enter">
       {/* Hero */}
-      <div className="relative py-28 px-6 bg-[#080808] border-b border-[#1e1e1e] text-center overflow-hidden">
+      <div className="relative py-28 px-6 bg-[#071009] border-b border-[#1b2e25] text-center overflow-hidden">
         <div className="absolute inset-0" style={{ backgroundImage: `radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%)` }} />
         <div className="relative z-10">
           <p className="section-label">Our Story</p>
@@ -41,7 +41,7 @@ export default function About() {
             </div>
           </div>
           <div className="relative">
-            <div className="aspect-[4/5] bg-[#111] border border-[#1e1e1e] flex items-center justify-center">
+            <div className="aspect-[4/5] bg-[#0f1d17] border border-[#1b2e25] flex items-center justify-center">
               <div className="text-center p-8">
                 <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="0.5" opacity="0.4" className="mx-auto mb-4">
                   <polygon points="12,2 22,8 22,16 12,22 2,16 2,8"/>
@@ -57,7 +57,7 @@ export default function About() {
       </section>
 
       {/* Stats */}
-      <section className="py-16 px-6 bg-[#080808] border-y border-[#1e1e1e]">
+      <section className="py-16 px-6 bg-[#071009] border-y border-[#1b2e25]">
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
             { num: '2023', label: 'Founded' },
@@ -80,7 +80,7 @@ export default function About() {
             <p className="section-label">What Sets Us Apart</p>
             <h2 className="section-title">Our Values</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#1e1e1e]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#1b2e25]">
             {[
               {
                 icon: '💎',
@@ -98,7 +98,7 @@ export default function About() {
                 desc: 'Each piece is crafted by experienced jewellers, ensuring perfection in every detail.'
               },
             ].map(v => (
-              <div key={v.title} className="bg-[#0a0a0a] p-8 text-center">
+              <div key={v.title} className="bg-[#0a1512] p-8 text-center">
                 <div className="text-4xl mb-4">{v.icon}</div>
                 <h3 className="font-display text-xl font-bold text-white mb-3">{v.title}</h3>
                 <p className="text-[#666] text-sm leading-relaxed">{v.desc}</p>
@@ -135,7 +135,7 @@ export default function About() {
       </section>
 
       {/* Visit us */}
-      <section className="py-16 px-6 bg-[#080808]">
+      <section className="py-16 px-6 bg-[#071009]">
         <div className="max-w-3xl mx-auto text-center">
           <p className="section-label">Come See Us</p>
           <h2 className="section-title mb-4">Visit Our Boutique</h2>

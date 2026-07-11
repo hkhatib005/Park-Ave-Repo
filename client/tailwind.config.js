@@ -10,10 +10,10 @@ export default {
           dark: '#9B7A2E',
         },
         dark: {
-          DEFAULT: '#0a0a0a',
-          50: '#1a1a1a',
-          100: '#141414',
-          200: '#111111',
+          DEFAULT: '#0a1512',
+          50: '#182a20',
+          100: '#0c1714',
+          200: '#0f1d17',
         }
       },
       fontFamily: {

@@ -32,9 +32,9 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080808]">
+    <div className="min-h-screen bg-[#071009]">
       {/* Admin nav */}
-      <nav className="bg-[#0e0e0e] border-b border-[#1e1e1e] px-6 h-14 flex items-center justify-between">
+      <nav className="bg-[#0c1714] border-b border-[#1b2e25] px-6 h-14 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center gap-2">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="#C9A84C">
@@ -43,7 +43,7 @@ export default function AdminDashboard() {
             </svg>
             <span className="font-display text-white text-sm font-bold">Park Ave</span>
           </Link>
-          <div className="h-4 w-px bg-[#2a2a2a]" />
+          <div className="h-4 w-px bg-[#24402f]" />
           <span className="text-[#555] text-xs tracking-widest uppercase">Admin Dashboard</span>
         </div>
         <div className="flex items-center gap-4">
@@ -71,7 +71,7 @@ export default function AdminDashboard() {
             { label: 'Unread Messages', value: stats.unreadMessages, icon: '✉️', color: 'text-[#f85149]' },
             { label: 'Newsletter Subscribers', value: stats.subscribers, icon: '📰', color: 'text-[#58a6ff]' },
           ].map(s => (
-            <div key={s.label} className="bg-[#111] border border-[#1e1e1e] p-5">
+            <div key={s.label} className="bg-[#0f1d17] border border-[#1b2e25] p-5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-2xl">{s.icon}</span>
               </div>
@@ -83,7 +83,7 @@ export default function AdminDashboard() {
 
         {/* Quick actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-          <Link to="/admin/products" className="group bg-[#111] border border-[#1e1e1e] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
+          <Link to="/admin/products" className="group bg-[#0f1d17] border border-[#1b2e25] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
             <div className="w-12 h-12 bg-[#C9A84C]/10 border border-[#C9A84C]/20 flex items-center justify-center text-xl">💎</div>
             <div>
               <h3 className="text-white font-semibold group-hover:text-[#C9A84C] transition-colors">Manage Products</h3>
@@ -93,7 +93,7 @@ export default function AdminDashboard() {
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </Link>
-          <Link to="/admin/orders" className="group bg-[#111] border border-[#1e1e1e] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
+          <Link to="/admin/orders" className="group bg-[#0f1d17] border border-[#1b2e25] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
             <div className="w-12 h-12 bg-[#58a6ff]/10 border border-[#58a6ff]/20 flex items-center justify-center text-xl">📦</div>
             <div>
               <h3 className="text-white font-semibold group-hover:text-[#C9A84C] transition-colors">Orders &amp; Payments</h3>
@@ -103,7 +103,7 @@ export default function AdminDashboard() {
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </Link>
-          <Link to="/admin/customers" className="group bg-[#111] border border-[#1e1e1e] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
+          <Link to="/admin/customers" className="group bg-[#0f1d17] border border-[#1b2e25] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
             <div className="w-12 h-12 bg-[#bc8cff]/10 border border-[#bc8cff]/20 flex items-center justify-center text-xl">👤</div>
             <div>
               <h3 className="text-white font-semibold group-hover:text-[#C9A84C] transition-colors">Customer Accounts</h3>
@@ -113,7 +113,7 @@ export default function AdminDashboard() {
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </Link>
-          <Link to="/admin/contacts" className="group bg-[#111] border border-[#1e1e1e] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
+          <Link to="/admin/contacts" className="group bg-[#0f1d17] border border-[#1b2e25] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
             <div className="w-12 h-12 bg-[#f85149]/10 border border-[#f85149]/20 flex items-center justify-center text-xl">✉️</div>
             <div>
               <h3 className="text-white font-semibold group-hover:text-[#C9A84C] transition-colors">Client Messages</h3>
@@ -123,7 +123,7 @@ export default function AdminDashboard() {
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </Link>
-          <Link to="/admin/newsletter" className="group bg-[#111] border border-[#1e1e1e] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
+          <Link to="/admin/newsletter" className="group bg-[#0f1d17] border border-[#1b2e25] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
             <div className="w-12 h-12 bg-[#58a6ff]/10 border border-[#58a6ff]/20 flex items-center justify-center text-xl">📰</div>
             <div>
               <h3 className="text-white font-semibold group-hover:text-[#C9A84C] transition-colors">Newsletter</h3>
@@ -136,8 +136,8 @@ export default function AdminDashboard() {
         </div>
 
         {/* Recent orders */}
-        <div className="bg-[#111] border border-[#1e1e1e]">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-[#1e1e1e]">
+        <div className="bg-[#0f1d17] border border-[#1b2e25]">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-[#1b2e25]">
             <h2 className="text-white font-semibold">Recent Orders</h2>
             <Link to="/admin/orders" className="text-[#C9A84C] text-xs tracking-widest uppercase hover:text-[#E2C47A] transition-colors">
               View All
@@ -149,7 +149,7 @@ export default function AdminDashboard() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-[#1a1a1a]">
+                  <tr className="border-b border-[#182a20]">
                     {['Order #', 'Customer', 'Total', 'Status', 'Date'].map(h => (
                       <th key={h} className="px-6 py-3 text-left text-[#444] text-[10px] tracking-[2px] uppercase font-medium">{h}</th>
                     ))}
@@ -157,7 +157,7 @@ export default function AdminDashboard() {
                 </thead>
                 <tbody>
                   {recentOrders.map(o => (
-                    <tr key={o.id} className="border-b border-[#1a1a1a] hover:bg-[#0e0e0e] transition-colors">
+                    <tr key={o.id} className="border-b border-[#182a20] hover:bg-[#0c1714] transition-colors">
                       <td className="px-6 py-3 text-[#C9A84C] font-mono text-xs">{o.order_number}</td>
                       <td className="px-6 py-3 text-white">{o.customer_name}</td>
                       <td className="px-6 py-3 text-white">${o.total.toLocaleString()}</td>

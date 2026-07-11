@@ -12,7 +12,7 @@
   }
 
   body {
-    background-color: #0a0a0a;
+    background-color: #0a1512;
     color: #ffffff;
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -23,7 +23,7 @@
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: #0a1512;
   }
   ::-webkit-scrollbar-thumb {
     background: #C9A84C;
@@ -32,7 +32,7 @@
 
   ::selection {
     background: #C9A84C;
-    color: #0a0a0a;
+    color: #0a1512;
   }
 }
 
@@ -62,11 +62,11 @@
   }
 
   .card-luxury {
-    @apply bg-[#111111] border border-[#1e1e1e] transition-all duration-500 hover:border-[#C9A84C]/40 hover:shadow-[0_8px_40px_rgba(201,168,76,0.08)];
+    @apply bg-[#0f1d17] border border-[#1b2e25] transition-all duration-500 hover:border-[#C9A84C]/40 hover:shadow-[0_8px_40px_rgba(201,168,76,0.08)];
   }
 
   .input-luxury {
-    @apply w-full bg-[#111111] border border-[#2a2a2a] text-white placeholder-[#555] px-4 py-3 text-sm focus:outline-none focus:border-[#C9A84C] transition-colors duration-200;
+    @apply w-full bg-[#0f1d17] border border-[#24402f] text-white placeholder-[#555] px-4 py-3 text-sm focus:outline-none focus:border-[#C9A84C] transition-colors duration-200;
   }
 
   .divider-gold {
@@ -121,7 +121,7 @@
 
 /* Luxury placeholder for products without images */
 .product-placeholder {
-  background: linear-gradient(135deg, #111 0%, #1a1a1a 50%, #111 100%);
+  background: linear-gradient(135deg, #0f1d17 0%, #182a20 50%, #0f1d17 100%);
   display: flex;
   align-items: center;
   justify-content: center;

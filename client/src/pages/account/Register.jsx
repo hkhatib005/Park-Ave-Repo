@@ -38,7 +38,7 @@ export default function AccountRegister() {
   };
 
   return (
-    <div className="pt-20 min-h-screen bg-[#080808] flex items-center justify-center px-6 page-enter">
+    <div className="pt-20 min-h-screen bg-[#071009] flex items-center justify-center px-6 page-enter">
       <div className="w-full max-w-sm">
         <div className="text-center mb-10">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="#C9A84C" className="mx-auto mb-4">
@@ -55,9 +55,9 @@ export default function AccountRegister() {
         </div>
 
         <div className="flex items-center gap-3 mb-6">
-          <div className="h-px bg-[#1e1e1e] flex-1" />
+          <div className="h-px bg-[#1b2e25] flex-1" />
           <span className="text-[#444] text-[10px] tracking-[2px] uppercase">Or</span>
-          <div className="h-px bg-[#1e1e1e] flex-1" />
+          <div className="h-px bg-[#1b2e25] flex-1" />
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
