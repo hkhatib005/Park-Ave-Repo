@@ -34,6 +34,26 @@ copy it immediately, it is never shown again or stored anywhere else.
 Without `STRIPE_SECRET_KEY` set, checkout returns a clear "payments not configured" error instead
 of crashing. Without `GOOGLE_CLIENT_ID`, the Google button renders as a disabled placeholder.
 
+## Deploying on Render (or any host with ephemeral disk)
+
+Render's free web services wipe local disk on every redeploy — that includes the SQLite database
+(`server/db/park_ave.db`) and any images uploaded through the admin panel. **On the free tier this
+means every redeploy loses all products, orders, and customer accounts.**
+
+To fix it:
+1. Upgrade to a paid instance type (Starter or higher) — free instances can't attach a disk at all.
+2. In the Render dashboard, add a **Disk** to the service (1 GB is plenty for a SQLite file + product
+   photos), mounted at e.g. `/var/data`.
+3. Set these env vars to point at that mount:
+   ```
+   DB_PATH=/var/data/park_ave.db
+   UPLOADS_DIR=/var/data/uploads
+   ```
+4. Redeploy. The server creates those paths automatically if they don't exist.
+
+Without `DB_PATH` / `UPLOADS_DIR` set, both default to folders inside `server/` — fine for local dev,
+not safe for production on ephemeral hosting.
+
 ## Apple Sign In
 
 Not wired up yet — it requires an active Apple Developer Program membership ($99/yr) plus domain

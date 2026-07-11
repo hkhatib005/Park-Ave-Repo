@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
+const { UPLOADS_DIR } = require('./config');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -30,7 +31,7 @@ app.use(cors({ origin: CLIENT_URL, credentials: true }));
 app.post('/api/checkout/webhook', express.raw({ type: 'application/json' }), require('./routes/checkoutWebhook'));
 
 app.use(express.json({ limit: '1mb' }));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(UPLOADS_DIR));
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/account', require('./routes/account'));
