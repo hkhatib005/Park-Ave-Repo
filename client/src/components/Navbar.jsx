@@ -26,7 +26,7 @@ export default function Navbar() {
 
   const navBg = isHome && !scrolled
     ? 'bg-transparent'
-    : 'bg-[#0a0a0a]/95 backdrop-blur-md border-b border-[#1e1e1e]';
+    : 'bg-[#0a1512]/95 backdrop-blur-md border-b border-[#1b2e25]';
 
   return (
     <>
@@ -132,7 +132,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="lg:hidden bg-[#0a0a0a] border-t border-[#1e1e1e] px-6 py-6">
+          <div className="lg:hidden bg-[#0a1512] border-t border-[#1b2e25] px-6 py-6">
             <ul className="space-y-4">
               {[
                 { label: 'Shop All', to: '/shop' },

@@ -50,13 +50,21 @@ export default function Shop() {
   return (
     <div className="pt-20 min-h-screen page-enter">
       {/* Header */}
-      <div className="bg-[#080808] border-b border-[#1e1e1e] py-12 px-6 text-center">
+      <div className="bg-[#071009] border-b border-[#1b2e25] py-12 px-6 text-center">
         <p className="section-label">Discover</p>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-white">
           {activeCategory === 'All' ? 'All Collections' : activeCategory}
         </h1>
         <div className="divider-gold" />
-        <p className="text-[#666] text-sm">{products.length} pieces</p>
+        <p className="text-[#666] text-sm mb-3">{products.length} pieces</p>
+        <div className="flex items-center justify-center gap-2">
+          <div className="flex text-[#C9A84C]">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+            ))}
+          </div>
+          <span className="text-[#888] text-xs">5.0 · 93 Google Reviews</span>
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-8">
@@ -69,7 +77,7 @@ export default function Shop() {
               className={`flex-shrink-0 px-5 py-2 text-xs tracking-[2px] uppercase border transition-all duration-200 ${
                 activeCategory === cat
                   ? 'border-[#C9A84C] text-[#C9A84C] bg-[#C9A84C]/5'
-                  : 'border-[#2a2a2a] text-[#666] hover:border-[#555] hover:text-white'
+                  : 'border-[#24402f] text-[#666] hover:border-[#555] hover:text-white'
               }`}
             >
               {cat}
@@ -131,7 +139,7 @@ export default function Shop() {
             </button>
 
             {showFilters && (
-              <div className="lg:hidden mb-6 p-4 bg-[#111] border border-[#1e1e1e] space-y-6">
+              <div className="lg:hidden mb-6 p-4 bg-[#0f1d17] border border-[#1b2e25] space-y-6">
                 <div>
                   <h3 className="text-white text-[10px] tracking-[3px] uppercase font-semibold mb-3">Price Range</h3>
                   <div className="space-y-2">
@@ -158,9 +166,9 @@ export default function Shop() {
             )}
 
             {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px bg-[#1e1e1e]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px bg-[#1b2e25]">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-[#0a0a0a] aspect-[3/4] animate-pulse" />
+                  <div key={i} className="bg-[#0a1512] aspect-[3/4] animate-pulse" />
                 ))}
               </div>
             ) : products.length === 0 ? (
@@ -169,7 +177,7 @@ export default function Shop() {
                 <p className="text-[#444] text-sm">Try adjusting your filters</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px bg-[#1e1e1e]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px bg-[#1b2e25]">
                 {products.map(p => <ProductCard key={p.id} product={p} />)}
               </div>
             )}
