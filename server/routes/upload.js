@@ -5,11 +5,19 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
+const MIME_EXT = {
+  'image/jpeg': '.jpg',
+  'image/png': '.png',
+  'image/webp': '.webp',
+  'image/gif': '.gif',
+};
+
 const storage = multer.diskStorage({
   destination: path.join(__dirname, '../uploads'),
   filename: (req, file, cb) => {
     const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, unique + path.extname(file.originalname));
+    // Extension is derived from the verified mimetype, never the client-supplied filename.
+    cb(null, unique + MIME_EXT[file.mimetype]);
   }
 });
 
@@ -17,7 +25,7 @@ const upload = multer({
   storage,
   limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
-    if (/image\/(jpeg|jpg|png|webp|gif)/.test(file.mimetype)) cb(null, true);
+    if (MIME_EXT[file.mimetype]) cb(null, true);
     else cb(new Error('Images only'));
   }
 });

@@ -1,7 +1,19 @@
-import { useParams, Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams, useSearchParams, Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 export default function OrderSuccess() {
   const { orderNumber } = useParams();
+  const [searchParams] = useSearchParams();
+  const { clearCart } = useCart();
+  const sessionId = searchParams.get('session_id');
+
+  useEffect(() => {
+    // Only clear if we actually came back from a Stripe redirect (has a session_id),
+    // so a stray/guessed URL to this page doesn't wipe someone's cart.
+    if (sessionId) clearCart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="pt-20 min-h-screen flex items-center justify-center px-6 page-enter">
@@ -17,8 +29,8 @@ export default function OrderSuccess() {
         <p className="text-[#888] text-sm mb-2">Your order has been received.</p>
         <p className="text-[#C9A84C] font-mono text-sm mb-8">{orderNumber}</p>
         <p className="text-[#666] text-xs mb-8 leading-relaxed">
-          A member of our team will contact you within 24 hours to confirm your order and arrange payment.
-          We look forward to serving you.
+          Your payment has been received. A confirmation has been sent to your email, and our team
+          will be in touch shortly regarding delivery. We look forward to serving you.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link to="/shop" className="btn-gold">Continue Shopping</Link>

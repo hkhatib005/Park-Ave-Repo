@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { placeOrder } from '../utils/api';
+import { useCustomerAuth } from '../context/CustomerAuthContext';
+import { createCheckoutSession } from '../utils/api';
 
 const INIT = {
   first_name: '', last_name: '', email: '', phone: '',
@@ -9,9 +10,13 @@ const INIT = {
 };
 
 export default function Checkout() {
-  const { items, total, clearCart } = useCart();
-  const navigate = useNavigate();
-  const [form, setForm] = useState(INIT);
+  const { items, total } = useCart();
+  const { customer } = useCustomerAuth();
+  const [form, setForm] = useState(() => {
+    if (!customer) return INIT;
+    const [first, ...rest] = (customer.name || '').split(' ');
+    return { ...INIT, first_name: first || '', last_name: rest.join(' '), email: customer.email };
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -23,7 +28,7 @@ export default function Checkout() {
     setLoading(true);
     setError('');
     try {
-      const { data } = await placeOrder({
+      const { data } = await createCheckoutSession({
         customer_name: `${form.first_name} ${form.last_name}`,
         customer_email: form.email,
         customer_phone: form.phone,
@@ -34,16 +39,14 @@ export default function Checkout() {
           zip: form.zip,
           country: form.country,
         },
-        items: items.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty })),
-        subtotal: total,
-        total: total,
+        items: items.map(i => ({ id: i.id, qty: i.qty })),
         notes: form.notes,
       });
-      clearCart();
-      navigate(`/order-success/${data.order_number}`);
+      // Cart is cleared on the success page once Stripe redirects back —
+      // not here, so the cart survives if the user cancels payment.
+      window.location.href = data.url;
     } catch (err) {
       setError(err.response?.data?.error || 'Something went wrong. Please try again.');
-    } finally {
       setLoading(false);
     }
   };
@@ -95,7 +98,7 @@ export default function Checkout() {
               <div className="space-y-4">
                 <div>
                   <label className="text-[#555] text-xs block mb-1.5">Street Address *</label>
-                  <input value={form.address} onChange={e => set('address', e.target.value)} required className="input-luxury" placeholder="520 Park Avenue" />
+                  <input value={form.address} onChange={e => set('address', e.target.value)} required className="input-luxury" placeholder="5th Avenue" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -133,14 +136,14 @@ export default function Checkout() {
             {error && <p className="text-red-400 text-sm">{error}</p>}
 
             <button type="submit" disabled={loading} className="btn-gold w-full py-4 text-sm disabled:opacity-50">
-              {loading ? 'Placing Order...' : `Place Order · $${total.toLocaleString()}`}
+              {loading ? 'Redirecting to payment...' : `Continue to Payment · $${total.toLocaleString()}`}
             </button>
 
             <p className="text-[#444] text-xs text-center">
               By placing your order you agree to our{' '}
               <span className="text-[#C9A84C]">Terms of Service</span> and{' '}
               <span className="text-[#C9A84C]">Privacy Policy</span>.
-              <br />A team member will contact you to confirm payment and delivery.
+              <br />You'll be securely redirected to Stripe to complete payment.
             </p>
           </form>
 

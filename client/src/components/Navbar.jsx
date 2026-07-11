@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useCustomerAuth } from '../context/CustomerAuthContext';
 import CartDrawer from './CartDrawer';
 import SearchBar from './SearchBar';
 
@@ -9,6 +10,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const { count, setIsOpen } = useCart();
+  const { customer } = useCustomerAuth();
   const location = useLocation();
   const isHome = location.pathname === '/';
 
@@ -34,14 +36,15 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-[#C9A84C]">
-              <polygon points="12,2 15.5,8.5 23,9.5 17.5,14.5 19,22 12,18.5 5,22 6.5,14.5 1,9.5 8.5,8.5" fill="currentColor" opacity="0.9"/>
+              <path d="M6 3L2 9l10 13L22 9l-4-6H6z" fill="currentColor" opacity="0.9"/>
+              <path d="M8 7h8M8 7l4 15m4-15-4 15M2 9h20" stroke="#000" strokeOpacity="0.25" strokeWidth="1" strokeLinejoin="round"/>
             </svg>
             <div>
               <span className="font-display text-lg font-bold text-white tracking-wide group-hover:text-[#C9A84C] transition-colors duration-300">
                 Park Ave
               </span>
               <span className="font-display text-lg font-bold text-[#C9A84C] tracking-wide ml-1">
-                Jewelry
+                Jewelers
               </span>
             </div>
           </Link>
@@ -98,11 +101,11 @@ export default function Navbar() {
             </button>
 
             <Link
-              to="/admin"
-              className="hidden lg:block text-[#555] hover:text-[#C9A84C] transition-colors duration-200"
-              aria-label="Admin"
+              to={customer ? '/account' : '/account/login'}
+              className="text-[#aaa] hover:text-[#C9A84C] transition-colors duration-200"
+              aria-label="Account"
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                 <circle cx="12" cy="7" r="4"/>
               </svg>

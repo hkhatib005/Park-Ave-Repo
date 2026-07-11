@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { getProducts, getOrders } from '../../utils/api';
+import { getProducts, getOrders, getCustomers, getContacts, getNewsletterSubscribers } from '../../utils/api';
 
 export default function AdminDashboard() {
   const { admin, logout } = useAuth();
   const navigate = useNavigate();
-  const [stats, setStats] = useState({ products: 0, orders: 0, revenue: 0, pending: 0 });
+  const [stats, setStats] = useState({ products: 0, orders: 0, revenue: 0, pending: 0, customers: 0, unreadMessages: 0, subscribers: 0 });
   const [recentOrders, setRecentOrders] = useState([]);
 
   useEffect(() => {
-    Promise.all([getProducts({ limit: 200 }), getOrders()])
-      .then(([pRes, oRes]) => {
+    Promise.all([getProducts({ limit: 200 }), getOrders(), getCustomers(), getContacts(), getNewsletterSubscribers()])
+      .then(([pRes, oRes, cRes, mRes, nRes]) => {
         const products = pRes.data;
         const orders = oRes.data;
-        const revenue = orders.reduce((s, o) => s + o.total, 0);
+        const revenue = orders.filter(o => o.payment_status === 'paid').reduce((s, o) => s + o.total, 0);
         const pending = orders.filter(o => o.status === 'pending').length;
-        setStats({ products: products.length, orders: orders.length, revenue, pending });
+        const unreadMessages = mRes.data.filter(m => !m.read).length;
+        setStats({ products: products.length, orders: orders.length, revenue, pending, customers: cRes.data.length, unreadMessages, subscribers: nRes.data.length });
         setRecentOrders(orders.slice(0, 5));
       }).catch(() => {});
   }, []);
@@ -37,7 +38,8 @@ export default function AdminDashboard() {
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center gap-2">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="#C9A84C">
-              <polygon points="12,2 15.5,8.5 23,9.5 17.5,14.5 19,22 12,18.5 5,22 6.5,14.5 1,9.5 8.5,8.5"/>
+              <path d="M6 3L2 9l10 13L22 9l-4-6H6z"/>
+              <path d="M8 7h8M8 7l4 15m4-15-4 15M2 9h20" fill="none" stroke="#000" strokeOpacity="0.25" strokeWidth="1" strokeLinejoin="round"/>
             </svg>
             <span className="font-display text-white text-sm font-bold">Park Ave</span>
           </Link>
@@ -61,10 +63,13 @@ export default function AdminDashboard() {
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           {[
-            { label: 'Total Products', value: stats.products, icon: '💎', color: 'text-[#C9A84C]' },
+            { label: 'Revenue (Paid)', value: `$${stats.revenue.toLocaleString()}`, icon: '💰', color: 'text-[#3fb950]' },
             { label: 'Total Orders', value: stats.orders, icon: '📦', color: 'text-[#58a6ff]' },
-            { label: 'Revenue', value: `$${stats.revenue.toLocaleString()}`, icon: '💰', color: 'text-[#3fb950]' },
             { label: 'Pending Orders', value: stats.pending, icon: '⏳', color: 'text-[#d29922]' },
+            { label: 'Total Products', value: stats.products, icon: '💎', color: 'text-[#C9A84C]' },
+            { label: 'Customer Accounts', value: stats.customers, icon: '👤', color: 'text-[#bc8cff]' },
+            { label: 'Unread Messages', value: stats.unreadMessages, icon: '✉️', color: 'text-[#f85149]' },
+            { label: 'Newsletter Subscribers', value: stats.subscribers, icon: '📰', color: 'text-[#58a6ff]' },
           ].map(s => (
             <div key={s.label} className="bg-[#111] border border-[#1e1e1e] p-5">
               <div className="flex items-center justify-between mb-3">
@@ -91,8 +96,38 @@ export default function AdminDashboard() {
           <Link to="/admin/orders" className="group bg-[#111] border border-[#1e1e1e] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
             <div className="w-12 h-12 bg-[#58a6ff]/10 border border-[#58a6ff]/20 flex items-center justify-center text-xl">📦</div>
             <div>
-              <h3 className="text-white font-semibold group-hover:text-[#C9A84C] transition-colors">View Orders</h3>
-              <p className="text-[#555] text-xs mt-0.5">Review and update order statuses</p>
+              <h3 className="text-white font-semibold group-hover:text-[#C9A84C] transition-colors">Orders &amp; Payments</h3>
+              <p className="text-[#555] text-xs mt-0.5">Review orders, statuses, and payment status</p>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="1.5" className="ml-auto group-hover:stroke-[#C9A84C] transition-colors">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </Link>
+          <Link to="/admin/customers" className="group bg-[#111] border border-[#1e1e1e] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
+            <div className="w-12 h-12 bg-[#bc8cff]/10 border border-[#bc8cff]/20 flex items-center justify-center text-xl">👤</div>
+            <div>
+              <h3 className="text-white font-semibold group-hover:text-[#C9A84C] transition-colors">Customer Accounts</h3>
+              <p className="text-[#555] text-xs mt-0.5">See who's signed up and what they've bought</p>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="1.5" className="ml-auto group-hover:stroke-[#C9A84C] transition-colors">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </Link>
+          <Link to="/admin/contacts" className="group bg-[#111] border border-[#1e1e1e] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
+            <div className="w-12 h-12 bg-[#f85149]/10 border border-[#f85149]/20 flex items-center justify-center text-xl">✉️</div>
+            <div>
+              <h3 className="text-white font-semibold group-hover:text-[#C9A84C] transition-colors">Client Messages</h3>
+              <p className="text-[#555] text-xs mt-0.5">Contact form submissions and client emails</p>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="1.5" className="ml-auto group-hover:stroke-[#C9A84C] transition-colors">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </Link>
+          <Link to="/admin/newsletter" className="group bg-[#111] border border-[#1e1e1e] hover:border-[#C9A84C]/40 p-6 flex items-center gap-4 transition-colors">
+            <div className="w-12 h-12 bg-[#58a6ff]/10 border border-[#58a6ff]/20 flex items-center justify-center text-xl">📰</div>
+            <div>
+              <h3 className="text-white font-semibold group-hover:text-[#C9A84C] transition-colors">Newsletter</h3>
+              <p className="text-[#555] text-xs mt-0.5">Everyone who's subscribed for updates</p>
             </div>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="1.5" className="ml-auto group-hover:stroke-[#C9A84C] transition-colors">
               <path d="M5 12h14M12 5l7 7-7 7"/>

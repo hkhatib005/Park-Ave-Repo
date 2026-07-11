@@ -29,10 +29,11 @@ export default function AdminLogin() {
       <div className="w-full max-w-sm">
         <div className="text-center mb-10">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="#C9A84C" className="mx-auto mb-4">
-            <polygon points="12,2 15.5,8.5 23,9.5 17.5,14.5 19,22 12,18.5 5,22 6.5,14.5 1,9.5 8.5,8.5"/>
+            <path d="M6 3L2 9l10 13L22 9l-4-6H6z"/>
+            <path d="M8 7h8M8 7l4 15m4-15-4 15M2 9h20" fill="none" stroke="#000" strokeOpacity="0.25" strokeWidth="1" strokeLinejoin="round"/>
           </svg>
           <h1 className="font-display text-3xl font-bold text-white">Admin Access</h1>
-          <p className="text-[#555] text-sm mt-2">Park Ave Jewelry Dashboard</p>
+          <p className="text-[#555] text-sm mt-2">Park Ave Jewelers Dashboard</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -44,7 +45,7 @@ export default function AdminLogin() {
               onChange={e => setEmail(e.target.value)}
               required
               className="input-luxury"
-              placeholder="admin@parkavejewelry.com"
+              placeholder="admin@parkavejewelers.com"
             />
           </div>
           <div>
@@ -63,10 +64,6 @@ export default function AdminLogin() {
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
-
-        <p className="text-[#333] text-xs text-center mt-8">
-          Default: admin@parkavejewelry.com / ParkAve2024!
-        </p>
       </div>
     </div>
   );
