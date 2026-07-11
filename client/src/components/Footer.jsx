@@ -1,13 +1,25 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { subscribeNewsletter } from '../utils/api';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleNewsletter = e => {
+  const handleNewsletter = async e => {
     e.preventDefault();
-    if (email) { setSubscribed(true); setEmail(''); }
+    if (!email || loading) return;
+    setLoading(true);
+    try {
+      await subscribeNewsletter(email);
+      setSubscribed(true);
+      setEmail('');
+    } catch {
+      // stay silent on the form UI, but don't falsely claim success
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -19,31 +31,32 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-5">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="#C9A84C">
-                <polygon points="12,2 15.5,8.5 23,9.5 17.5,14.5 19,22 12,18.5 5,22 6.5,14.5 1,9.5 8.5,8.5"/>
+                <path d="M6 3L2 9l10 13L22 9l-4-6H6z"/>
+                <path d="M8 7h8M8 7l4 15m4-15-4 15M2 9h20" fill="none" stroke="#000" strokeOpacity="0.25" strokeWidth="1" strokeLinejoin="round"/>
               </svg>
-              <span className="font-display text-lg font-bold text-white">Park Ave <span className="text-[#C9A84C]">Jewelry</span></span>
+              <span className="font-display text-lg font-bold text-white">Park Ave <span className="text-[#C9A84C]">Jewelers</span></span>
             </div>
             <p className="text-[#666] text-sm leading-relaxed mb-6">
-              Where Luxury Meets Legacy. New York City's premier destination for fine jewellery and luxury timepieces.
+              Fine jewellery and luxury timepieces from the heart of Manhattan's historic Diamond District.
             </p>
             <div className="space-y-2 text-sm text-[#666]">
               <p className="flex items-start gap-2">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" className="mt-0.5 flex-shrink-0">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
                 </svg>
-                520 Park Avenue, New York, NY 10022
+                25 W 47th St, Booth #8, New York, NY 10036
               </p>
               <p className="flex items-center gap-2">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.61 4.9 2 2 0 0 1 3.59 2.72h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 10.1a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                 </svg>
-                (212) 555-0192
+                (917) 599-3862
               </p>
               <p className="flex items-center gap-2">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
                 </svg>
-                info@parkavejewelry.com
+                Parkavejewelers1@gmail.com
               </p>
             </div>
           </div>
@@ -71,8 +84,8 @@ export default function Footer() {
                 { label: 'Contact', to: '/contact' },
                 { label: 'Custom Orders', to: '/contact' },
                 { label: 'Care & Maintenance', to: '/about' },
-                { label: 'Shipping Policy', to: '/about' },
-                { label: 'Return Policy', to: '/about' },
+                { label: 'Shipping Policy', to: '/about#policies' },
+                { label: 'Return Policy', to: '/about#policies' },
               ].map(l => (
                 <li key={l.label}>
                   <Link to={l.to} className="text-[#666] hover:text-[#C9A84C] text-sm transition-colors duration-200">
@@ -99,16 +112,18 @@ export default function Footer() {
                   className="input-luxury text-sm"
                   required
                 />
-                <button type="submit" className="btn-gold w-full text-center">Subscribe</button>
+                <button type="submit" disabled={loading} className="btn-gold w-full text-center disabled:opacity-50">
+                  {loading ? 'Subscribing...' : 'Subscribe'}
+                </button>
               </form>
             )}
 
             <div className="mt-8">
               <h4 className="text-white text-xs tracking-[3px] uppercase font-semibold mb-3">Hours</h4>
               <div className="space-y-1 text-sm text-[#666]">
-                <p>Mon – Fri: 10am – 7pm</p>
-                <p>Saturday: 10am – 6pm</p>
-                <p>Sunday: 12pm – 5pm</p>
+                <p>Mon – Fri: 10am – 5:30pm</p>
+                <p>Saturday: Closed</p>
+                <p>Sunday: Closed</p>
               </div>
             </div>
           </div>
@@ -117,7 +132,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-[#1e1e1e] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[#444] text-xs">
-            © {new Date().getFullYear()} Park Ave Jewelry. All rights reserved.
+            © {new Date().getFullYear()} Park Ave Jewelers. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             {/* Social icons */}
