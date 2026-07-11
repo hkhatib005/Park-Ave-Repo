@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getOrders, updateOrderStatus } from '../../utils/api';
+import { getOrders, updateOrderStatus, updateOrderPayment } from '../../utils/api';
 
 const STATUSES = ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled'];
 const STATUS_COLORS = {
@@ -10,6 +10,11 @@ const STATUS_COLORS = {
   shipped: 'text-[#3fb950] bg-[#3fb950]/10 border-[#3fb950]/20',
   delivered: 'text-[#3fb950] bg-[#3fb950]/10 border-[#3fb950]/20',
   cancelled: 'text-[#f85149] bg-[#f85149]/10 border-[#f85149]/20',
+};
+const PAYMENT_COLORS = {
+  unpaid: 'text-[#f85149] bg-[#f85149]/10 border-[#f85149]/20',
+  paid: 'text-[#3fb950] bg-[#3fb950]/10 border-[#3fb950]/20',
+  refunded: 'text-[#888] bg-[#888]/10 border-[#888]/20',
 };
 
 export default function AdminOrders() {
@@ -24,6 +29,12 @@ export default function AdminOrders() {
     await updateOrderStatus(id, status).catch(() => {});
     load();
     if (selected?.id === id) setSelected(o => ({ ...o, status }));
+  };
+
+  const changePayment = async (id, payment_status) => {
+    await updateOrderPayment(id, payment_status, 'manual').catch(() => {});
+    load();
+    if (selected?.id === id) setSelected(o => ({ ...o, payment_status }));
   };
 
   const filtered = filter === 'all' ? orders : orders.filter(o => o.status === filter);
@@ -71,7 +82,10 @@ export default function AdminOrders() {
               >
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[#C9A84C] font-mono text-xs">{o.order_number}</span>
-                  <span className={`text-[9px] tracking-[2px] uppercase px-2 py-0.5 border ${STATUS_COLORS[o.status]}`}>{o.status}</span>
+                  <div className="flex gap-1">
+                    <span className={`text-[9px] tracking-[2px] uppercase px-2 py-0.5 border ${PAYMENT_COLORS[o.payment_status] || PAYMENT_COLORS.unpaid}`}>{o.payment_status}</span>
+                    <span className={`text-[9px] tracking-[2px] uppercase px-2 py-0.5 border ${STATUS_COLORS[o.status]}`}>{o.status}</span>
+                  </div>
                 </div>
                 <p className="text-white text-sm font-medium">{o.customer_name}</p>
                 <div className="flex items-center justify-between mt-1">
@@ -95,7 +109,10 @@ export default function AdminOrders() {
                     <h2 className="font-display text-xl font-bold text-white">{selected.order_number}</h2>
                     <p className="text-[#555] text-xs mt-1">{new Date(selected.created_at).toLocaleString()}</p>
                   </div>
-                  <span className={`text-[10px] tracking-[2px] uppercase px-3 py-1 border ${STATUS_COLORS[selected.status]}`}>{selected.status}</span>
+                  <div className="flex gap-2">
+                    <span className={`text-[10px] tracking-[2px] uppercase px-3 py-1 border ${PAYMENT_COLORS[selected.payment_status] || PAYMENT_COLORS.unpaid}`}>{selected.payment_status}</span>
+                    <span className={`text-[10px] tracking-[2px] uppercase px-3 py-1 border ${STATUS_COLORS[selected.status]}`}>{selected.status}</span>
+                  </div>
                 </div>
 
                 {/* Customer */}
@@ -139,6 +156,25 @@ export default function AdminOrders() {
                     <p className="text-[#888] text-xs">{selected.notes}</p>
                   </div>
                 )}
+
+                {/* Payment override */}
+                <div className="mb-5">
+                  <h3 className="text-[#444] text-[10px] tracking-[2px] uppercase mb-3">Payment {selected.payment_method === 'card' ? '(via Stripe)' : ''}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {['unpaid', 'paid', 'refunded'].map(p => (
+                      <button
+                        key={p}
+                        onClick={() => changePayment(selected.id, p)}
+                        disabled={selected.payment_status === p}
+                        className={`text-[10px] tracking-[2px] uppercase px-3 py-1.5 border transition-colors disabled:opacity-30 disabled:cursor-default ${
+                          selected.payment_status === p ? PAYMENT_COLORS[p] : 'border-[#2a2a2a] text-[#555] hover:border-[#555] hover:text-white'
+                        }`}
+                      >
+                        {p}
+                      </button>
+                    ))}
+                  </div>
+                </div>
 
                 {/* Update status */}
                 <div>

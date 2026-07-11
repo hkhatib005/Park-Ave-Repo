@@ -7,11 +7,11 @@ export default function About() {
         <div className="relative z-10">
           <p className="section-label">Our Story</p>
           <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-4">
-            Park Ave <span className="text-[#C9A84C]">Jewelry</span>
+            Park Ave <span className="text-[#C9A84C]">Jewelers</span>
           </h1>
           <div className="divider-gold" />
           <p className="text-[#888] text-base max-w-lg mx-auto">
-            A family legacy of extraordinary craftsmanship on New York's most iconic avenue.
+            Independent fine jewellery and timepieces from the heart of NYC's historic Diamond District.
           </p>
         </div>
       </div>
@@ -20,20 +20,19 @@ export default function About() {
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
-            <p className="section-label">Since 1987</p>
+            <p className="section-label">Since 2023</p>
             <h2 className="font-display text-4xl font-bold text-white mb-5 leading-tight">
-              Three Generations of Excellence
+              Rooted in the Diamond District
             </h2>
             <div className="space-y-4 text-[#888] text-sm leading-relaxed">
               <p>
-                Founded in 1987 by master jeweller George Alkhatib, Park Ave Jewelry began as a small atelier
-                on Manhattan's most celebrated boulevard. What started as a passion for exceptional gemstones
-                has grown into New York City's most trusted name in fine jewellery and luxury timepieces.
+                Park Ave Jewelers is an independent jeweller based in Manhattan's historic Diamond District —
+                the same few blocks of 47th Street that have set the standard for fine jewellery and watches
+                in New York for generations. We hand-select every stone and personally oversee every setting.
               </p>
               <p>
-                Today, the third generation continues that legacy — hand-selecting every stone, personally
-                overseeing every setting, and maintaining the uncompromising standards that have earned
-                us the trust of New York's most discerning clientele.
+                Our approach is simple: exceptional pieces, fair prices, and the kind of personal attention
+                that's earned us a 5.0 rating across dozens of Google reviews from clients who've become friends.
               </p>
               <p>
                 Every piece in our collection is GIA certified, ethically sourced, and comes with
@@ -61,9 +60,9 @@ export default function About() {
       <section className="py-16 px-6 bg-[#080808] border-y border-[#1e1e1e]">
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
-            { num: '1987', label: 'Founded' },
-            { num: '35+', label: 'Years Experience' },
-            { num: '10,000+', label: 'Clients Served' },
+            { num: '2023', label: 'Founded' },
+            { num: '5.0★', label: 'Google Rating' },
+            { num: '93+', label: 'Five-Star Reviews' },
             { num: '100%', label: 'Certified Stones' },
           ].map(s => (
             <div key={s.label}>
@@ -91,12 +90,12 @@ export default function About() {
               {
                 icon: '🤝',
                 title: 'Personal Service',
-                desc: 'Our family has built relationships with clients across generations. Your satisfaction is our legacy.'
+                desc: 'We build real relationships with every client — it\'s why we\'ve earned a 5.0 rating across dozens of reviews.'
               },
               {
                 icon: '⚒️',
                 title: 'Master Craftsmanship',
-                desc: 'Each piece is crafted by jewellers with decades of experience, ensuring perfection in every detail.'
+                desc: 'Each piece is crafted by experienced jewellers, ensuring perfection in every detail.'
               },
             ].map(v => (
               <div key={v.title} className="bg-[#0a0a0a] p-8 text-center">
@@ -109,17 +108,43 @@ export default function About() {
         </div>
       </section>
 
+      {/* Policies */}
+      <section id="policies" className="py-20 px-6">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="section-label">Good to Know</p>
+            <h2 className="section-title">Our Policies</h2>
+          </div>
+          <div className="space-y-8">
+            <div className="border-l-2 border-[#C9A84C]/30 pl-6">
+              <h3 className="text-white font-semibold mb-2">Returns &amp; Exchanges</h3>
+              <p className="text-[#888] text-sm leading-relaxed">
+                Returns are issued as store credit only — we're unable to offer cash or card refunds.
+                Please contact us before returning a piece so we can assist with the exchange.
+              </p>
+            </div>
+            <div className="border-l-2 border-[#C9A84C]/30 pl-6">
+              <h3 className="text-white font-semibold mb-2">Shipping</h3>
+              <p className="text-[#888] text-sm leading-relaxed">
+                Complimentary insured shipping on all orders within the continental US. Contact us for
+                international or expedited shipping options.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Visit us */}
       <section className="py-16 px-6 bg-[#080808]">
         <div className="max-w-3xl mx-auto text-center">
           <p className="section-label">Come See Us</p>
           <h2 className="section-title mb-4">Visit Our Boutique</h2>
           <div className="divider-gold" />
-          <p className="text-[#888] text-sm mb-8">520 Park Avenue, New York, NY 10022</p>
+          <p className="text-[#888] text-sm mb-8">25 W 47th St, Booth #8, New York, NY 10036</p>
           <div className="grid grid-cols-3 gap-4 text-sm text-[#666] mb-8">
-            <div><p className="text-white font-medium mb-1">Mon – Fri</p><p>10am – 7pm</p></div>
-            <div><p className="text-white font-medium mb-1">Saturday</p><p>10am – 6pm</p></div>
-            <div><p className="text-white font-medium mb-1">Sunday</p><p>12pm – 5pm</p></div>
+            <div><p className="text-white font-medium mb-1">Mon – Fri</p><p>10am – 5:30pm</p></div>
+            <div><p className="text-white font-medium mb-1">Saturday</p><p>Closed</p></div>
+            <div><p className="text-white font-medium mb-1">Sunday</p><p>Closed</p></div>
           </div>
           <a href="/contact" className="btn-gold">Book an Appointment</a>
         </div>

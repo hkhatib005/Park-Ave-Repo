@@ -40,7 +40,8 @@ router.get('/:id', (req, res) => {
 // Admin routes
 router.post('/', auth, (req, res) => {
   const { name, description, price, compare_price, category, material, images, featured, in_stock, stock_qty, sku } = req.body;
-  if (!name || !price || !category) return res.status(400).json({ error: 'name, price, category required' });
+  if (!name || !category) return res.status(400).json({ error: 'name, price, category required' });
+  if (!(Number(price) > 0)) return res.status(400).json({ error: 'price must be a positive number' });
 
   const result = db.prepare(`
     INSERT INTO products (name, description, price, compare_price, category, material, images, featured, in_stock, stock_qty, sku)
@@ -54,6 +55,7 @@ router.put('/:id', auth, (req, res) => {
   const { name, description, price, compare_price, category, material, images, featured, in_stock, stock_qty, sku } = req.body;
   const existing = db.prepare('SELECT id FROM products WHERE id = ?').get(req.params.id);
   if (!existing) return res.status(404).json({ error: 'Not found' });
+  if (!(Number(price) > 0)) return res.status(400).json({ error: 'price must be a positive number' });
 
   db.prepare(`
     UPDATE products SET name=?, description=?, price=?, compare_price=?, category=?, material=?, images=?, featured=?, in_stock=?, stock_qty=?, sku=?

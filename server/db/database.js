@@ -1,5 +1,6 @@
 const Database = require('better-sqlite3');
 const path = require('path');
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
 const DB_PATH = path.join(__dirname, 'park_ave.db');
@@ -25,9 +26,19 @@ db.exec(`
     created_at TEXT DEFAULT (datetime('now'))
   );
 
+  CREATE TABLE IF NOT EXISTS customers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    password TEXT,
+    google_id TEXT UNIQUE,
+    created_at TEXT DEFAULT (datetime('now'))
+  );
+
   CREATE TABLE IF NOT EXISTS orders (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     order_number TEXT UNIQUE NOT NULL,
+    customer_id INTEGER REFERENCES customers(id),
     customer_name TEXT NOT NULL,
     customer_email TEXT NOT NULL,
     customer_phone TEXT,
@@ -36,6 +47,9 @@ db.exec(`
     subtotal REAL NOT NULL,
     total REAL NOT NULL,
     status TEXT DEFAULT 'pending',
+    payment_status TEXT DEFAULT 'unpaid',
+    payment_method TEXT,
+    stripe_session_id TEXT,
     notes TEXT,
     created_at TEXT DEFAULT (datetime('now'))
   );
@@ -54,16 +68,39 @@ db.exec(`
     phone TEXT,
     subject TEXT,
     message TEXT NOT NULL,
+    read INTEGER DEFAULT 0,
+    created_at TEXT DEFAULT (datetime('now'))
+  );
+
+  CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT UNIQUE NOT NULL,
     created_at TEXT DEFAULT (datetime('now'))
   );
 `);
 
-// Seed default admin
-const existingAdmin = db.prepare('SELECT id FROM admins WHERE email = ?').get('admin@parkavejewelry.com');
+// Migrate columns for databases created before this revision
+const orderCols = db.prepare("PRAGMA table_info(orders)").all().map(c => c.name);
+if (!orderCols.includes('customer_id')) db.exec('ALTER TABLE orders ADD COLUMN customer_id INTEGER REFERENCES customers(id)');
+if (!orderCols.includes('payment_status')) db.exec("ALTER TABLE orders ADD COLUMN payment_status TEXT DEFAULT 'unpaid'");
+if (!orderCols.includes('payment_method')) db.exec('ALTER TABLE orders ADD COLUMN payment_method TEXT');
+if (!orderCols.includes('stripe_session_id')) db.exec('ALTER TABLE orders ADD COLUMN stripe_session_id TEXT');
+const contactCols = db.prepare("PRAGMA table_info(contacts)").all().map(c => c.name);
+if (!contactCols.includes('read')) db.exec('ALTER TABLE contacts ADD COLUMN read INTEGER DEFAULT 0');
+
+// Seed admin — credentials come from env, never hardcoded/displayed in the app.
+// If ADMIN_PASSWORD isn't set, generate one and print it once to the server console.
+const adminEmail = process.env.ADMIN_EMAIL || 'admin@parkavejewelers.com';
+const existingAdmin = db.prepare('SELECT id FROM admins WHERE email = ?').get(adminEmail);
 if (!existingAdmin) {
-  const hash = bcrypt.hashSync('ParkAve2024!', 10);
-  db.prepare('INSERT INTO admins (email, password) VALUES (?, ?)').run('admin@parkavejewelry.com', hash);
-  console.log('Admin seeded: admin@parkavejewelry.com / ParkAve2024!');
+  const password = process.env.ADMIN_PASSWORD || crypto.randomBytes(9).toString('base64url');
+  const hash = bcrypt.hashSync(password, 12);
+  db.prepare('INSERT INTO admins (email, password) VALUES (?, ?)').run(adminEmail, hash);
+  console.log('='.repeat(60));
+  console.log('Admin account created — save these credentials now:');
+  console.log(`  email:    ${adminEmail}`);
+  if (!process.env.ADMIN_PASSWORD) console.log(`  password: ${password}  (set ADMIN_PASSWORD in .env to control this)`);
+  console.log('='.repeat(60));
 }
 
 // Seed sample products
