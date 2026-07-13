@@ -28,6 +28,9 @@ router.post('/create-session', checkoutLimiter, optionalCustomerAuth, (req, res)
     if (!product) return res.status(400).json({ error: `Product ${item.id} not found` });
     if (!product.in_stock) return res.status(400).json({ error: `${product.name} is out of stock` });
     const qty = Math.max(1, Math.min(20, Number(item.qty) || 1));
+    if (product.stock_qty != null && qty > product.stock_qty) {
+      return res.status(400).json({ error: `Only ${product.stock_qty} of ${product.name} left in stock` });
+    }
     const images = JSON.parse(product.images || '[]');
 
     subtotal += product.price * qty;
