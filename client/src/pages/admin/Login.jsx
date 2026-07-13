@@ -17,8 +17,8 @@ export default function AdminLogin() {
     try {
       await login(email, password);
       navigate('/admin/dashboard');
-    } catch {
-      setError('Invalid email or password');
+    } catch (err) {
+      setError(err.response?.data?.error || 'Invalid email or password');
     } finally {
       setLoading(false);
     }
