@@ -54,14 +54,6 @@ To fix it:
 Without `DB_PATH` / `UPLOADS_DIR` set, both default to folders inside `server/` — fine for local dev,
 not safe for production on ephemeral hosting.
 
-## Apple Sign In
-
-Not wired up yet — it requires an active Apple Developer Program membership ($99/yr) plus domain
-verification, which can't be provisioned same-day. The button exists in the UI
-(`client/src/components/AppleSignInButton.jsx`) as a disabled placeholder so the layout is ready.
-To enable later: mirror `server/routes/account.js`'s `/google` handler with an `/apple` handler that
-verifies Apple's identity token, and swap in Apple's JS SDK in the button component.
-
 ## Payments model
 
 Checkout uses Stripe's hosted Checkout page (redirect-based) — no card data ever touches this
@@ -71,6 +63,21 @@ can't check out at a discount.
 
 Admins can also manually mark an order `paid` / `unpaid` / `refunded` in **Orders → Payment** for
 phone/wire orders that don't go through Stripe.
+
+## Abandoned-cart emails
+
+Every checkout attempt writes an `orders` row (with the customer's email) before redirecting to
+Stripe, whether or not they finish paying. A background job (`server/jobs/abandonedCart.js`) checks
+every 15 minutes for orders that are still `unpaid` an hour after checkout was started
+(`ABANDONED_CART_DELAY_MINUTES` in `.env`), and emails a reminder via [Resend](https://resend.com)
+with a link back to the still-open Stripe Checkout session if one exists, or the shop otherwise.
+Each order is only emailed once (`abandoned_email_sent_at`), and orders older than 7 days are never
+retried, so a restart or outage can't cause a backlog of stale reminders.
+
+Requires `RESEND_API_KEY` in `.env`. `EMAIL_FROM` must be an address on a domain verified in Resend
+(Domains → Add Domain, then add the DNS records at your registrar) — until that's done, it falls
+back to Resend's shared sandbox address, which only delivers to the email your Resend account is
+registered with.
 
 ## Admin dashboard
 

@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
 const { UPLOADS_DIR } = require('./config');
+const { runAbandonedCartCheck } = require('./jobs/abandonedCart');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -51,3 +52,7 @@ app.use(express.static(clientDist));
 app.get('*', (req, res) => res.sendFile(path.join(clientDist, 'index.html')));
 
 app.listen(PORT, () => console.log(`Park Ave Jewelers running on port ${PORT}`));
+
+// Checks for abandoned checkouts every 15 minutes; no-ops until RESEND_API_KEY is set.
+const CART_CHECK_INTERVAL_MS = 15 * 60 * 1000;
+setInterval(() => runAbandonedCartCheck().catch(err => console.error('Abandoned cart job failed:', err.message)), CART_CHECK_INTERVAL_MS);

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCustomerAuth } from '../../context/CustomerAuthContext';
 import GoogleSignInButton from '../../components/GoogleSignInButton';
-import AppleSignInButton from '../../components/AppleSignInButton';
 
 export default function AccountRegister() {
   const [name, setName] = useState('');
@@ -51,7 +50,6 @@ export default function AccountRegister() {
 
         <div className="space-y-3 mb-6">
           <GoogleSignInButton onCredential={handleGoogle} />
-          <AppleSignInButton />
         </div>
 
         <div className="flex items-center gap-3 mb-6">
