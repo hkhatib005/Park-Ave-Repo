@@ -112,6 +112,7 @@ if (!existingAdmin) {
   // (there's no in-app "change admin password" feature otherwise).
   const hash = bcrypt.hashSync(process.env.ADMIN_PASSWORD.trim(), 12);
   db.prepare('UPDATE admins SET password = ? WHERE id = ?').run(hash, existingAdmin.id);
+  console.log(`Admin password for ${adminEmail} synced from ADMIN_PASSWORD (length ${process.env.ADMIN_PASSWORD.trim().length})`);
 }
 
 // Seed sample products
