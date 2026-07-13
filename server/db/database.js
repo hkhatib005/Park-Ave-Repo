@@ -93,23 +93,24 @@ if (!orderCols.includes('abandoned_email_sent_at')) db.exec('ALTER TABLE orders 
 const contactCols = db.prepare("PRAGMA table_info(contacts)").all().map(c => c.name);
 if (!contactCols.includes('read')) db.exec('ALTER TABLE contacts ADD COLUMN read INTEGER DEFAULT 0');
 
-// TEMPORARY (demo): hardcoded so login works regardless of env config — REMOVE before real launch,
-// this puts the admin password in git history. Revert to reading ADMIN_EMAIL/ADMIN_PASSWORD from env.
-const adminEmail = 'moe@admin.com';
-const DEMO_ADMIN_PASSWORD = 'iluvhatemn';
+// Seed admin — credentials come from env, never hardcoded/displayed in the app.
+// If ADMIN_PASSWORD isn't set, generate one and print it once to the server console.
+const adminEmail = (process.env.ADMIN_EMAIL || 'admin@parkavejewelers.com').trim().toLowerCase();
 const existingAdmin = db.prepare('SELECT id FROM admins WHERE email = ?').get(adminEmail);
 if (!existingAdmin) {
-  const password = DEMO_ADMIN_PASSWORD;
+  const password = process.env.ADMIN_PASSWORD?.trim() || crypto.randomBytes(9).toString('base64url');
   const hash = bcrypt.hashSync(password, 12);
   db.prepare('INSERT INTO admins (email, password) VALUES (?, ?)').run(adminEmail, hash);
   console.log('='.repeat(60));
   console.log('Admin account created — save these credentials now:');
   console.log(`  email:    ${adminEmail}`);
+  if (!process.env.ADMIN_PASSWORD) console.log(`  password: ${password}  (set ADMIN_PASSWORD in .env to control this)`);
   console.log('='.repeat(60));
-} else {
-  // Force the existing row to match the hardcoded demo password on every boot too,
-  // regardless of whatever was seeded before.
-  const hash = bcrypt.hashSync(DEMO_ADMIN_PASSWORD, 12);
+} else if (process.env.ADMIN_PASSWORD?.trim()) {
+  // ADMIN_PASSWORD is explicit deploy-time config, not a one-time seed value — keep the
+  // stored hash in sync with it on every boot so updating the env var always takes effect
+  // (there's no in-app "change admin password" feature otherwise).
+  const hash = bcrypt.hashSync(process.env.ADMIN_PASSWORD.trim(), 12);
   db.prepare('UPDATE admins SET password = ? WHERE id = ?').run(hash, existingAdmin.id);
 }
 
