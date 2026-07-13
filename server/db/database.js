@@ -106,6 +106,12 @@ if (!existingAdmin) {
   console.log(`  email:    ${adminEmail}`);
   if (!process.env.ADMIN_PASSWORD) console.log(`  password: ${password}  (set ADMIN_PASSWORD in .env to control this)`);
   console.log('='.repeat(60));
+} else if (process.env.ADMIN_PASSWORD?.trim()) {
+  // ADMIN_PASSWORD is explicit deploy-time config, not a one-time seed value — keep the
+  // stored hash in sync with it on every boot so updating the env var always takes effect
+  // (there's no in-app "change admin password" feature otherwise).
+  const hash = bcrypt.hashSync(process.env.ADMIN_PASSWORD.trim(), 12);
+  db.prepare('UPDATE admins SET password = ? WHERE id = ?').run(hash, existingAdmin.id);
 }
 
 // Seed sample products
