@@ -13,11 +13,15 @@ export function CartProvider({ children }) {
     localStorage.setItem('paj_cart', JSON.stringify(items));
   }, [items]);
 
+  // Server clamps quantity per line item to 20 (see server/routes/checkout.js) — mirror
+  // that here so the total shown in the cart always matches what gets charged at checkout.
+  const MAX_QTY = 20;
+
   const addItem = (product, qty = 1) => {
     setItems(prev => {
       const exists = prev.find(i => i.id === product.id);
-      if (exists) return prev.map(i => i.id === product.id ? { ...i, qty: i.qty + qty } : i);
-      return [...prev, { ...product, qty }];
+      if (exists) return prev.map(i => i.id === product.id ? { ...i, qty: Math.min(MAX_QTY, i.qty + qty) } : i);
+      return [...prev, { ...product, qty: Math.min(MAX_QTY, qty) }];
     });
     setIsOpen(true);
   };
@@ -26,7 +30,7 @@ export function CartProvider({ children }) {
 
   const updateQty = (id, qty) => {
     if (qty < 1) return removeItem(id);
-    setItems(prev => prev.map(i => i.id === id ? { ...i, qty } : i));
+    setItems(prev => prev.map(i => i.id === id ? { ...i, qty: Math.min(MAX_QTY, qty) } : i));
   };
 
   const clearCart = () => setItems([]);

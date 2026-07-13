@@ -68,11 +68,20 @@ router.post('/google', authLimiter, async (req, res) => {
   }
 
   const email = payload.email.toLowerCase();
-  let customer = db.prepare('SELECT * FROM customers WHERE google_id = ? OR email = ?').get(payload.sub, email);
+  // Only trust an email match for account linking if Google has verified it — otherwise
+  // an attacker with an unverified address matching an existing customer could hijack that account.
+  let customer = payload.email_verified
+    ? db.prepare('SELECT * FROM customers WHERE google_id = ? OR email = ?').get(payload.sub, email)
+    : db.prepare('SELECT * FROM customers WHERE google_id = ?').get(payload.sub);
 
   if (!customer) {
-    const result = db.prepare('INSERT INTO customers (email, name, google_id) VALUES (?, ?, ?)').run(email, payload.name || email, payload.sub);
-    customer = { id: result.lastInsertRowid, email, name: payload.name || email };
+    try {
+      const result = db.prepare('INSERT INTO customers (email, name, google_id) VALUES (?, ?, ?)').run(email, payload.name || email, payload.sub);
+      customer = { id: result.lastInsertRowid, email, name: payload.name || email };
+    } catch {
+      // Unverified email collided with an existing account — refuse rather than crash.
+      return res.status(409).json({ error: 'An account with this email already exists' });
+    }
   } else if (!customer.google_id) {
     db.prepare('UPDATE customers SET google_id = ? WHERE id = ?').run(payload.sub, customer.id);
   }
