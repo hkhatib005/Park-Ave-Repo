@@ -22,8 +22,19 @@ app.use(helmet({
       imgSrc: ["'self'", 'data:', 'https:'],
       connectSrc: ["'self'", 'https://accounts.google.com'],
       frameSrc: ['https://accounts.google.com', 'https://checkout.stripe.com', 'https://www.google.com'],
+      // Same reasoning as hsts below: this directive tells the browser to silently
+      // rewrite every http:// asset request on the page to https:// before sending
+      // it. Fine once a real proxy terminates TLS in front of us; fatal in local
+      // dev, where nothing is listening on https:// and every asset just fails.
+      upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? [] : null,
     },
   },
+  // HSTS forces the browser to upgrade every future request on this host to HTTPS.
+  // This app doesn't terminate TLS itself, so sending it over plain HTTP in local
+  // dev makes the browser silently rewrite the next asset request to https:// —
+  // which has nothing listening — leaving a blank page. Only send it once we're
+  // actually running in production behind a proxy that terminates TLS.
+  hsts: process.env.NODE_ENV === 'production',
 }));
 app.use(cors({ origin: CLIENT_URL, credentials: true }));
 

@@ -1,17 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-
-const DiamondIcon = () => (
-  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="0.8" opacity="0.4">
-    <polygon points="12,2 22,8 22,16 12,22 2,16 2,8"/>
-    <line x1="2" y1="8" x2="22" y2="8"/>
-    <line x1="12" y1="2" x2="12" y2="22"/>
-    <line x1="2" y1="8" x2="12" y2="22"/>
-    <line x1="22" y1="8" x2="12" y2="22"/>
-  </svg>
-);
+import { RingIcon, CATEGORY_ICONS } from './CategoryIcons';
 
 export default function ProductCard({ product }) {
+  const PlaceholderIcon = CATEGORY_ICONS[product.category] || RingIcon;
   const { addItem } = useCart();
   const image = product.images?.[0];
   const hasDiscount = product.compare_price && product.compare_price > product.price;
@@ -32,7 +24,7 @@ export default function ProductCard({ product }) {
           />
         ) : (
           <div className="w-full h-full product-placeholder flex flex-col items-center justify-center gap-3">
-            <DiamondIcon />
+            <PlaceholderIcon width="40" height="40" className="text-[#C9A84C]/40" />
             <span className="text-[#333] text-[10px] tracking-[3px] uppercase">{product.category}</span>
           </div>
         )}
