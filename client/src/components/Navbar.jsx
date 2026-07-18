@@ -26,7 +26,7 @@ export default function Navbar() {
 
   const navBg = isHome && !scrolled
     ? 'bg-transparent'
-    : 'bg-[#0a1512]/95 backdrop-blur-md border-b border-[#1b2e25]';
+    : 'bg-[#003102]/95 backdrop-blur-md border-b border-[#005b04]';
 
   return (
     <>
@@ -34,19 +34,17 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-[#C9A84C]">
-              <path d="M6 3L2 9l10 13L22 9l-4-6H6z" fill="currentColor" opacity="0.9"/>
-              <path d="M8 7h8M8 7l4 15m4-15-4 15M2 9h20" stroke="#000" strokeOpacity="0.25" strokeWidth="1" strokeLinejoin="round"/>
-            </svg>
-            <div>
-              <span className="font-display text-lg font-bold text-white tracking-wide group-hover:text-[#C9A84C] transition-colors duration-300">
-                Park Ave
-              </span>
-              <span className="font-display text-lg font-bold text-[#C9A84C] tracking-wide ml-1">
+          <Link to="/" className="flex flex-col items-start group leading-none">
+            <span className="font-display text-lg font-bold text-white tracking-wide group-hover:text-[#f4f1ea] transition-colors duration-300">
+              Park Ave
+            </span>
+            <span className="flex items-center gap-1.5 mt-1">
+              <span className="w-3 h-px bg-white/70" />
+              <span className="font-display text-[9px] tracking-[3px] uppercase text-white/85">
                 Jewelers
               </span>
-            </div>
+              <span className="w-3 h-px bg-white/70" />
+            </span>
           </Link>
 
           {/* Desktop Nav */}
@@ -57,6 +55,7 @@ export default function Navbar() {
               { label: 'Watches', to: '/shop?category=Watches' },
               { label: 'Custom', to: '/shop?category=Custom Jewellery' },
               { label: 'About', to: '/about' },
+              { label: 'Locations', to: '/locations' },
               { label: 'Contact', to: '/contact' },
             ].map(l => (
               <li key={l.to}>
@@ -132,7 +131,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="lg:hidden bg-[#0a1512] border-t border-[#1b2e25] px-6 py-6">
+          <div className="lg:hidden bg-[#003102] border-t border-[#005b04] px-6 py-6">
             <ul className="space-y-4">
               {[
                 { label: 'Shop All', to: '/shop' },
@@ -143,6 +142,7 @@ export default function Navbar() {
                 { label: 'Watches', to: '/shop?category=Watches' },
                 { label: 'Custom', to: '/shop?category=Custom Jewellery' },
                 { label: 'About', to: '/about' },
+                { label: 'Locations', to: '/locations' },
                 { label: 'Contact', to: '/contact' },
               ].map(l => (
                 <li key={l.to}>

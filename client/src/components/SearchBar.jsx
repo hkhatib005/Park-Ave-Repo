@@ -63,9 +63,9 @@ export default function SearchBar({ onClose }) {
               <button
                 key={p.id}
                 onClick={() => go(p.id)}
-                className="w-full flex items-center gap-4 p-3 hover:bg-[#0f1d17] transition-colors text-left group"
+                className="w-full flex items-center gap-4 p-3 hover:bg-[#003e02] transition-colors text-left group"
               >
-                <div className="w-12 h-12 bg-[#0f1d17] flex-shrink-0 overflow-hidden">
+                <div className="w-12 h-12 bg-[#003e02] flex-shrink-0 overflow-hidden">
                   {p.images?.[0] ? (
                     <img src={p.images[0]} alt={p.name} className="w-full h-full object-cover" />
                   ) : (
@@ -94,7 +94,7 @@ export default function SearchBar({ onClose }) {
                 <button
                   key={t}
                   onClick={() => setQuery(t)}
-                  className="border border-[#24402f] text-[#666] hover:border-[#C9A84C] hover:text-[#C9A84C] px-3 py-1.5 text-xs transition-colors"
+                  className="border border-[#007605] text-[#666] hover:border-[#C9A84C] hover:text-[#C9A84C] px-3 py-1.5 text-xs transition-colors"
                 >
                   {t}
                 </button>

@@ -149,12 +149,12 @@ export default function Checkout() {
 
           {/* Order summary */}
           <div className="lg:col-span-2">
-            <div className="bg-[#0f1d17] border border-[#1b2e25] p-6 sticky top-24">
+            <div className="bg-[#003e02] border border-[#005b04] p-6 sticky top-24">
               <h2 className="font-display text-xl font-bold text-white mb-5">Your Order</h2>
               <div className="space-y-4 mb-5">
                 {items.map(item => (
                   <div key={item.id} className="flex items-center gap-3">
-                    <div className="relative w-14 h-14 bg-[#0a1512] flex-shrink-0">
+                    <div className="relative w-14 h-14 bg-[#003102] flex-shrink-0">
                       {item.images?.[0] ? (
                         <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
                       ) : <div className="w-full h-full product-placeholder" />}
@@ -170,7 +170,7 @@ export default function Checkout() {
                   </div>
                 ))}
               </div>
-              <div className="border-t border-[#1b2e25] pt-4 space-y-2">
+              <div className="border-t border-[#005b04] pt-4 space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-[#666]">Subtotal</span>
                   <span className="text-white">${total.toLocaleString()}</span>
@@ -180,7 +180,7 @@ export default function Checkout() {
                   <span className="text-[#C9A84C] text-xs">Complimentary</span>
                 </div>
               </div>
-              <div className="border-t border-[#1b2e25] mt-4 pt-4">
+              <div className="border-t border-[#005b04] mt-4 pt-4">
                 <div className="flex justify-between">
                   <span className="text-white font-semibold">Total</span>
                   <span className="text-[#C9A84C] font-display text-xl font-bold">${total.toLocaleString()}</span>

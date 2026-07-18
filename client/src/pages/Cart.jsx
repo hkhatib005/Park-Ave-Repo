@@ -6,7 +6,7 @@ export default function Cart() {
 
   if (items.length === 0) return (
     <div className="pt-20 min-h-screen flex flex-col items-center justify-center gap-6 page-enter">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#24402f" strokeWidth="1">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#007605" strokeWidth="1">
         <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
         <line x1="3" y1="6" x2="21" y2="6"/>
         <path d="M16 10a4 4 0 0 1-8 0"/>
@@ -34,8 +34,8 @@ export default function Cart() {
           {/* Items */}
           <div className="lg:col-span-2 space-y-4">
             {items.map(item => (
-              <div key={item.id} className="flex gap-6 p-5 bg-[#0f1d17] border border-[#1b2e25] hover:border-[#C9A84C]/20 transition-colors">
-                <Link to={`/product/${item.id}`} className="w-24 h-24 bg-[#0a1512] flex-shrink-0 overflow-hidden">
+              <div key={item.id} className="flex gap-6 p-5 bg-[#003e02] border border-[#005b04] hover:border-[#C9A84C]/20 transition-colors">
+                <Link to={`/product/${item.id}`} className="w-24 h-24 bg-[#003102] flex-shrink-0 overflow-hidden">
                   {item.images?.[0] ? (
                     <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
                   ) : (
@@ -57,7 +57,7 @@ export default function Cart() {
                   <p className="text-[#555] text-xs mb-4">{item.category} {item.material && `· ${item.material}`}</p>
 
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center border border-[#24402f]">
+                    <div className="flex items-center border border-[#007605]">
                       <button onClick={() => updateQty(item.id, item.qty - 1)} className="w-8 h-8 flex items-center justify-center text-[#666] hover:text-white transition-colors text-sm">−</button>
                       <span className="text-white text-sm w-8 text-center">{item.qty}</span>
                       <button onClick={() => updateQty(item.id, item.qty + 1)} className="w-8 h-8 flex items-center justify-center text-[#666] hover:text-white transition-colors text-sm">+</button>
@@ -73,7 +73,7 @@ export default function Cart() {
 
           {/* Summary */}
           <div>
-            <div className="bg-[#0f1d17] border border-[#1b2e25] p-6 sticky top-24">
+            <div className="bg-[#003e02] border border-[#005b04] p-6 sticky top-24">
               <h2 className="font-display text-xl font-bold text-white mb-6">Order Summary</h2>
 
               <div className="space-y-3 mb-6">
@@ -91,7 +91,7 @@ export default function Cart() {
                 </div>
               </div>
 
-              <div className="border-t border-[#1b2e25] pt-5 mb-6">
+              <div className="border-t border-[#005b04] pt-5 mb-6">
                 <div className="flex justify-between">
                   <span className="text-white font-semibold">Estimated Total</span>
                   <span className="text-[#C9A84C] font-display text-xl font-bold">${total.toLocaleString()}</span>
@@ -105,7 +105,7 @@ export default function Cart() {
                 Continue Shopping
               </Link>
 
-              <div className="mt-6 pt-6 border-t border-[#1b2e25]">
+              <div className="mt-6 pt-6 border-t border-[#005b04]">
                 <div className="flex items-center justify-center gap-3 text-[#444]">
                   {['🔒 Secure', '🚚 Insured', '💎 Certified'].map(t => (
                     <span key={t} className="text-[10px] tracking-wide">{t}</span>

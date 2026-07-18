@@ -9,6 +9,7 @@ import Product from './pages/Product';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import About from './pages/About';
+import Locations from './pages/Locations';
 import Contact from './pages/Contact';
 import OrderSuccess from './pages/OrderSuccess';
 import AccountLogin from './pages/account/Login';
@@ -55,6 +56,7 @@ export default function App() {
       <Route path="/cart" element={<StoreLayout><Cart /></StoreLayout>} />
       <Route path="/checkout" element={<StoreLayout><Checkout /></StoreLayout>} />
       <Route path="/about" element={<StoreLayout><About /></StoreLayout>} />
+      <Route path="/locations" element={<StoreLayout><Locations /></StoreLayout>} />
       <Route path="/contact" element={<StoreLayout><Contact /></StoreLayout>} />
       <Route path="/order-success/:orderNumber" element={<StoreLayout><OrderSuccess /></StoreLayout>} />
 

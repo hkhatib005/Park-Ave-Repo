@@ -18,11 +18,11 @@ export default function AdminContacts() {
   };
 
   return (
-    <div className="min-h-screen bg-[#071009]">
-      <nav className="bg-[#0c1714] border-b border-[#1b2e25] px-6 h-14 flex items-center justify-between">
+    <div className="min-h-screen bg-[#002902]">
+      <nav className="bg-[#0c1714] border-b border-[#005b04] px-6 h-14 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Link to="/admin/dashboard" className="text-[#555] hover:text-white text-xs tracking-widest uppercase transition-colors">← Dashboard</Link>
-          <div className="h-4 w-px bg-[#24402f]" />
+          <div className="h-4 w-px bg-[#007605]" />
           <span className="text-white text-sm font-semibold">Client Messages</span>
         </div>
         <span className="text-[#555] text-xs">{contacts.filter(c => !c.read).length} unread</span>
@@ -37,7 +37,7 @@ export default function AdminContacts() {
                 key={c.id}
                 onClick={() => open(c)}
                 className={`w-full text-left p-4 border transition-colors ${
-                  selected?.id === c.id ? 'border-[#C9A84C] bg-[#0f1d17]' : 'border-[#1b2e25] bg-[#0f1d17] hover:border-[#24402f]'
+                  selected?.id === c.id ? 'border-[#C9A84C] bg-[#003e02]' : 'border-[#005b04] bg-[#003e02] hover:border-[#007605]'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -56,7 +56,7 @@ export default function AdminContacts() {
                 Select a message to view details
               </div>
             ) : (
-              <div className="bg-[#0f1d17] border border-[#1b2e25] p-6">
+              <div className="bg-[#003e02] border border-[#005b04] p-6">
                 <h2 className="font-display text-xl font-bold text-white mb-1">{selected.subject || 'General Inquiry'}</h2>
                 <p className="text-[#555] text-xs mb-5">{new Date(selected.created_at).toLocaleString()}</p>
 
@@ -68,7 +68,7 @@ export default function AdminContacts() {
                   {selected.phone && <p className="text-[#888] text-xs">{selected.phone}</p>}
                 </div>
 
-                <div className="p-4 bg-[#0a1512] border border-[#1b2e25]">
+                <div className="p-4 bg-[#003102] border border-[#005b04]">
                   <p className="text-[#ccc] text-sm leading-relaxed whitespace-pre-wrap">{selected.message}</p>
                 </div>
 
