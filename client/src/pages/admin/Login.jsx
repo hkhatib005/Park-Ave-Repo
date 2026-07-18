@@ -25,7 +25,7 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-[#071009] flex items-center justify-center px-6">
+    <div className="min-h-screen bg-[#002902] flex items-center justify-center px-6">
       <div className="w-full max-w-sm">
         <div className="text-center mb-10">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="#C9A84C" className="mx-auto mb-4">

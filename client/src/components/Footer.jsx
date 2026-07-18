@@ -23,21 +23,22 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#071009] border-t border-[#1b2e25]">
+    <footer className="bg-[#002902] border-t border-[#005b04]">
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-5">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#C9A84C">
-                <path d="M6 3L2 9l10 13L22 9l-4-6H6z"/>
-                <path d="M8 7h8M8 7l4 15m4-15-4 15M2 9h20" fill="none" stroke="#000" strokeOpacity="0.25" strokeWidth="1" strokeLinejoin="round"/>
-              </svg>
-              <span className="font-display text-lg font-bold text-white">Park Ave <span className="text-[#C9A84C]">Jewelers</span></span>
+            <div className="flex flex-col items-start mb-5 leading-none">
+              <span className="font-display text-2xl font-bold text-white">Park Ave</span>
+              <span className="flex items-center gap-2 mt-1.5">
+                <span className="w-5 h-px bg-white/70" />
+                <span className="font-display text-[11px] tracking-[3px] uppercase text-white/85">Jewelers</span>
+                <span className="w-5 h-px bg-white/70" />
+              </span>
             </div>
             <p className="text-[#666] text-sm leading-relaxed mb-6">
-              Fine jewellery and luxury timepieces from the heart of Manhattan's historic Diamond District.
+              Fine jewellery and luxury timepieces from the heart of Manhattan's historic Diamond District — with a boutique in Dubai.
             </p>
             <div className="space-y-2 text-sm text-[#666]">
               <p className="flex items-start gap-2">
@@ -81,6 +82,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {[
                 { label: 'About Us', to: '/about' },
+                { label: 'Locations', to: '/locations' },
                 { label: 'Contact', to: '/contact' },
                 { label: 'Custom Orders', to: '/contact' },
                 { label: 'Care & Maintenance', to: '/about' },
@@ -122,7 +124,7 @@ export default function Footer() {
               <h4 className="text-white text-xs tracking-[3px] uppercase font-semibold mb-3">Hours</h4>
               <div className="space-y-1 text-sm text-[#666]">
                 <p>Mon – Fri: 10am – 5:30pm</p>
-                <p>Saturday: Closed</p>
+                <p>Saturday: 11am – 5pm</p>
                 <p>Sunday: Closed</p>
               </div>
             </div>
@@ -130,7 +132,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-[#1b2e25] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-[#005b04] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[#444] text-xs">
             © {new Date().getFullYear()} Park Ave Jewelers. All rights reserved.
           </p>

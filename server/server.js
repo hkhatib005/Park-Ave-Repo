@@ -21,7 +21,7 @@ app.use(helmet({
       fontSrc: ["'self'", 'https://fonts.gstatic.com'],
       imgSrc: ["'self'", 'data:', 'https:'],
       connectSrc: ["'self'", 'https://accounts.google.com'],
-      frameSrc: ['https://accounts.google.com', 'https://checkout.stripe.com'],
+      frameSrc: ['https://accounts.google.com', 'https://checkout.stripe.com', 'https://www.google.com'],
     },
   },
 }));
