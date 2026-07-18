@@ -3,6 +3,14 @@ import { useParams, Link } from 'react-router-dom';
 import { getProduct, getProducts } from '../utils/api';
 import { useCart } from '../context/CartContext';
 import ProductCard from '../components/ProductCard';
+import { RingIcon, CATEGORY_ICONS } from '../components/CategoryIcons';
+
+const TRUST_SIGNALS = [
+  { text: 'Secure checkout', icon: <><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></> },
+  { text: 'GIA certified stones', icon: <><polygon points="12,3 20,8 20,15 12,21 4,15 4,8"/></> },
+  { text: 'Free insured shipping', icon: <><rect x="2" y="7" width="13" height="10"/><path d="M15 10h4l3 3v4h-7z"/><circle cx="7" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></> },
+  { text: 'Store credit returns', icon: <><path d="M3 10a8 8 0 1 1 2.7 6"/><path d="M3 4v6h6"/></> },
+];
 
 export default function Product() {
   const { id } = useParams();
@@ -69,9 +77,10 @@ export default function Product() {
                 />
               ) : (
                 <div className="w-full h-full product-placeholder flex items-center justify-center">
-                  <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="0.5" opacity="0.3">
-                    <polygon points="12,2 22,8 22,16 12,22 2,16 2,8"/>
-                  </svg>
+                  {(() => {
+                    const Icon = CATEGORY_ICONS[product.category] || RingIcon;
+                    return <Icon width="88" height="88" className="text-[#C9A84C]/35" />;
+                  })()}
                 </div>
               )}
             </div>
@@ -173,14 +182,9 @@ export default function Product() {
 
             {/* Trust signals */}
             <div className="mt-8 pt-8 border-t border-[#005b04] grid grid-cols-2 gap-4">
-              {[
-                { icon: '🔒', text: 'Secure checkout' },
-                { icon: '💎', text: 'GIA certified stones' },
-                { icon: '🚚', text: 'Free insured shipping' },
-                { icon: '↩️', text: 'Store credit returns' },
-              ].map(t => (
-                <div key={t.text} className="flex items-center gap-2">
-                  <span className="text-sm">{t.icon}</span>
+              {TRUST_SIGNALS.map(t => (
+                <div key={t.text} className="flex items-center gap-2.5">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" className="flex-shrink-0">{t.icon}</svg>
                   <span className="text-[#666] text-xs">{t.text}</span>
                 </div>
               ))}
@@ -195,7 +199,7 @@ export default function Product() {
               <p className="section-label">You May Also Like</p>
               <h2 className="font-display text-3xl font-bold text-white">Related Pieces</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#005b04]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {related.map(p => <ProductCard key={p.id} product={p} />)}
             </div>
           </div>

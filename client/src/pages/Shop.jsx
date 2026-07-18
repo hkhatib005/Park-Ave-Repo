@@ -166,9 +166,9 @@ export default function Shop() {
             )}
 
             {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px bg-[#005b04]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-[#003102] aspect-[3/4] animate-pulse" />
+                  <div key={i} className="bg-[#003e02] border border-[#005b04] aspect-[3/4] animate-pulse" />
                 ))}
               </div>
             ) : products.length === 0 ? (
@@ -177,7 +177,7 @@ export default function Shop() {
                 <p className="text-[#444] text-sm">Try adjusting your filters</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px bg-[#005b04]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
                 {products.map(p => <ProductCard key={p.id} product={p} />)}
               </div>
             )}

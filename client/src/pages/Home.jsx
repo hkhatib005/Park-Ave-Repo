@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getProducts } from '../utils/api';
 import ProductCard from '../components/ProductCard';
+import { RingIcon, NecklaceIcon, BraceletIcon, EarringIcon, WatchIcon, CustomIcon } from '../components/CategoryIcons';
 
 const categories = [
-  { name: 'Rings', icon: '💍', desc: 'Engagement, wedding & fashion rings' },
-  { name: 'Necklaces', icon: '📿', desc: 'Diamond, gold & pearl necklaces' },
-  { name: 'Bracelets', icon: '✨', desc: 'Bangles, chains & tennis bracelets' },
-  { name: 'Earrings', icon: '💎', desc: 'Studs, hoops & drop earrings' },
-  { name: 'Watches', icon: '⌚', desc: 'Rolex, Cartier & fine timepieces' },
-  { name: 'Custom Jewellery', icon: '🎨', desc: 'Bespoke pieces made for you' },
+  { name: 'Rings', Icon: RingIcon, desc: 'Engagement, wedding & fashion rings' },
+  { name: 'Necklaces', Icon: NecklaceIcon, desc: 'Diamond, gold & pearl necklaces' },
+  { name: 'Bracelets', Icon: BraceletIcon, desc: 'Bangles, chains & tennis bracelets' },
+  { name: 'Earrings', Icon: EarringIcon, desc: 'Studs, hoops & drop earrings' },
+  { name: 'Watches', Icon: WatchIcon, desc: 'Rolex, Cartier & fine timepieces' },
+  { name: 'Custom Jewellery', Icon: CustomIcon, desc: 'Bespoke pieces made for you' },
 ];
 
 const reviews = [
@@ -49,7 +50,7 @@ export default function Home() {
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] tracking-tight mb-6">
             Where Luxury
             <br />
-            <span className="gold-shimmer">Meets Legacy</span>
+            <span className="italic text-[#E2C47A]">Meets Legacy</span>
           </h1>
           <div className="divider-gold" />
           <p className="text-[#888] text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
@@ -67,7 +68,7 @@ export default function Home() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
           <span className="text-[#444] text-[9px] tracking-[4px] uppercase">Scroll</span>
           <div className="w-px h-8 bg-gradient-to-b from-[#C9A84C] to-transparent" />
         </div>
@@ -110,8 +111,8 @@ export default function Home() {
                 to={`/shop?category=${cat.name}`}
                 className="group bg-[#003102] p-6 flex flex-col items-center text-center hover:bg-[#003e02] transition-colors duration-300"
               >
-                <div className="w-14 h-14 border border-[#007605] group-hover:border-[#C9A84C] rounded-full flex items-center justify-center text-2xl mb-4 transition-colors duration-300">
-                  {cat.icon}
+                <div className="w-14 h-14 border border-[#007605] group-hover:border-[#C9A84C] rounded-full flex items-center justify-center mb-4 transition-colors duration-300 text-[#C9A84C]/80 group-hover:text-[#C9A84C]">
+                  <cat.Icon width="24" height="24" />
                 </div>
                 <h3 className="text-white text-sm font-semibold mb-1 group-hover:text-[#C9A84C] transition-colors duration-300">
                   {cat.name}
@@ -137,7 +138,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#005b04]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {featured.slice(0, 8).map(p => (
                 <ProductCard key={p.id} product={p} />
               ))}
@@ -151,11 +152,7 @@ export default function Home() {
       )}
 
       {/* CRAFTSMANSHIP BANNER */}
-      <section className="relative py-32 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#003102] via-[#003e02] to-[#003102]" />
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(ellipse at center, rgba(201,168,76,0.08) 0%, transparent 70%)`
-        }} />
+      <section className="relative py-28 px-6 overflow-hidden bg-[#003e02] border-y border-[#005b04]">
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <p className="section-label">Our Promise</p>
           <h2 className="font-display text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
@@ -167,18 +164,6 @@ export default function Home() {
             From our booth in Manhattan's historic Diamond District, each jewel is sourced, certified, and
             set by master craftsmen. We stand behind every piece with our lifetime guarantee.
           </p>
-          <div className="grid grid-cols-3 gap-8 mb-10">
-            {[
-              { num: '5.0★', label: 'Google Rating' },
-              { num: '93+', label: 'Five-Star Reviews' },
-              { num: '100%', label: 'Certified Stones' },
-            ].map(s => (
-              <div key={s.label}>
-                <p className="font-display text-3xl md:text-4xl font-bold text-[#C9A84C]">{s.num}</p>
-                <p className="text-[#666] text-xs tracking-widest uppercase mt-1">{s.label}</p>
-              </div>
-            ))}
-          </div>
           <Link to="/about" className="btn-outline-gold">Our Story</Link>
         </div>
       </section>

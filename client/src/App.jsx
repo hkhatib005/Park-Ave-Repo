@@ -3,6 +3,7 @@ import { useAuth } from './context/AuthContext';
 import { useCustomerAuth } from './context/CustomerAuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import Product from './pages/Product';
@@ -48,6 +49,8 @@ function StoreLayout({ children }) {
 
 export default function App() {
   return (
+    <>
+    <ScrollToTop />
     <Routes>
       {/* Store */}
       <Route path="/" element={<StoreLayout><Home /></StoreLayout>} />
@@ -74,5 +77,6 @@ export default function App() {
       <Route path="/admin/contacts" element={<ProtectedRoute><AdminContacts /></ProtectedRoute>} />
       <Route path="/admin/newsletter" element={<ProtectedRoute><AdminNewsletter /></ProtectedRoute>} />
     </Routes>
+    </>
   );
 }

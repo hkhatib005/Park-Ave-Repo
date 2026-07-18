@@ -106,9 +106,16 @@ export default function Cart() {
               </Link>
 
               <div className="mt-6 pt-6 border-t border-[#005b04]">
-                <div className="flex items-center justify-center gap-3 text-[#444]">
-                  {['🔒 Secure', '🚚 Insured', '💎 Certified'].map(t => (
-                    <span key={t} className="text-[10px] tracking-wide">{t}</span>
+                <div className="flex items-center justify-center gap-5 text-[#666]">
+                  {[
+                    { text: 'Secure', icon: <><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></> },
+                    { text: 'Insured', icon: <><rect x="2" y="7" width="13" height="10"/><path d="M15 10h4l3 3v4h-7z"/><circle cx="7" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></> },
+                    { text: 'Certified', icon: <><polygon points="12,3 20,8 20,15 12,21 4,15 4,8"/></> },
+                  ].map(t => (
+                    <span key={t.text} className="flex items-center gap-1.5 text-[10px] tracking-wide uppercase">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">{t.icon}</svg>
+                      {t.text}
+                    </span>
                   ))}
                 </div>
               </div>

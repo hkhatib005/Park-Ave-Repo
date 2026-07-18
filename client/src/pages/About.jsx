@@ -1,3 +1,9 @@
+const VALUE_ICONS = {
+  quality: <><polygon points="12,3 20,8 20,15 12,21 4,15 4,8"/><path d="M4 8l8 3 8-3M12 11v10" opacity="0.5"/></>,
+  service: <><path d="M8.5 12.5 L11 15 L16 9"/><circle cx="12" cy="12" r="9"/></>,
+  craft: <><path d="M14 6 L18 10 L8 20 L4 20 L4 16 Z"/><path d="M12 8 L16 12" /></>,
+};
+
 export default function About() {
   return (
     <div className="pt-20 page-enter">
@@ -35,8 +41,8 @@ export default function About() {
                 that's earned us a 5.0 rating across dozens of Google reviews from clients who've become friends.
               </p>
               <p>
-                Every piece in our collection is GIA certified, ethically sourced, and comes with
-                our lifetime craftsmanship guarantee.
+                Every diamond in our collection is 100% natural — never lab-grown — GIA certified,
+                ethically sourced, and comes with our lifetime craftsmanship guarantee.
               </p>
             </div>
           </div>
@@ -63,7 +69,7 @@ export default function About() {
             { num: '2023', label: 'Founded' },
             { num: '5.0★', label: 'Google Rating' },
             { num: '93+', label: 'Five-Star Reviews' },
-            { num: '100%', label: 'Certified Stones' },
+            { num: '100%', label: 'Natural Diamonds' },
           ].map(s => (
             <div key={s.label}>
               <p className="font-display text-3xl md:text-4xl font-bold text-[#C9A84C] mb-1">{s.num}</p>
@@ -83,23 +89,25 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#005b04]">
             {[
               {
-                icon: '💎',
+                icon: VALUE_ICONS.quality,
                 title: 'Exceptional Quality',
-                desc: 'Every diamond is hand-selected and GIA certified. We accept nothing less than the finest stones in the world.'
+                desc: '100% natural diamonds, hand-selected and GIA certified. We accept nothing less than the finest stones in the world.'
               },
               {
-                icon: '🤝',
+                icon: VALUE_ICONS.service,
                 title: 'Personal Service',
                 desc: 'We build real relationships with every client — it\'s why we\'ve earned a 5.0 rating across dozens of reviews.'
               },
               {
-                icon: '⚒️',
+                icon: VALUE_ICONS.craft,
                 title: 'Master Craftsmanship',
                 desc: 'Each piece is crafted by experienced jewellers, ensuring perfection in every detail.'
               },
             ].map(v => (
               <div key={v.title} className="bg-[#003102] p-8 text-center">
-                <div className="text-4xl mb-4">{v.icon}</div>
+                <div className="w-12 h-12 mx-auto mb-5 flex items-center justify-center border border-[#C9A84C]/25 rounded-full">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.3">{v.icon}</svg>
+                </div>
                 <h3 className="font-display text-xl font-bold text-white mb-3">{v.title}</h3>
                 <p className="text-[#666] text-sm leading-relaxed">{v.desc}</p>
               </div>
