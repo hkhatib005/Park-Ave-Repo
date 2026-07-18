@@ -60,7 +60,7 @@ export default function Product() {
 
           {/* Images */}
           <div>
-            <div className="aspect-square bg-[#0f1d17] mb-3 overflow-hidden">
+            <div className="aspect-square bg-[#003e02] mb-3 overflow-hidden">
               {images[activeImg] ? (
                 <img
                   src={images[activeImg]}
@@ -81,7 +81,7 @@ export default function Product() {
                   <button
                     key={i}
                     onClick={() => setActiveImg(i)}
-                    className={`aspect-square bg-[#0f1d17] overflow-hidden border-2 transition-colors ${activeImg === i ? 'border-[#C9A84C]' : 'border-transparent'}`}
+                    className={`aspect-square bg-[#003e02] overflow-hidden border-2 transition-colors ${activeImg === i ? 'border-[#C9A84C]' : 'border-transparent'}`}
                   >
                     {img && <img src={img} alt="" className="w-full h-full object-cover" />}
                   </button>
@@ -123,7 +123,7 @@ export default function Product() {
               )}
             </div>
 
-            <div className="w-full h-px bg-[#1b2e25] mb-6" />
+            <div className="w-full h-px bg-[#005b04] mb-6" />
 
             {/* Description */}
             {product.description && (
@@ -136,7 +136,7 @@ export default function Product() {
             {product.in_stock !== 0 ? (
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center border border-[#24402f]">
+                  <div className="flex items-center border border-[#007605]">
                     <button onClick={() => setQty(q => Math.max(1, q - 1))} className="w-10 h-10 flex items-center justify-center text-[#666] hover:text-white transition-colors">−</button>
                     <span className="text-white w-10 text-center text-sm">{qty}</span>
                     <button onClick={() => setQty(q => q + 1)} className="w-10 h-10 flex items-center justify-center text-[#666] hover:text-white transition-colors">+</button>
@@ -162,7 +162,7 @@ export default function Product() {
               </div>
             ) : (
               <div className="space-y-4">
-                <div className="w-full py-4 text-center text-xs tracking-[3px] uppercase bg-[#182a20] text-[#555] border border-[#24402f]">
+                <div className="w-full py-4 text-center text-xs tracking-[3px] uppercase bg-[#005403] text-[#555] border border-[#007605]">
                   Sold Out
                 </div>
                 <Link to="/contact" className="btn-outline-gold w-full text-center block">
@@ -172,7 +172,7 @@ export default function Product() {
             )}
 
             {/* Trust signals */}
-            <div className="mt-8 pt-8 border-t border-[#1b2e25] grid grid-cols-2 gap-4">
+            <div className="mt-8 pt-8 border-t border-[#005b04] grid grid-cols-2 gap-4">
               {[
                 { icon: '🔒', text: 'Secure checkout' },
                 { icon: '💎', text: 'GIA certified stones' },
@@ -195,7 +195,7 @@ export default function Product() {
               <p className="section-label">You May Also Like</p>
               <h2 className="font-display text-3xl font-bold text-white">Related Pieces</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#1b2e25]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#005b04]">
               {related.map(p => <ProductCard key={p.id} product={p} />)}
             </div>
           </div>

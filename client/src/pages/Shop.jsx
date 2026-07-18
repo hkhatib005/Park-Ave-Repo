@@ -50,7 +50,7 @@ export default function Shop() {
   return (
     <div className="pt-20 min-h-screen page-enter">
       {/* Header */}
-      <div className="bg-[#071009] border-b border-[#1b2e25] py-12 px-6 text-center">
+      <div className="bg-[#002902] border-b border-[#005b04] py-12 px-6 text-center">
         <p className="section-label">Discover</p>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-white">
           {activeCategory === 'All' ? 'All Collections' : activeCategory}
@@ -77,7 +77,7 @@ export default function Shop() {
               className={`flex-shrink-0 px-5 py-2 text-xs tracking-[2px] uppercase border transition-all duration-200 ${
                 activeCategory === cat
                   ? 'border-[#C9A84C] text-[#C9A84C] bg-[#C9A84C]/5'
-                  : 'border-[#24402f] text-[#666] hover:border-[#555] hover:text-white'
+                  : 'border-[#007605] text-[#666] hover:border-[#555] hover:text-white'
               }`}
             >
               {cat}
@@ -139,7 +139,7 @@ export default function Shop() {
             </button>
 
             {showFilters && (
-              <div className="lg:hidden mb-6 p-4 bg-[#0f1d17] border border-[#1b2e25] space-y-6">
+              <div className="lg:hidden mb-6 p-4 bg-[#003e02] border border-[#005b04] space-y-6">
                 <div>
                   <h3 className="text-white text-[10px] tracking-[3px] uppercase font-semibold mb-3">Price Range</h3>
                   <div className="space-y-2">
@@ -166,9 +166,9 @@ export default function Shop() {
             )}
 
             {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px bg-[#1b2e25]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px bg-[#005b04]">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-[#0a1512] aspect-[3/4] animate-pulse" />
+                  <div key={i} className="bg-[#003102] aspect-[3/4] animate-pulse" />
                 ))}
               </div>
             ) : products.length === 0 ? (
@@ -177,7 +177,7 @@ export default function Shop() {
                 <p className="text-[#444] text-sm">Try adjusting your filters</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px bg-[#1b2e25]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px bg-[#005b04]">
                 {products.map(p => <ProductCard key={p.id} product={p} />)}
               </div>
             )}
