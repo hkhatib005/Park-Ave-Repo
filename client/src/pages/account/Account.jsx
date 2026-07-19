@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCustomerAuth } from '../../context/CustomerAuthContext';
 import { getMyOrders } from '../../utils/api';
+import DeleteAccountModal from '../../components/DeleteAccountModal';
 
 const STATUS_COLORS = {
   pending: 'text-[#d29922] bg-[#d29922]/10',
@@ -15,6 +16,7 @@ const STATUS_COLORS = {
 export default function Account() {
   const { customer, logout } = useCustomerAuth();
   const [orders, setOrders] = useState([]);
+  const [showDelete, setShowDelete] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,7 +66,31 @@ export default function Account() {
             ))}
           </div>
         )}
+
+        <div className="mt-16 pt-8 border-t border-[#1b2e25]">
+          <h2 className="text-[#666] text-sm tracking-[3px] uppercase font-semibold mb-3">Danger Zone</h2>
+          <div className="border border-red-900/40 p-5 flex items-center justify-between gap-4 flex-wrap">
+            <div>
+              <p className="text-white text-sm font-medium mb-1">Delete Account</p>
+              <p className="text-[#666] text-xs">Permanently removes your login and profile. Past orders are kept for our records but unlinked from your account.</p>
+            </div>
+            <button
+              onClick={() => setShowDelete(true)}
+              className="text-red-400 hover:text-red-300 border border-red-900/40 hover:border-red-700 text-xs tracking-widest uppercase px-4 py-2.5 transition-colors flex-shrink-0"
+            >
+              Delete Account
+            </button>
+          </div>
+        </div>
       </div>
+
+      {showDelete && (
+        <DeleteAccountModal
+          hasPassword={customer?.has_password}
+          onClose={() => setShowDelete(false)}
+          onDeleted={() => navigate('/')}
+        />
+      )}
     </div>
   );
 }

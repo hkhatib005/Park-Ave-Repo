@@ -37,8 +37,11 @@ export const adminLogin = (email, password) => api.post('/auth/login', { email, 
 export const registerCustomer = (name, email, password) => api.post('/account/register', { name, email, password });
 export const loginCustomer = (email, password) => api.post('/account/login', { email, password });
 export const googleLogin = credential => api.post('/account/google', { credential });
+export const forgotPassword = email => api.post('/account/forgot-password', { email });
+export const resetPassword = (token, password) => api.post('/account/reset-password', { token, password });
 export const getMe = () => api.get('/account/me', { headers: customerHeaders() });
 export const getMyOrders = () => api.get('/account/orders', { headers: customerHeaders() });
+export const deleteMyAccount = password => api.delete('/account/me', { data: { password }, headers: customerHeaders() });
 
 // Admin — customer accounts view
 export const getCustomers = () => api.get('/admin/customers', { headers: adminHeaders() });

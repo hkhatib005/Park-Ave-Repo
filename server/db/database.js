@@ -92,6 +92,13 @@ if (!orderCols.includes('stripe_session_id')) db.exec('ALTER TABLE orders ADD CO
 if (!orderCols.includes('abandoned_email_sent_at')) db.exec('ALTER TABLE orders ADD COLUMN abandoned_email_sent_at TEXT');
 const contactCols = db.prepare("PRAGMA table_info(contacts)").all().map(c => c.name);
 if (!contactCols.includes('read')) db.exec('ALTER TABLE contacts ADD COLUMN read INTEGER DEFAULT 0');
+const customerCols = db.prepare("PRAGMA table_info(customers)").all().map(c => c.name);
+if (!customerCols.includes('reset_token')) db.exec('ALTER TABLE customers ADD COLUMN reset_token TEXT');
+if (!customerCols.includes('reset_token_expires')) db.exec('ALTER TABLE customers ADD COLUMN reset_token_expires TEXT');
+// Bumped whenever a password is reset, so JWTs issued before that point stop
+// verifying — otherwise a leaked token would stay valid up to its 30-day
+// expiry even after the owner resets their password specifically to kill it.
+if (!customerCols.includes('token_version')) db.exec('ALTER TABLE customers ADD COLUMN token_version INTEGER DEFAULT 0');
 
 // Seed admin — credentials come from env, never hardcoded/displayed in the app.
 // If ADMIN_PASSWORD isn't set, generate one and print it once to the server console.

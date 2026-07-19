@@ -16,6 +16,8 @@ import OrderSuccess from './pages/OrderSuccess';
 import AccountLogin from './pages/account/Login';
 import AccountRegister from './pages/account/Register';
 import Account from './pages/account/Account';
+import ForgotPassword from './pages/account/ForgotPassword';
+import ResetPassword from './pages/account/ResetPassword';
 import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminProducts from './pages/admin/Products';
@@ -66,6 +68,8 @@ export default function App() {
       {/* Customer accounts */}
       <Route path="/account/login" element={<StoreLayout><AccountLogin /></StoreLayout>} />
       <Route path="/account/register" element={<StoreLayout><AccountRegister /></StoreLayout>} />
+      <Route path="/account/forgot-password" element={<StoreLayout><ForgotPassword /></StoreLayout>} />
+      <Route path="/account/reset-password" element={<StoreLayout><ResetPassword /></StoreLayout>} />
       <Route path="/account" element={<StoreLayout><ProtectedCustomerRoute><Account /></ProtectedCustomerRoute></StoreLayout>} />
 
       {/* Admin */}

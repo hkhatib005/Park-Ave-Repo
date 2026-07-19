@@ -171,6 +171,15 @@ export default function Footer() {
             Handcrafted in New York City
           </p>
         </div>
+
+        <div className="text-center mt-6">
+          <p className="text-[#333] text-[11px]">
+            Created &amp; Designed by software engineer{' '}
+            <a href="https://hkhatib005.github.io/hatem" target="_blank" rel="noopener noreferrer" className="text-[#555] hover:text-[#C9A84C] transition-colors duration-200">
+              Hatem Alkhatib
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );
