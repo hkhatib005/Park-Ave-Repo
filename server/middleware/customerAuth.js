@@ -1,12 +1,19 @@
 const jwt = require('jsonwebtoken');
+const db = require('../db/database');
 const { JWT_SECRET } = require('../config');
 
+// Checked against the DB on every request (not just signature/expiry) so a
+// password reset or an account deletion can actually kill outstanding
+// tokens instead of leaving them valid for their full 30-day lifetime.
 function verify(req) {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) return null;
   try {
     const payload = jwt.verify(token, JWT_SECRET);
-    return payload.role === 'customer' ? payload : null;
+    if (payload.role !== 'customer') return null;
+    const row = db.prepare('SELECT token_version FROM customers WHERE id = ?').get(payload.id);
+    if (!row || row.token_version !== payload.tokenVersion) return null;
+    return payload;
   } catch {
     return null;
   }
