@@ -10,6 +10,8 @@ services:
         value: production
       - key: JWT_SECRET
         generateValue: true
+      - key: INTERNAL_CRON_SECRET
+        generateValue: true
       - key: CLIENT_URL
         sync: false
       - key: ADMIN_EMAIL
@@ -38,3 +40,25 @@ services:
       name: park-ave-data
       mountPath: /var/data
       sizeGB: 1
+
+  # Triggers the abandoned-cart check over HTTP instead of running as an
+  # in-process timer on the web service — survives deploys/restarts and
+  # (if the web service ever scales past one instance) still only fires
+  # once per run instead of once per instance. Can't touch the SQLite file
+  # directly since Render disks only attach to one service.
+  - type: cron
+    name: park-ave-abandoned-cart-cron
+    runtime: node
+    plan: starter
+    schedule: "*/15 * * * *"
+    buildCommand: "echo no build needed"
+    startCommand: >-
+      curl -sf -X POST -H "x-internal-secret: $INTERNAL_CRON_SECRET" "$APP_URL/api/internal/abandoned-cart-check"
+    envVars:
+      - key: INTERNAL_CRON_SECRET
+        fromService:
+          type: web
+          name: park-ave-jewelers
+          envVarKey: INTERNAL_CRON_SECRET
+      - key: APP_URL
+        sync: false

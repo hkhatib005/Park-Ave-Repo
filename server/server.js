@@ -4,7 +4,6 @@ const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
 const { UPLOADS_DIR } = require('./config');
-const { runAbandonedCartCheck } = require('./jobs/abandonedCart');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -54,6 +53,7 @@ app.use('/api/upload', require('./routes/upload'));
 app.use('/api/contact', require('./routes/contact'));
 app.use('/api/admin/customers', require('./routes/adminCustomers'));
 app.use('/api/newsletter', require('./routes/newsletter'));
+app.use('/api/internal', require('./routes/internal'));
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok', time: new Date().toISOString() }));
 
@@ -64,6 +64,8 @@ app.get('*', (req, res) => res.sendFile(path.join(clientDist, 'index.html')));
 
 app.listen(PORT, () => console.log(`Park Ave Jewelers running on port ${PORT}`));
 
-// Checks for abandoned checkouts every 15 minutes; no-ops until RESEND_API_KEY is set.
-const CART_CHECK_INTERVAL_MS = 15 * 60 * 1000;
-setInterval(() => runAbandonedCartCheck().catch(err => console.error('Abandoned cart job failed:', err.message)), CART_CHECK_INTERVAL_MS);
+// The abandoned-cart check runs on a schedule via a separate Render Cron Job
+// service hitting POST /api/internal/abandoned-cart-check (see render.yaml
+// and routes/internal.js) — not an in-process timer, which wouldn't survive
+// the host sleeping, a deploy restarting it, or ever running as more than
+// one instance.
