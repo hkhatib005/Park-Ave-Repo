@@ -4,6 +4,7 @@ import { useCustomerAuth } from './context/CustomerAuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import LoadingScreen from './components/LoadingScreen';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import Product from './pages/Product';
@@ -28,14 +29,14 @@ import AdminNewsletter from './pages/admin/Newsletter';
 
 function ProtectedRoute({ children }) {
   const { admin, loading } = useAuth();
-  if (loading) return null;
+  if (loading) return <LoadingScreen />;
   return admin ? children : <Navigate to="/admin" replace />;
 }
 
 function ProtectedCustomerRoute({ children }) {
   const { customer, loading } = useCustomerAuth();
   const location = useLocation();
-  if (loading) return null;
+  if (loading) return <LoadingScreen />;
   return customer ? children : <Navigate to="/account/login" state={{ from: location.pathname }} replace />;
 }
 
