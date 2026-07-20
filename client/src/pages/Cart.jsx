@@ -60,7 +60,13 @@ export default function Cart() {
                     <div className="flex items-center border border-[#007605]">
                       <button onClick={() => updateQty(item.id, item.qty - 1)} className="w-8 h-8 flex items-center justify-center text-[#666] hover:text-white transition-colors text-sm">−</button>
                       <span className="text-white text-sm w-8 text-center">{item.qty}</span>
-                      <button onClick={() => updateQty(item.id, item.qty + 1)} className="w-8 h-8 flex items-center justify-center text-[#666] hover:text-white transition-colors text-sm">+</button>
+                      <button
+                        onClick={() => updateQty(item.id, item.qty + 1)}
+                        disabled={item.stock_qty != null && item.qty >= item.stock_qty}
+                        className="w-8 h-8 flex items-center justify-center text-[#666] hover:text-white transition-colors text-sm disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-[#666]"
+                      >
+                        +
+                      </button>
                     </div>
                     <span className="text-[#C9A84C] font-display font-bold text-lg">
                       ${(item.price * item.qty).toLocaleString()}

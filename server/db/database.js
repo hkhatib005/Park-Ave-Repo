@@ -90,6 +90,7 @@ if (!orderCols.includes('payment_status')) db.exec("ALTER TABLE orders ADD COLUM
 if (!orderCols.includes('payment_method')) db.exec('ALTER TABLE orders ADD COLUMN payment_method TEXT');
 if (!orderCols.includes('stripe_session_id')) db.exec('ALTER TABLE orders ADD COLUMN stripe_session_id TEXT');
 if (!orderCols.includes('abandoned_email_sent_at')) db.exec('ALTER TABLE orders ADD COLUMN abandoned_email_sent_at TEXT');
+if (!orderCols.includes('tracking_number')) db.exec('ALTER TABLE orders ADD COLUMN tracking_number TEXT');
 const contactCols = db.prepare("PRAGMA table_info(contacts)").all().map(c => c.name);
 if (!contactCols.includes('read')) db.exec('ALTER TABLE contacts ADD COLUMN read INTEGER DEFAULT 0');
 const customerCols = db.prepare("PRAGMA table_info(customers)").all().map(c => c.name);
