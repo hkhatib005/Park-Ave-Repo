@@ -21,14 +21,40 @@ export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
   const [selected, setSelected] = useState(null);
   const [filter, setFilter] = useState('all');
+  const [shippingOrder, setShippingOrder] = useState(null);
+  const [trackingInput, setTrackingInput] = useState('');
+  const [noTracking, setNoTracking] = useState(false);
+  const [statusError, setStatusError] = useState('');
 
   const load = () => getOrders().then(({ data }) => setOrders(data)).catch(() => {});
   useEffect(() => { load(); }, []);
 
-  const changeStatus = async (id, status) => {
-    await updateOrderStatus(id, status).catch(() => {});
-    load();
-    if (selected?.id === id) setSelected(o => ({ ...o, status }));
+  const changeStatus = async (id, status, extra) => {
+    setStatusError('');
+    try {
+      await updateOrderStatus(id, status, extra);
+      load();
+      if (selected?.id === id) setSelected(o => ({ ...o, status, ...(extra?.tracking_number !== undefined ? { tracking_number: extra.tracking_number } : {}) }));
+    } catch (err) {
+      setStatusError(err.response?.data?.error || 'Failed to update status');
+    }
+  };
+
+  const requestStatusChange = (order, status) => {
+    if (status === 'shipped') {
+      setTrackingInput(order.tracking_number || '');
+      setNoTracking(false);
+      setStatusError('');
+      setShippingOrder(order);
+      return;
+    }
+    changeStatus(order.id, status);
+  };
+
+  const confirmShipped = () => {
+    if (!noTracking && !trackingInput.trim()) return;
+    changeStatus(shippingOrder.id, 'shipped', { tracking_number: noTracking ? null : trackingInput.trim(), no_tracking: noTracking });
+    setShippingOrder(null);
   };
 
   const changePayment = async (id, payment_status) => {
@@ -149,6 +175,14 @@ export default function AdminOrders() {
                   </div>
                 </div>
 
+                {/* Tracking */}
+                {selected.status === 'shipped' && (
+                  <div className="mb-5 p-3 bg-[#003102] border border-[#005b04]">
+                    <p className="text-[#444] text-[10px] tracking-[2px] uppercase mb-1">Tracking Number</p>
+                    <p className="text-[#888] text-xs">{selected.tracking_number || 'None provided'}</p>
+                  </div>
+                )}
+
                 {/* Notes */}
                 {selected.notes && (
                   <div className="mb-5 p-3 bg-[#003102] border border-[#005b04]">
@@ -178,12 +212,16 @@ export default function AdminOrders() {
 
                 {/* Update status */}
                 <div>
-                  <h3 className="text-[#444] text-[10px] tracking-[2px] uppercase mb-3">Update Status</h3>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-[#444] text-[10px] tracking-[2px] uppercase">Update Status</h3>
+                    <p className="text-[#444] text-[10px]">Customer is emailed on every change</p>
+                  </div>
+                  {statusError && <p className="text-red-400 text-xs mb-3">{statusError}</p>}
                   <div className="flex flex-wrap gap-2">
                     {STATUSES.map(s => (
                       <button
                         key={s}
-                        onClick={() => changeStatus(selected.id, s)}
+                        onClick={() => requestStatusChange(selected, s)}
                         disabled={selected.status === s}
                         className={`text-[10px] tracking-[2px] uppercase px-3 py-1.5 border transition-colors disabled:opacity-30 disabled:cursor-default ${
                           selected.status === s
@@ -201,6 +239,54 @@ export default function AdminOrders() {
           </div>
         </div>
       </div>
+
+      {shippingOrder && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center px-4">
+          <div className="bg-[#0c1714] border border-[#005b04] w-full max-w-sm">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[#005b04]">
+              <h2 className="font-display text-lg font-bold text-white">Mark as Shipped</h2>
+              <button onClick={() => setShippingOrder(null)} className="text-[#555] hover:text-white transition-colors">✕</button>
+            </div>
+            <div className="p-6 space-y-4">
+              <p className="text-[#888] text-sm">
+                {shippingOrder.order_number} — the customer is emailed as soon as you confirm.
+              </p>
+              <div>
+                <label className="text-[#555] text-xs block mb-1.5">Tracking Number</label>
+                <input
+                  value={trackingInput}
+                  onChange={e => { setTrackingInput(e.target.value); if (e.target.value.trim()) setNoTracking(false); }}
+                  disabled={noTracking}
+                  className="input-luxury disabled:opacity-40"
+                  placeholder="1Z999AA10123456784"
+                  autoFocus
+                />
+              </div>
+              <label className="flex items-center gap-2 text-[#888] text-xs cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={noTracking}
+                  onChange={e => { setNoTracking(e.target.checked); if (e.target.checked) setTrackingInput(''); }}
+                />
+                No tracking number for this shipment
+              </label>
+              {statusError && <p className="text-red-400 text-xs">{statusError}</p>}
+              <div className="flex gap-3 pt-2">
+                <button onClick={() => setShippingOrder(null)} className="btn-outline-gold flex-1 py-3">
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmShipped}
+                  disabled={!noTracking && !trackingInput.trim()}
+                  className="btn-gold flex-1 py-3 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  Confirm Shipped
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

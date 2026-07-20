@@ -148,7 +148,13 @@ export default function Product() {
                   <div className="flex items-center border border-[#007605]">
                     <button onClick={() => setQty(q => Math.max(1, q - 1))} className="w-10 h-10 flex items-center justify-center text-[#666] hover:text-white transition-colors">−</button>
                     <span className="text-white w-10 text-center text-sm">{qty}</span>
-                    <button onClick={() => setQty(q => q + 1)} className="w-10 h-10 flex items-center justify-center text-[#666] hover:text-white transition-colors">+</button>
+                    <button
+                      onClick={() => setQty(q => product.stock_qty != null ? Math.min(product.stock_qty, q + 1) : q + 1)}
+                      disabled={product.stock_qty != null && qty >= product.stock_qty}
+                      className="w-10 h-10 flex items-center justify-center text-[#666] hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-[#666]"
+                    >
+                      +
+                    </button>
                   </div>
                   <p className={`text-xs font-medium ${product.stock_qty <= 3 ? 'text-[#d29922]' : 'text-[#555]'}`}>
                     {product.stock_qty <= 3 ? `Only ${product.stock_qty} left in stock` : `${product.stock_qty} in stock`}

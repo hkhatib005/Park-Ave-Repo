@@ -57,4 +57,37 @@ async function sendPasswordResetEmail({ to, name, resetUrl }) {
   });
 }
 
-module.exports = { sendAbandonedCartEmail, sendPasswordResetEmail };
+const STATUS_COPY = {
+  pending: { subject: 'Order Received', heading: 'Order Received', body: "we've received your order and it's pending confirmation." },
+  confirmed: { subject: 'Order Confirmed', heading: 'Order Confirmed', body: 'your order has been confirmed and is being prepared.' },
+  processing: { subject: 'Order Being Processed', heading: 'Order Being Processed', body: 'your order is now being processed.' },
+  shipped: { subject: 'Your Order Has Shipped', heading: 'Your Order Has Shipped', body: "good news — your order is on its way." },
+  delivered: { subject: 'Order Delivered', heading: 'Order Delivered', body: 'your order has been marked as delivered. We hope you love it.' },
+  cancelled: { subject: 'Order Cancelled', heading: 'Order Cancelled', body: "your order has been cancelled. If this wasn't expected, please reach out to us." },
+};
+
+async function sendOrderStatusEmail({ to, name, orderNumber, status, trackingNumber }) {
+  if (!resend) return { skipped: 'RESEND_API_KEY not configured' };
+  const copy = STATUS_COPY[status];
+  if (!copy) return { skipped: `No email copy for status: ${status}` };
+
+  const trackingLine = status !== 'shipped' ? '' : trackingNumber
+    ? `<p style="margin:20px 0 0;font-size:14px;">Tracking number: <strong>${trackingNumber}</strong></p>`
+    : `<p style="margin:20px 0 0;font-size:13px;color:#555;">No tracking number was provided for this shipment.</p>`;
+
+  const html = wrapEmail(`
+      <h2 style="margin:0 0 16px;color:${GOLD_DARK};font-size:22px;">${copy.heading}</h2>
+      <p style="margin:0;">Hi ${name || 'there'}, ${copy.body}</p>
+      <p style="margin:20px 0 0;font-size:13px;color:#555;">Order ${orderNumber}</p>
+      ${trackingLine}
+  `);
+
+  return resend.emails.send({
+    from: FROM,
+    to,
+    subject: `${copy.subject} — ${orderNumber}`,
+    html,
+  });
+}
+
+module.exports = { sendAbandonedCartEmail, sendPasswordResetEmail, sendOrderStatusEmail };

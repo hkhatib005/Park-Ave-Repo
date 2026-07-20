@@ -23,7 +23,7 @@ export const deleteProduct = id => api.delete(`/products/${id}`, { headers: admi
 // Orders — admin only (order creation happens via /checkout)
 export const getOrders = () => api.get('/orders', { headers: adminHeaders() });
 export const getOrder = id => api.get(`/orders/${id}`, { headers: adminHeaders() });
-export const updateOrderStatus = (id, status) => api.patch(`/orders/${id}/status`, { status }, { headers: adminHeaders() });
+export const updateOrderStatus = (id, status, extra = {}) => api.patch(`/orders/${id}/status`, { status, ...extra }, { headers: adminHeaders() });
 export const updateOrderPayment = (id, payment_status, payment_method) =>
   api.patch(`/orders/${id}/payment`, { payment_status, payment_method }, { headers: adminHeaders() });
 
