@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: park-ave-jewelers
+    runtime: node
+    plan: starter
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: VITE_GOOGLE_CLIENT_ID
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        value: orders@parkavejewelry.com
+      - key: ABANDONED_CART_DELAY_MINUTES
+        value: 60
+      - key: DB_PATH
+        value: /var/data/park_ave.db
+      - key: UPLOADS_DIR
+        value: /var/data/uploads
+    disk:
+      name: park-ave-data
+      mountPath: /var/data
+      sizeGB: 1
