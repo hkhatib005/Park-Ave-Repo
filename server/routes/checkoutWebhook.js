@@ -1,8 +1,7 @@
 const db = require('../db/database');
+const { releaseOrderStock } = require('../services/stock');
 
 const stripe = process.env.STRIPE_SECRET_KEY ? require('stripe')(process.env.STRIPE_SECRET_KEY) : null;
-
-const releaseStock = db.prepare('UPDATE products SET stock_qty = stock_qty + ?, in_stock = 1 WHERE id = ?');
 
 module.exports = (req, res) => {
   if (!stripe || !process.env.STRIPE_WEBHOOK_SECRET) return res.status(503).end();
@@ -39,14 +38,12 @@ module.exports = (req, res) => {
     const session = event.data.object;
     const orderNumber = session.metadata?.order_number;
     if (orderNumber) {
-      const order = db.prepare('SELECT items, payment_status FROM orders WHERE order_number = ?').get(orderNumber);
+      const order = db.prepare('SELECT id, payment_status FROM orders WHERE order_number = ?').get(orderNumber);
       // A session can't complete after expiring, but guard against odd event
       // ordering rather than assume it.
       if (order && order.payment_status !== 'paid') {
-        for (const item of JSON.parse(order.items || '[]')) {
-          releaseStock.run(item.qty, item.id);
-        }
-        db.prepare("UPDATE orders SET payment_status = 'expired' WHERE order_number = ?").run(orderNumber);
+        db.prepare("UPDATE orders SET payment_status = 'expired' WHERE id = ?").run(order.id);
+        releaseOrderStock(order.id);
       }
     }
   }

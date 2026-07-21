@@ -55,6 +55,7 @@ db.exec(`
     payment_method TEXT,
     stripe_session_id TEXT,
     notes TEXT,
+    stock_released INTEGER DEFAULT 0,
     created_at TEXT DEFAULT (datetime('now'))
   );
 
@@ -91,6 +92,11 @@ if (!orderCols.includes('payment_method')) db.exec('ALTER TABLE orders ADD COLUM
 if (!orderCols.includes('stripe_session_id')) db.exec('ALTER TABLE orders ADD COLUMN stripe_session_id TEXT');
 if (!orderCols.includes('abandoned_email_sent_at')) db.exec('ALTER TABLE orders ADD COLUMN abandoned_email_sent_at TEXT');
 if (!orderCols.includes('tracking_number')) db.exec('ALTER TABLE orders ADD COLUMN tracking_number TEXT');
+// Claimed atomically before releasing an order's reserved stock, so the three
+// independent paths that can release it (Stripe's checkout.session.expired
+// webhook, an admin cancelling the order, an admin refunding it) can't
+// double-credit the same units back no matter which fires first.
+if (!orderCols.includes('stock_released')) db.exec('ALTER TABLE orders ADD COLUMN stock_released INTEGER DEFAULT 0');
 const contactCols = db.prepare("PRAGMA table_info(contacts)").all().map(c => c.name);
 if (!contactCols.includes('read')) db.exec('ALTER TABLE contacts ADD COLUMN read INTEGER DEFAULT 0');
 const customerCols = db.prepare("PRAGMA table_info(customers)").all().map(c => c.name);

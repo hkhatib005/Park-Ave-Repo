@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('../db/database');
 const auth = require('../middleware/auth');
 const { sendOrderStatusEmail } = require('../services/email');
+const { releaseOrderStock } = require('../services/stock');
 
 const router = express.Router();
 
@@ -25,7 +26,7 @@ router.patch('/:id/status', auth, async (req, res) => {
   // Shipped has to come with either a real tracking number or an explicit
   // admin confirmation that none exists — never silently shipped with
   // nothing on file for the customer to go on.
-  if (status === 'shipped' && !no_tracking && !tracking_number?.trim()) {
+  if (status === 'shipped' && !no_tracking && (typeof tracking_number !== 'string' || !tracking_number.trim())) {
     return res.status(400).json({ error: 'Provide a tracking number, or confirm none is available' });
   }
 
@@ -33,6 +34,10 @@ router.patch('/:id/status', auth, async (req, res) => {
     ? db.prepare('UPDATE orders SET status = ?, tracking_number = ? WHERE id = ?').run(status, no_tracking ? null : tracking_number.trim(), req.params.id)
     : db.prepare('UPDATE orders SET status = ? WHERE id = ?').run(status, req.params.id);
   if (result.changes === 0) return res.status(404).json({ error: 'Not found' });
+
+  // Cancelling releases whatever stock was reserved for this order at checkout
+  // (see routes/checkout.js) — otherwise those units are gone from stock_qty forever.
+  if (status === 'cancelled') releaseOrderStock(req.params.id);
 
   const order = db.prepare('SELECT customer_name, customer_email, order_number, tracking_number FROM orders WHERE id = ?').get(req.params.id);
   try {
@@ -58,6 +63,11 @@ router.patch('/:id/payment', auth, (req, res) => {
   const result = db.prepare('UPDATE orders SET payment_status = ?, payment_method = ? WHERE id = ?')
     .run(payment_status, payment_method || 'manual', req.params.id);
   if (result.changes === 0) return res.status(404).json({ error: 'Not found' });
+
+  // Refunding releases whatever stock was reserved for this order at checkout —
+  // same reasoning as cancelling an order (see the status route above).
+  if (payment_status === 'refunded') releaseOrderStock(req.params.id);
+
   res.json({ message: 'Payment status updated' });
 });
 

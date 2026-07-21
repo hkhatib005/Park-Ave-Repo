@@ -9,6 +9,7 @@ export default function AdminProducts() {
   const [products, setProducts] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState(null);
+  const [originalStockQty, setOriginalStockQty] = useState(null);
   const [form, setForm] = useState(EMPTY);
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -19,9 +20,10 @@ export default function AdminProducts() {
 
   const set = (k, v) => setForm(p => ({ ...p, [k]: v }));
 
-  const openNew = () => { setEditing(null); setForm(EMPTY); setShowForm(true); };
+  const openNew = () => { setEditing(null); setOriginalStockQty(null); setForm(EMPTY); setShowForm(true); };
   const openEdit = p => {
     setEditing(p.id);
+    setOriginalStockQty(p.stock_qty);
     setForm({ ...p, price: p.price, compare_price: p.compare_price || '', featured: p.featured === 1, in_stock: p.in_stock !== 0 });
     setShowForm(true);
   };
@@ -44,7 +46,7 @@ export default function AdminProducts() {
     setSaving(true);
     try {
       const payload = { ...form, price: Number(form.price), compare_price: form.compare_price ? Number(form.compare_price) : null };
-      if (editing) await updateProduct(editing, payload);
+      if (editing) await updateProduct(editing, { ...payload, previous_stock_qty: originalStockQty });
       else await createProduct(payload);
       setShowForm(false);
       load();

@@ -89,11 +89,19 @@ router.post('/create-session', checkoutLimiter, optionalCustomerAuth, async (req
   }
 
   // Only written once Stripe has confirmed the session exists, so a failed
-  // Stripe call above never leaves an orphaned order row behind.
-  db.prepare(`
-    INSERT INTO orders (order_number, customer_id, customer_name, customer_email, customer_phone, shipping_address, items, subtotal, total, notes, stripe_session_id)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `).run(order_number, req.customer?.id || null, customer_name, customer_email, customer_phone || null, JSON.stringify(shipping_address), JSON.stringify(orderItems), subtotal, total, notes || null, session.id);
+  // Stripe call above never leaves an orphaned order row behind. Guarded
+  // separately so a DB-level failure here (not the Stripe call) still rolls
+  // back the reservation instead of stranding it with no order row to match.
+  try {
+    db.prepare(`
+      INSERT INTO orders (order_number, customer_id, customer_name, customer_email, customer_phone, shipping_address, items, subtotal, total, notes, stripe_session_id)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(order_number, req.customer?.id || null, customer_name, customer_email, customer_phone || null, JSON.stringify(shipping_address), JSON.stringify(orderItems), subtotal, total, notes || null, session.id);
+  } catch (err) {
+    console.error('Order insert failed after Stripe session created:', err.message);
+    rollbackReservations(reserved);
+    return res.status(502).json({ error: 'Could not finalize your order. Please try again.' });
+  }
 
   res.json({ url: session.url, order_number });
 });
