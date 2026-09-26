@@ -25,13 +25,13 @@ export default function Contact() {
   return (
     <div className="pt-20 page-enter">
       {/* Header */}
-      <div className="py-20 px-6 bg-[#002902] border-b border-[#005b04] text-center relative overflow-hidden">
-        <div className="absolute inset-0" style={{ backgroundImage: `radial-gradient(ellipse at center, rgba(201,168,76,0.05) 0%, transparent 70%)` }} />
+      <div className="py-20 px-6 bg-[#F4F7F4] border-b border-[#D8E3DC] text-center relative overflow-hidden">
+        <div className="absolute inset-0" style={{ backgroundImage: `radial-gradient(ellipse at center, rgba(15,90,58,0.05) 0%, transparent 70%)` }} />
         <div className="relative z-10">
           <p className="section-label">Get In Touch</p>
           <h1 className="section-title mb-3">Contact Us</h1>
           <div className="divider-gold" />
-          <p className="text-[#888] text-sm max-w-md mx-auto">
+          <p className="text-[#53655B] text-sm max-w-md mx-auto">
             We'd love to hear from you. Whether you have a question about a piece, want to book a consultation,
             or enquire about a custom order — we're here.
           </p>
@@ -44,7 +44,7 @@ export default function Contact() {
           {/* Info */}
           <div className="lg:col-span-2 space-y-8">
             <div>
-              <h2 className="font-display text-2xl font-bold text-white mb-6">Our Boutique</h2>
+              <h2 className="font-display text-2xl font-bold text-[#14291F] mb-6">Our Boutique</h2>
               <div className="space-y-5">
                 {[
                   {
@@ -64,44 +64,44 @@ export default function Contact() {
                   },
                 ].map(c => (
                   <div key={c.label} className="flex gap-4">
-                    <div className="w-10 h-10 border border-[#007605] flex items-center justify-center flex-shrink-0">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5">
+                    <div className="w-10 h-10 border border-[#C3D2C8] flex items-center justify-center flex-shrink-0">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F5A3A" strokeWidth="1.5">
                         {c.icon}
                       </svg>
                     </div>
                     <div>
-                      <p className="text-[#555] text-[10px] tracking-[2px] uppercase mb-0.5">{c.label}</p>
-                      <p className="text-white text-sm whitespace-pre-line">{c.value}</p>
+                      <p className="text-[#6A7A71] text-[10px] tracking-[2px] uppercase mb-0.5">{c.label}</p>
+                      <p className="text-[#14291F] text-sm whitespace-pre-line">{c.value}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="border-t border-[#005b04] pt-8">
-              <h3 className="text-white text-xs tracking-[3px] uppercase font-semibold mb-4">Hours</h3>
+            <div className="border-t border-[#D8E3DC] pt-8">
+              <h3 className="text-[#14291F] text-xs tracking-[3px] uppercase font-semibold mb-4">Hours</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-[#666]">Mon – Fri</span>
-                  <span className="text-white">10am – 5:30pm</span>
+                  <span className="text-[#5E6F66]">Mon – Fri</span>
+                  <span className="text-[#14291F]">10am – 5:30pm</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#666]">Saturday</span>
-                  <span className="text-white">11am – 5pm</span>
+                  <span className="text-[#5E6F66]">Saturday</span>
+                  <span className="text-[#14291F]">11am – 5pm</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#666]">Sunday</span>
-                  <span className="text-white">Closed</span>
+                  <span className="text-[#5E6F66]">Sunday</span>
+                  <span className="text-[#14291F]">Closed</span>
                 </div>
               </div>
             </div>
 
-            <div className="border-t border-[#005b04] pt-8">
-              <h3 className="text-white text-xs tracking-[3px] uppercase font-semibold mb-4">Enquiry Types</h3>
+            <div className="border-t border-[#D8E3DC] pt-8">
+              <h3 className="text-[#14291F] text-xs tracking-[3px] uppercase font-semibold mb-4">Enquiry Types</h3>
               <div className="space-y-2">
                 {['Product Enquiry', 'Custom Jewellery', 'Watch Consultation', 'Repairs & Restoration', 'Corporate Gifts'].map(t => (
-                  <div key={t} className="flex items-center gap-2 text-[#666] text-sm">
-                    <div className="w-1 h-1 rounded-full bg-[#C9A84C]" />
+                  <div key={t} className="flex items-center gap-2 text-[#5E6F66] text-sm">
+                    <div className="w-1 h-1 rounded-full bg-[#0F5A3A]" />
                     {t}
                   </div>
                 ))}
@@ -113,13 +113,13 @@ export default function Contact() {
           <div className="lg:col-span-3">
             {sent ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-16">
-                <div className="w-16 h-16 border border-[#C9A84C] flex items-center justify-center mb-6">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5">
+                <div className="w-16 h-16 border border-[#0F5A3A] flex items-center justify-center mb-6">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0F5A3A" strokeWidth="1.5">
                     <polyline points="20 6 9 17 4 12"/>
                   </svg>
                 </div>
-                <h2 className="font-display text-3xl font-bold text-white mb-3">Message Received</h2>
-                <p className="text-[#888] text-sm max-w-sm">
+                <h2 className="font-display text-3xl font-bold text-[#14291F] mb-3">Message Received</h2>
+                <p className="text-[#53655B] text-sm max-w-sm">
                   Thank you for reaching out. A member of our team will be in touch within 24 hours.
                 </p>
               </div>
@@ -127,19 +127,19 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-[#555] text-xs block mb-1.5">Full Name *</label>
+                    <label className="text-[#6A7A71] text-xs block mb-1.5">Full Name *</label>
                     <input value={form.name} onChange={e => set('name', e.target.value)} required className="input-luxury" placeholder="Your name" />
                   </div>
                   <div>
-                    <label className="text-[#555] text-xs block mb-1.5">Phone</label>
+                    <label className="text-[#6A7A71] text-xs block mb-1.5">Phone</label>
                     <input type="tel" value={form.phone} onChange={e => set('phone', e.target.value)} className="input-luxury" placeholder="+1 (212) 555-0100" />
                   </div>
                   <div className="col-span-2">
-                    <label className="text-[#555] text-xs block mb-1.5">Email Address *</label>
+                    <label className="text-[#6A7A71] text-xs block mb-1.5">Email Address *</label>
                     <input type="email" value={form.email} onChange={e => set('email', e.target.value)} required className="input-luxury" placeholder="your@email.com" />
                   </div>
                   <div className="col-span-2">
-                    <label className="text-[#555] text-xs block mb-1.5">Subject</label>
+                    <label className="text-[#6A7A71] text-xs block mb-1.5">Subject</label>
                     <select value={form.subject} onChange={e => set('subject', e.target.value)} className="input-luxury">
                       <option value="">Select a subject...</option>
                       {['Product Enquiry', 'Custom Jewellery', 'Watch Consultation', 'Repairs & Restoration', 'Corporate Gifts', 'Other'].map(o => (
@@ -148,7 +148,7 @@ export default function Contact() {
                     </select>
                   </div>
                   <div className="col-span-2">
-                    <label className="text-[#555] text-xs block mb-1.5">Message *</label>
+                    <label className="text-[#6A7A71] text-xs block mb-1.5">Message *</label>
                     <textarea
                       value={form.message}
                       onChange={e => set('message', e.target.value)}

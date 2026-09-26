@@ -40,7 +40,7 @@ export default function Product() {
 
   if (!product) return (
     <div className="pt-20 min-h-screen flex items-center justify-center">
-      <div className="w-10 h-10 border-2 border-[#C9A84C] border-t-transparent rounded-full animate-spin" />
+      <div className="w-10 h-10 border-2 border-[#0F5A3A] border-t-transparent rounded-full animate-spin" />
     </div>
   );
 
@@ -51,14 +51,14 @@ export default function Product() {
     <div className="pt-20 min-h-screen page-enter">
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-6 py-4">
-        <nav className="flex items-center gap-2 text-[#555] text-xs">
-          <Link to="/" className="hover:text-[#C9A84C] transition-colors">Home</Link>
+        <nav className="flex items-center gap-2 text-[#6A7A71] text-xs">
+          <Link to="/" className="hover:text-[#0F5A3A] transition-colors">Home</Link>
           <span>/</span>
-          <Link to="/shop" className="hover:text-[#C9A84C] transition-colors">Shop</Link>
+          <Link to="/shop" className="hover:text-[#0F5A3A] transition-colors">Shop</Link>
           <span>/</span>
-          <Link to={`/shop?category=${product.category}`} className="hover:text-[#C9A84C] transition-colors">{product.category}</Link>
+          <Link to={`/shop?category=${product.category}`} className="hover:text-[#0F5A3A] transition-colors">{product.category}</Link>
           <span>/</span>
-          <span className="text-[#888]">{product.name}</span>
+          <span className="text-[#53655B]">{product.name}</span>
         </nav>
       </div>
 
@@ -68,7 +68,7 @@ export default function Product() {
 
           {/* Images */}
           <div>
-            <div className="aspect-square bg-[#003e02] mb-3 overflow-hidden">
+            <div className="aspect-square bg-[#EEF3EF] mb-3 overflow-hidden">
               {images[activeImg] ? (
                 <img
                   src={images[activeImg]}
@@ -79,7 +79,7 @@ export default function Product() {
                 <div className="w-full h-full product-placeholder flex items-center justify-center">
                   {(() => {
                     const Icon = CATEGORY_ICONS[product.category] || RingIcon;
-                    return <Icon width="88" height="88" className="text-[#C9A84C]/35" />;
+                    return <Icon width="88" height="88" className="text-[#0F5A3A]/35" />;
                   })()}
                 </div>
               )}
@@ -90,7 +90,7 @@ export default function Product() {
                   <button
                     key={i}
                     onClick={() => setActiveImg(i)}
-                    className={`aspect-square bg-[#003e02] overflow-hidden border-2 transition-colors ${activeImg === i ? 'border-[#C9A84C]' : 'border-transparent'}`}
+                    className={`aspect-square bg-[#EEF3EF] overflow-hidden border-2 transition-colors ${activeImg === i ? 'border-[#0F5A3A]' : 'border-transparent'}`}
                   >
                     {img && <img src={img} alt="" className="w-full h-full object-cover" />}
                   </button>
@@ -102,41 +102,41 @@ export default function Product() {
           {/* Info */}
           <div className="lg:pt-4">
             <p className="section-label">{product.category}</p>
-            <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-2 leading-tight">
+            <h1 className="font-display text-3xl md:text-4xl font-bold text-[#14291F] mb-2 leading-tight">
               {product.name}
             </h1>
             <div className="flex items-center gap-2 mb-3">
-              <div className="flex text-[#C9A84C]">
+              <div className="flex text-[#0F5A3A]">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
                 ))}
               </div>
-              <span className="text-[#888] text-xs">5.0 · 93 Google Reviews</span>
+              <span className="text-[#53655B] text-xs">5.0 · 93 Google Reviews</span>
             </div>
             {product.material && (
-              <p className="text-[#666] text-sm mb-4">{product.material}</p>
+              <p className="text-[#5E6F66] text-sm mb-4">{product.material}</p>
             )}
             {product.sku && (
-              <p className="text-[#444] text-xs tracking-wider mb-6">SKU: {product.sku}</p>
+              <p className="text-[#7A8980] text-xs tracking-wider mb-6">SKU: {product.sku}</p>
             )}
 
             {/* Price */}
             <div className="flex items-baseline gap-4 mb-6">
-              <span className="font-display text-3xl font-bold text-[#C9A84C]">
+              <span className="font-display text-3xl font-bold text-[#0F5A3A]">
                 ${product.price.toLocaleString()}
               </span>
               {hasDiscount && (
-                <span className="text-[#555] text-lg line-through">
+                <span className="text-[#6A7A71] text-lg line-through">
                   ${product.compare_price.toLocaleString()}
                 </span>
               )}
             </div>
 
-            <div className="w-full h-px bg-[#005b04] mb-6" />
+            <div className="w-full h-px bg-[#D8E3DC] mb-6" />
 
             {/* Description */}
             {product.description && (
-              <p className="text-[#888] text-sm leading-relaxed mb-8">
+              <p className="text-[#53655B] text-sm leading-relaxed mb-8">
                 {product.description}
               </p>
             )}
@@ -145,18 +145,18 @@ export default function Product() {
             {product.in_stock !== 0 ? (
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center border border-[#007605]">
-                    <button onClick={() => setQty(q => Math.max(1, q - 1))} className="w-10 h-10 flex items-center justify-center text-[#666] hover:text-white transition-colors">−</button>
-                    <span className="text-white w-10 text-center text-sm">{qty}</span>
+                  <div className="flex items-center border border-[#C3D2C8]">
+                    <button onClick={() => setQty(q => Math.max(1, q - 1))} className="w-10 h-10 flex items-center justify-center text-[#5E6F66] hover:text-[#14291F] transition-colors">−</button>
+                    <span className="text-[#14291F] w-10 text-center text-sm">{qty}</span>
                     <button
                       onClick={() => setQty(q => product.stock_qty != null ? Math.min(product.stock_qty, q + 1) : q + 1)}
                       disabled={product.stock_qty != null && qty >= product.stock_qty}
-                      className="w-10 h-10 flex items-center justify-center text-[#666] hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-[#666]"
+                      className="w-10 h-10 flex items-center justify-center text-[#5E6F66] hover:text-[#14291F] transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-[#5E6F66]"
                     >
                       +
                     </button>
                   </div>
-                  <p className={`text-xs font-medium ${product.stock_qty <= 3 ? 'text-[#d29922]' : 'text-[#555]'}`}>
+                  <p className={`text-xs font-medium ${product.stock_qty <= 3 ? 'text-[#d29922]' : 'text-[#6A7A71]'}`}>
                     {product.stock_qty <= 3 ? `Only ${product.stock_qty} left in stock` : `${product.stock_qty} in stock`}
                   </p>
                 </div>
@@ -165,8 +165,8 @@ export default function Product() {
                   onClick={handleAdd}
                   className={`w-full py-4 text-xs tracking-[3px] uppercase font-bold transition-all duration-300 ${
                     added
-                      ? 'bg-[#3fb950] text-black'
-                      : 'bg-[#C9A84C] text-black hover:bg-[#E2C47A] hover:shadow-[0_0_40px_rgba(201,168,76,0.25)]'
+                      ? 'bg-[#3fb950] text-white'
+                      : 'bg-[#0F5A3A] text-white hover:bg-[#1E7A52] hover:shadow-[0_0_40px_rgba(15,90,58,0.25)]'
                   }`}
                 >
                   {added ? '✓ Added to Cart' : 'Add to Cart'}
@@ -177,7 +177,7 @@ export default function Product() {
               </div>
             ) : (
               <div className="space-y-4">
-                <div className="w-full py-4 text-center text-xs tracking-[3px] uppercase bg-[#005403] text-[#555] border border-[#007605]">
+                <div className="w-full py-4 text-center text-xs tracking-[3px] uppercase bg-[#E3ECE6] text-[#6A7A71] border border-[#C3D2C8]">
                   Sold Out
                 </div>
                 <Link to="/contact" className="btn-outline-gold w-full text-center block">
@@ -187,11 +187,11 @@ export default function Product() {
             )}
 
             {/* Trust signals */}
-            <div className="mt-8 pt-8 border-t border-[#005b04] grid grid-cols-2 gap-4">
+            <div className="mt-8 pt-8 border-t border-[#D8E3DC] grid grid-cols-2 gap-4">
               {TRUST_SIGNALS.map(t => (
                 <div key={t.text} className="flex items-center gap-2.5">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" className="flex-shrink-0">{t.icon}</svg>
-                  <span className="text-[#666] text-xs">{t.text}</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0F5A3A" strokeWidth="1.5" className="flex-shrink-0">{t.icon}</svg>
+                  <span className="text-[#5E6F66] text-xs">{t.text}</span>
                 </div>
               ))}
             </div>
@@ -203,7 +203,7 @@ export default function Product() {
           <div className="mt-24">
             <div className="text-center mb-10">
               <p className="section-label">You May Also Like</p>
-              <h2 className="font-display text-3xl font-bold text-white">Related Pieces</h2>
+              <h2 className="font-display text-3xl font-bold text-[#14291F]">Related Pieces</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {related.map(p => <ProductCard key={p.id} product={p} />)}

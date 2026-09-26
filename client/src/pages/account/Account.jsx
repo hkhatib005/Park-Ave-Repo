@@ -29,20 +29,20 @@ export default function Account() {
         <div className="flex items-center justify-between mb-10">
           <div>
             <p className="section-label">My Account</p>
-            <h1 className="font-display text-4xl font-bold text-white">{customer?.name}</h1>
-            <p className="text-[#666] text-sm mt-1">{customer?.email}</p>
+            <h1 className="font-display text-4xl font-bold text-[#14291F]">{customer?.name}</h1>
+            <p className="text-[#5E6F66] text-sm mt-1">{customer?.email}</p>
           </div>
           <button
             onClick={() => { logout(); navigate('/'); }}
-            className="text-[#555] hover:text-[#C9A84C] text-xs tracking-widest uppercase transition-colors"
+            className="text-[#6A7A71] hover:text-[#0F5A3A] text-xs tracking-widest uppercase transition-colors"
           >
             Sign Out
           </button>
         </div>
 
-        <h2 className="text-white text-sm tracking-[3px] uppercase font-semibold mb-5">Order History</h2>
+        <h2 className="text-[#14291F] text-sm tracking-[3px] uppercase font-semibold mb-5">Order History</h2>
         {orders.length === 0 ? (
-          <div className="card-luxury p-10 text-center text-[#555] text-sm">
+          <div className="card-luxury p-10 text-center text-[#6A7A71] text-sm">
             No orders yet.
           </div>
         ) : (
@@ -50,29 +50,29 @@ export default function Account() {
             {orders.map(o => (
               <div key={o.id} className="card-luxury p-5">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[#C9A84C] font-mono text-xs">{o.order_number}</span>
-                  <span className={`text-[9px] tracking-[2px] uppercase px-2 py-1 ${STATUS_COLORS[o.status] || 'text-[#666]'}`}>{o.status}</span>
+                  <span className="text-[#0F5A3A] font-mono text-xs">{o.order_number}</span>
+                  <span className={`text-[9px] tracking-[2px] uppercase px-2 py-1 ${STATUS_COLORS[o.status] || 'text-[#5E6F66]'}`}>{o.status}</span>
                 </div>
                 <div className="space-y-1 mb-3">
                   {o.items.map((item, i) => (
-                    <p key={i} className="text-[#888] text-sm">{item.name} × {item.qty}</p>
+                    <p key={i} className="text-[#53655B] text-sm">{item.name} × {item.qty}</p>
                   ))}
                 </div>
-                <div className="flex items-center justify-between pt-3 border-t border-[#005403]">
-                  <span className="text-[#555] text-xs">{new Date(o.created_at).toLocaleDateString()}</span>
-                  <span className="text-white font-semibold">${o.total.toLocaleString()}</span>
+                <div className="flex items-center justify-between pt-3 border-t border-[#E3ECE6]">
+                  <span className="text-[#6A7A71] text-xs">{new Date(o.created_at).toLocaleDateString()}</span>
+                  <span className="text-[#14291F] font-semibold">${o.total.toLocaleString()}</span>
                 </div>
               </div>
             ))}
           </div>
         )}
 
-        <div className="mt-16 pt-8 border-t border-[#1b2e25]">
-          <h2 className="text-[#666] text-sm tracking-[3px] uppercase font-semibold mb-3">Danger Zone</h2>
+        <div className="mt-16 pt-8 border-t border-[#E8F0EA]">
+          <h2 className="text-[#5E6F66] text-sm tracking-[3px] uppercase font-semibold mb-3">Danger Zone</h2>
           <div className="border border-red-900/40 p-5 flex items-center justify-between gap-4 flex-wrap">
             <div>
-              <p className="text-white text-sm font-medium mb-1">Delete Account</p>
-              <p className="text-[#666] text-xs">Permanently removes your login and profile. Past orders are kept for our records but unlinked from your account.</p>
+              <p className="text-[#14291F] text-sm font-medium mb-1">Delete Account</p>
+              <p className="text-[#5E6F66] text-xs">Permanently removes your login and profile. Past orders are kept for our records but unlinked from your account.</p>
             </div>
             <button
               onClick={() => setShowDelete(true)}

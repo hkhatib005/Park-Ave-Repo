@@ -25,8 +25,8 @@ export default function Navbar() {
   }, [location]);
 
   const navBg = isHome && !scrolled
-    ? 'bg-transparent'
-    : 'bg-[#003102]/95 backdrop-blur-md border-b border-[#005b04]';
+    ? 'bg-white/90 backdrop-blur-md border-b border-[#D8E3DC]/70'
+    : 'bg-white/95 backdrop-blur-xl border-b border-[#D8E3DC] shadow-[0_8px_30px_rgba(20,41,31,0.05)]';
 
   return (
     <>
@@ -35,15 +35,15 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link to="/" className="flex flex-col items-start group leading-none">
-            <span className="font-display text-lg font-bold text-white tracking-wide group-hover:text-[#f4f1ea] transition-colors duration-300">
+            <span className="font-display text-[22px] font-semibold text-[#14291F] tracking-wide group-hover:text-[#0F5A3A] transition-colors duration-300">
               Park Ave
             </span>
             <span className="flex items-center gap-1.5 mt-1">
-              <span className="w-3 h-px bg-white/70" />
-              <span className="font-display text-[9px] tracking-[3px] uppercase text-white/85">
+              <span className="w-3 h-px bg-[#0F5A3A]/60" />
+              <span className="font-display text-[9px] tracking-[3px] uppercase text-[#0F5A3A]">
                 Jewelers
               </span>
-              <span className="w-3 h-px bg-white/70" />
+              <span className="w-3 h-px bg-[#0F5A3A]/60" />
             </span>
           </Link>
 
@@ -61,10 +61,10 @@ export default function Navbar() {
               <li key={l.to}>
                 <Link
                   to={l.to}
-                  className="text-[#aaa] hover:text-white text-xs tracking-[2px] uppercase font-medium transition-colors duration-200 relative group"
+                  className={`text-[11px] tracking-[0.18em] uppercase font-semibold transition-colors duration-200 relative group ${location.pathname === l.to.split('?')[0] ? 'text-[#0F5A3A]' : 'text-[#526158] hover:text-[#0F5A3A]'}`}
                 >
                   {l.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#C9A84C] transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute -bottom-2 left-0 w-0 h-px bg-[#0F5A3A] transition-all duration-300 group-hover:w-full" />
                 </Link>
               </li>
             ))}
@@ -74,7 +74,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setSearchOpen(true)}
-              className="text-[#aaa] hover:text-[#C9A84C] transition-colors duration-200"
+              className="text-[#526158] hover:text-[#0F5A3A] transition-colors duration-200"
               aria-label="Search"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -84,7 +84,7 @@ export default function Navbar() {
 
             <button
               onClick={() => setIsOpen(true)}
-              className="relative text-[#aaa] hover:text-[#C9A84C] transition-colors duration-200"
+              className="relative text-[#526158] hover:text-[#0F5A3A] transition-colors duration-200"
               aria-label="Cart"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -93,7 +93,7 @@ export default function Navbar() {
                 <path d="M16 10a4 4 0 0 1-8 0"/>
               </svg>
               {count > 0 && (
-                <span className="absolute -top-2 -right-2 bg-[#C9A84C] text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-[#0F5A3A] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {count}
                 </span>
               )}
@@ -101,7 +101,7 @@ export default function Navbar() {
 
             <Link
               to={customer ? '/account' : '/account/login'}
-              className="text-[#aaa] hover:text-[#C9A84C] transition-colors duration-200"
+              className="text-[#526158] hover:text-[#0F5A3A] transition-colors duration-200"
               aria-label="Account"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -113,7 +113,7 @@ export default function Navbar() {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="lg:hidden text-[#aaa] hover:text-white transition-colors"
+              className="lg:hidden text-[#526158] hover:text-[#0F5A3A] transition-colors"
               aria-label="Menu"
             >
               {menuOpen ? (
@@ -131,7 +131,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="lg:hidden bg-[#003102] border-t border-[#005b04] px-6 py-6">
+          <div className="lg:hidden bg-white border-t border-[#D8E3DC] px-6 py-6 shadow-[0_20px_30px_rgba(20,41,31,0.08)]">
             <ul className="space-y-4">
               {[
                 { label: 'Shop All', to: '/shop' },
@@ -146,7 +146,7 @@ export default function Navbar() {
                 { label: 'Contact', to: '/contact' },
               ].map(l => (
                 <li key={l.to}>
-                  <Link to={l.to} className="text-[#aaa] hover:text-[#C9A84C] text-sm tracking-wider uppercase block transition-colors">
+                  <Link to={l.to} className="text-[#526158] hover:text-[#0F5A3A] text-sm tracking-wider uppercase block transition-colors">
                     {l.label}
                   </Link>
                 </li>

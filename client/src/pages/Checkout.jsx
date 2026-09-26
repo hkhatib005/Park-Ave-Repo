@@ -53,7 +53,7 @@ export default function Checkout() {
 
   if (items.length === 0) return (
     <div className="pt-20 min-h-screen flex flex-col items-center justify-center gap-4 page-enter">
-      <p className="font-display text-2xl text-white">Your cart is empty</p>
+      <p className="font-display text-2xl text-[#14291F]">Your cart is empty</p>
       <Link to="/shop" className="btn-gold">Shop Now</Link>
     </div>
   );
@@ -63,7 +63,7 @@ export default function Checkout() {
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="mb-10">
           <p className="section-label">Secure Checkout</p>
-          <h1 className="font-display text-4xl font-bold text-white">Complete Your Order</h1>
+          <h1 className="font-display text-4xl font-bold text-[#14291F]">Complete Your Order</h1>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
@@ -71,22 +71,22 @@ export default function Checkout() {
           <form onSubmit={handleSubmit} className="lg:col-span-3 space-y-8">
             {/* Contact */}
             <div>
-              <h2 className="text-white text-xs tracking-[3px] uppercase font-semibold mb-5">Contact Information</h2>
+              <h2 className="text-[#14291F] text-xs tracking-[3px] uppercase font-semibold mb-5">Contact Information</h2>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-[#555] text-xs block mb-1.5">First Name *</label>
+                  <label className="text-[#6A7A71] text-xs block mb-1.5">First Name *</label>
                   <input value={form.first_name} onChange={e => set('first_name', e.target.value)} required className="input-luxury" placeholder="John" />
                 </div>
                 <div>
-                  <label className="text-[#555] text-xs block mb-1.5">Last Name *</label>
+                  <label className="text-[#6A7A71] text-xs block mb-1.5">Last Name *</label>
                   <input value={form.last_name} onChange={e => set('last_name', e.target.value)} required className="input-luxury" placeholder="Smith" />
                 </div>
                 <div className="col-span-2">
-                  <label className="text-[#555] text-xs block mb-1.5">Email Address *</label>
+                  <label className="text-[#6A7A71] text-xs block mb-1.5">Email Address *</label>
                   <input type="email" value={form.email} onChange={e => set('email', e.target.value)} required className="input-luxury" placeholder="john@example.com" />
                 </div>
                 <div className="col-span-2">
-                  <label className="text-[#555] text-xs block mb-1.5">Phone</label>
+                  <label className="text-[#6A7A71] text-xs block mb-1.5">Phone</label>
                   <input type="tel" value={form.phone} onChange={e => set('phone', e.target.value)} className="input-luxury" placeholder="+1 (212) 555-0100" />
                 </div>
               </div>
@@ -94,27 +94,27 @@ export default function Checkout() {
 
             {/* Shipping */}
             <div>
-              <h2 className="text-white text-xs tracking-[3px] uppercase font-semibold mb-5">Shipping Address</h2>
+              <h2 className="text-[#14291F] text-xs tracking-[3px] uppercase font-semibold mb-5">Shipping Address</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="text-[#555] text-xs block mb-1.5">Street Address *</label>
+                  <label className="text-[#6A7A71] text-xs block mb-1.5">Street Address *</label>
                   <input value={form.address} onChange={e => set('address', e.target.value)} required className="input-luxury" placeholder="5th Avenue" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-[#555] text-xs block mb-1.5">City *</label>
+                    <label className="text-[#6A7A71] text-xs block mb-1.5">City *</label>
                     <input value={form.city} onChange={e => set('city', e.target.value)} required className="input-luxury" placeholder="New York" />
                   </div>
                   <div>
-                    <label className="text-[#555] text-xs block mb-1.5">State *</label>
+                    <label className="text-[#6A7A71] text-xs block mb-1.5">State *</label>
                     <input value={form.state} onChange={e => set('state', e.target.value)} required className="input-luxury" placeholder="NY" />
                   </div>
                   <div>
-                    <label className="text-[#555] text-xs block mb-1.5">ZIP Code *</label>
+                    <label className="text-[#6A7A71] text-xs block mb-1.5">ZIP Code *</label>
                     <input value={form.zip} onChange={e => set('zip', e.target.value)} required className="input-luxury" placeholder="10022" />
                   </div>
                   <div>
-                    <label className="text-[#555] text-xs block mb-1.5">Country</label>
+                    <label className="text-[#6A7A71] text-xs block mb-1.5">Country</label>
                     <input value={form.country} onChange={e => set('country', e.target.value)} className="input-luxury" placeholder="US" />
                   </div>
                 </div>
@@ -123,7 +123,7 @@ export default function Checkout() {
 
             {/* Notes */}
             <div>
-              <h2 className="text-white text-xs tracking-[3px] uppercase font-semibold mb-5">Order Notes</h2>
+              <h2 className="text-[#14291F] text-xs tracking-[3px] uppercase font-semibold mb-5">Order Notes</h2>
               <textarea
                 value={form.notes}
                 onChange={e => set('notes', e.target.value)}
@@ -139,51 +139,51 @@ export default function Checkout() {
               {loading ? 'Redirecting to payment...' : `Continue to Payment · $${total.toLocaleString()}`}
             </button>
 
-            <p className="text-[#444] text-xs text-center">
+            <p className="text-[#7A8980] text-xs text-center">
               By placing your order you agree to our{' '}
-              <span className="text-[#C9A84C]">Terms of Service</span> and{' '}
-              <span className="text-[#C9A84C]">Privacy Policy</span>.
+              <span className="text-[#0F5A3A]">Terms of Service</span> and{' '}
+              <span className="text-[#0F5A3A]">Privacy Policy</span>.
               <br />You'll be securely redirected to Stripe to complete payment.
             </p>
           </form>
 
           {/* Order summary */}
           <div className="lg:col-span-2">
-            <div className="bg-[#003e02] border border-[#005b04] p-6 sticky top-24">
-              <h2 className="font-display text-xl font-bold text-white mb-5">Your Order</h2>
+            <div className="bg-[#EEF3EF] border border-[#D8E3DC] p-6 sticky top-24">
+              <h2 className="font-display text-xl font-bold text-[#14291F] mb-5">Your Order</h2>
               <div className="space-y-4 mb-5">
                 {items.map(item => (
                   <div key={item.id} className="flex items-center gap-3">
-                    <div className="relative w-14 h-14 bg-[#003102] flex-shrink-0">
+                    <div className="relative w-14 h-14 bg-[#FFFFFF] flex-shrink-0">
                       {item.images?.[0] ? (
                         <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
                       ) : <div className="w-full h-full product-placeholder" />}
-                      <span className="absolute -top-1 -right-1 bg-[#C9A84C] text-black text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                      <span className="absolute -top-1 -right-1 bg-[#0F5A3A] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                         {item.qty}
                       </span>
                     </div>
                     <div className="flex-1">
-                      <p className="text-white text-sm font-medium leading-tight">{item.name}</p>
-                      <p className="text-[#555] text-xs">{item.category}</p>
+                      <p className="text-[#14291F] text-sm font-medium leading-tight">{item.name}</p>
+                      <p className="text-[#6A7A71] text-xs">{item.category}</p>
                     </div>
-                    <span className="text-[#C9A84C] text-sm font-semibold">${(item.price * item.qty).toLocaleString()}</span>
+                    <span className="text-[#0F5A3A] text-sm font-semibold">${(item.price * item.qty).toLocaleString()}</span>
                   </div>
                 ))}
               </div>
-              <div className="border-t border-[#005b04] pt-4 space-y-2">
+              <div className="border-t border-[#D8E3DC] pt-4 space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-[#666]">Subtotal</span>
-                  <span className="text-white">${total.toLocaleString()}</span>
+                  <span className="text-[#5E6F66]">Subtotal</span>
+                  <span className="text-[#14291F]">${total.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-[#666]">Shipping</span>
-                  <span className="text-[#C9A84C] text-xs">Complimentary</span>
+                  <span className="text-[#5E6F66]">Shipping</span>
+                  <span className="text-[#0F5A3A] text-xs">Complimentary</span>
                 </div>
               </div>
-              <div className="border-t border-[#005b04] mt-4 pt-4">
+              <div className="border-t border-[#D8E3DC] mt-4 pt-4">
                 <div className="flex justify-between">
-                  <span className="text-white font-semibold">Total</span>
-                  <span className="text-[#C9A84C] font-display text-xl font-bold">${total.toLocaleString()}</span>
+                  <span className="text-[#14291F] font-semibold">Total</span>
+                  <span className="text-[#0F5A3A] font-display text-xl font-bold">${total.toLocaleString()}</span>
                 </div>
               </div>
             </div>

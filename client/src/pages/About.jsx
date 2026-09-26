@@ -8,15 +8,15 @@ export default function About() {
   return (
     <div className="pt-20 page-enter">
       {/* Hero */}
-      <div className="relative py-28 px-6 bg-[#002902] border-b border-[#005b04] text-center overflow-hidden">
-        <div className="absolute inset-0" style={{ backgroundImage: `radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%)` }} />
+      <div className="relative py-28 px-6 bg-[#F4F7F4] border-b border-[#D8E3DC] text-center overflow-hidden">
+        <div className="absolute inset-0" style={{ backgroundImage: `radial-gradient(ellipse at center, rgba(15,90,58,0.06) 0%, transparent 70%)` }} />
         <div className="relative z-10">
           <p className="section-label">Our Story</p>
-          <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-4">
+          <h1 className="font-display text-5xl md:text-6xl font-bold text-[#14291F] mb-4">
             Park Ave Jewelers
           </h1>
           <div className="divider-gold" />
-          <p className="text-[#888] text-base max-w-lg mx-auto">
+          <p className="text-[#53655B] text-base max-w-lg mx-auto">
             Independent fine jewellery and timepieces from the heart of NYC's historic Diamond District.
           </p>
         </div>
@@ -27,10 +27,10 @@ export default function About() {
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
             <p className="section-label">Since 2023</p>
-            <h2 className="font-display text-4xl font-bold text-white mb-5 leading-tight">
+            <h2 className="font-display text-4xl font-bold text-[#14291F] mb-5 leading-tight">
               Rooted in the Diamond District
             </h2>
-            <div className="space-y-4 text-[#888] text-sm leading-relaxed">
+            <div className="space-y-4 text-[#53655B] text-sm leading-relaxed">
               <p>
                 Park Ave Jewelers is an independent jeweller based in Manhattan's historic Diamond District —
                 the same few blocks of 47th Street that have set the standard for fine jewellery and watches
@@ -47,23 +47,18 @@ export default function About() {
             </div>
           </div>
           <div className="relative">
-            <div className="aspect-[4/5] bg-[#003e02] border border-[#005b04] flex items-center justify-center">
-              <div className="text-center p-8">
-                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="0.5" opacity="0.4" className="mx-auto mb-4">
-                  <polygon points="12,2 22,8 22,16 12,22 2,16 2,8"/>
-                  <line x1="2" y1="8" x2="22" y2="8"/>
-                  <line x1="12" y1="2" x2="12" y2="22"/>
-                </svg>
-                <p className="font-display text-[#C9A84C] text-xl italic">"Where Luxury Meets Legacy"</p>
-              </div>
+            <div className="aspect-[4/5] bg-[#EEF3EF] border border-[#D8E3DC] overflow-hidden">
+              <img src="/images/editorial/lightning.png" alt="Diamond lightning bolt pendant from Park Ave Jewelers" className="w-full h-full object-cover" />
             </div>
-            <div className="absolute -bottom-4 -right-4 w-32 h-32 border border-[#C9A84C]/20" />
+            <div className="absolute -bottom-4 -right-4 bg-[#0F5A3A] text-white px-6 py-5 max-w-[220px]">
+              <p className="font-display text-xl italic leading-tight">“Where luxury meets legacy.”</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="py-16 px-6 bg-[#002902] border-y border-[#005b04]">
+      <section className="py-16 px-6 bg-[#F4F7F4] border-y border-[#D8E3DC]">
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
             { num: '2023', label: 'Founded' },
@@ -72,8 +67,8 @@ export default function About() {
             { num: '100%', label: 'Natural Diamonds' },
           ].map(s => (
             <div key={s.label}>
-              <p className="font-display text-3xl md:text-4xl font-bold text-[#C9A84C] mb-1">{s.num}</p>
-              <p className="text-[#555] text-xs tracking-[2px] uppercase">{s.label}</p>
+              <p className="font-display text-3xl md:text-4xl font-bold text-[#0F5A3A] mb-1">{s.num}</p>
+              <p className="text-[#6A7A71] text-xs tracking-[2px] uppercase">{s.label}</p>
             </div>
           ))}
         </div>
@@ -86,7 +81,7 @@ export default function About() {
             <p className="section-label">What Sets Us Apart</p>
             <h2 className="section-title">Our Values</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#005b04]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#D8E3DC]">
             {[
               {
                 icon: VALUE_ICONS.quality,
@@ -104,12 +99,12 @@ export default function About() {
                 desc: 'Each piece is crafted by experienced jewellers, ensuring perfection in every detail.'
               },
             ].map(v => (
-              <div key={v.title} className="bg-[#003102] p-8 text-center">
-                <div className="w-12 h-12 mx-auto mb-5 flex items-center justify-center border border-[#C9A84C]/25 rounded-full">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.3">{v.icon}</svg>
+              <div key={v.title} className="bg-[#FFFFFF] p-8 text-center">
+                <div className="w-12 h-12 mx-auto mb-5 flex items-center justify-center border border-[#0F5A3A]/25 rounded-full">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F5A3A" strokeWidth="1.3">{v.icon}</svg>
                 </div>
-                <h3 className="font-display text-xl font-bold text-white mb-3">{v.title}</h3>
-                <p className="text-[#666] text-sm leading-relaxed">{v.desc}</p>
+                <h3 className="font-display text-xl font-bold text-[#14291F] mb-3">{v.title}</h3>
+                <p className="text-[#5E6F66] text-sm leading-relaxed">{v.desc}</p>
               </div>
             ))}
           </div>
@@ -124,16 +119,16 @@ export default function About() {
             <h2 className="section-title">Our Policies</h2>
           </div>
           <div className="space-y-8">
-            <div className="border-l-2 border-[#C9A84C]/30 pl-6">
-              <h3 className="text-white font-semibold mb-2">Returns &amp; Exchanges</h3>
-              <p className="text-[#888] text-sm leading-relaxed">
+            <div className="border-l-2 border-[#0F5A3A]/30 pl-6">
+              <h3 className="text-[#14291F] font-semibold mb-2">Returns &amp; Exchanges</h3>
+              <p className="text-[#53655B] text-sm leading-relaxed">
                 Returns are issued as store credit only — we're unable to offer cash or card refunds.
                 Please contact us before returning a piece so we can assist with the exchange.
               </p>
             </div>
-            <div className="border-l-2 border-[#C9A84C]/30 pl-6">
-              <h3 className="text-white font-semibold mb-2">Shipping</h3>
-              <p className="text-[#888] text-sm leading-relaxed">
+            <div className="border-l-2 border-[#0F5A3A]/30 pl-6">
+              <h3 className="text-[#14291F] font-semibold mb-2">Shipping</h3>
+              <p className="text-[#53655B] text-sm leading-relaxed">
                 Complimentary insured shipping on all orders within the continental US. Contact us for
                 international or expedited shipping options.
               </p>
@@ -143,16 +138,16 @@ export default function About() {
       </section>
 
       {/* Visit us */}
-      <section className="py-16 px-6 bg-[#002902]">
+      <section className="py-16 px-6 bg-[#F4F7F4]">
         <div className="max-w-3xl mx-auto text-center">
           <p className="section-label">Come See Us</p>
           <h2 className="section-title mb-4">Visit Our Boutique</h2>
           <div className="divider-gold" />
-          <p className="text-[#888] text-sm mb-8">25 W 47th St, Booth #8, New York, NY 10036</p>
-          <div className="grid grid-cols-3 gap-4 text-sm text-[#666] mb-8">
-            <div><p className="text-white font-medium mb-1">Mon – Fri</p><p>10am – 5:30pm</p></div>
-            <div><p className="text-white font-medium mb-1">Saturday</p><p>11am – 5pm</p></div>
-            <div><p className="text-white font-medium mb-1">Sunday</p><p>Closed</p></div>
+          <p className="text-[#53655B] text-sm mb-8">25 W 47th St, Booth #8, New York, NY 10036</p>
+          <div className="grid grid-cols-3 gap-4 text-sm text-[#5E6F66] mb-8">
+            <div><p className="text-[#14291F] font-medium mb-1">Mon – Fri</p><p>10am – 5:30pm</p></div>
+            <div><p className="text-[#14291F] font-medium mb-1">Saturday</p><p>11am – 5pm</p></div>
+            <div><p className="text-[#14291F] font-medium mb-1">Sunday</p><p>Closed</p></div>
           </div>
           <div className="flex items-center justify-center gap-4">
             <a href="/contact" className="btn-gold">Book an Appointment</a>

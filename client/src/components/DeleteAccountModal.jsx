@@ -27,19 +27,19 @@ export default function DeleteAccountModal({ hasPassword, onClose, onDeleted }) 
 
   return (
     <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center px-4">
-      <div className="bg-[#0c1714] border border-red-900/40 w-full max-w-sm">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#1b2e25]">
-          <h2 className="font-display text-lg font-bold text-white">Delete Account</h2>
-          <button onClick={onClose} className="text-[#555] hover:text-white transition-colors">✕</button>
+      <div className="bg-[#FFFFFF] border border-red-900/40 w-full max-w-sm">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8F0EA]">
+          <h2 className="font-display text-lg font-bold text-[#14291F]">Delete Account</h2>
+          <button onClick={onClose} className="text-[#6A7A71] hover:text-[#14291F] transition-colors">✕</button>
         </div>
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
-          <p className="text-[#888] text-sm leading-relaxed">
+          <p className="text-[#53655B] text-sm leading-relaxed">
             This permanently deletes your login and profile. It can't be undone.
           </p>
 
           {hasPassword ? (
             <div>
-              <label className="text-[#555] text-xs block mb-1.5">Enter your password to confirm</label>
+              <label className="text-[#6A7A71] text-xs block mb-1.5">Enter your password to confirm</label>
               <input
                 type="password"
                 value={password}
@@ -51,7 +51,7 @@ export default function DeleteAccountModal({ hasPassword, onClose, onDeleted }) 
             </div>
           ) : (
             <div>
-              <label className="text-[#555] text-xs block mb-1.5">Type DELETE to confirm</label>
+              <label className="text-[#6A7A71] text-xs block mb-1.5">Type DELETE to confirm</label>
               <input
                 value={confirmText}
                 onChange={e => setConfirmText(e.target.value)}
@@ -71,7 +71,7 @@ export default function DeleteAccountModal({ hasPassword, onClose, onDeleted }) 
             <button
               type="submit"
               disabled={!canSubmit || loading}
-              className="flex-1 py-3 text-xs tracking-[3px] uppercase font-bold bg-red-900/80 text-white hover:bg-red-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="flex-1 py-3 text-xs tracking-[3px] uppercase font-bold bg-red-900/80 text-[#14291F] hover:bg-red-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {loading ? 'Deleting...' : 'Delete'}
             </button>

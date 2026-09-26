@@ -18,17 +18,17 @@ export default function OrderSuccess() {
   return (
     <div className="pt-20 min-h-screen flex items-center justify-center px-6 page-enter">
       <div className="text-center max-w-md">
-        <div className="w-20 h-20 border border-[#C9A84C] flex items-center justify-center mx-auto mb-8">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5">
+        <div className="w-20 h-20 border border-[#0F5A3A] flex items-center justify-center mx-auto mb-8">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0F5A3A" strokeWidth="1.5">
             <polyline points="20 6 9 17 4 12"/>
           </svg>
         </div>
         <p className="section-label mb-2">Order Confirmed</p>
-        <h1 className="font-display text-4xl font-bold text-white mb-3">Thank You</h1>
+        <h1 className="font-display text-4xl font-bold text-[#14291F] mb-3">Thank You</h1>
         <div className="divider-gold" />
-        <p className="text-[#888] text-sm mb-2">Your order has been received.</p>
-        <p className="text-[#C9A84C] font-mono text-sm mb-8">{orderNumber}</p>
-        <p className="text-[#666] text-xs mb-8 leading-relaxed">
+        <p className="text-[#53655B] text-sm mb-2">Your order has been received.</p>
+        <p className="text-[#0F5A3A] font-mono text-sm mb-8">{orderNumber}</p>
+        <p className="text-[#5E6F66] text-xs mb-8 leading-relaxed">
           Your payment has been received. A confirmation has been sent to your email, and our team
           will be in touch shortly regarding delivery. We look forward to serving you.
         </p>

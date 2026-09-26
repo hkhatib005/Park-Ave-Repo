@@ -23,7 +23,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#002902] border-t border-[#005b04]">
+    <footer className="bg-[#0B3B29] border-t border-[#2F634B]">
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
@@ -37,24 +37,24 @@ export default function Footer() {
                 <span className="w-5 h-px bg-white/70" />
               </span>
             </div>
-            <p className="text-[#666] text-sm leading-relaxed mb-6">
+            <p className="text-[#BDD0C3] text-sm leading-relaxed mb-6">
               Fine jewellery and luxury timepieces from the heart of Manhattan's historic Diamond District — with a boutique in Dubai.
             </p>
-            <div className="space-y-2 text-sm text-[#666]">
+            <div className="space-y-2 text-sm text-[#BDD0C3]">
               <p className="flex items-start gap-2">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" className="mt-0.5 flex-shrink-0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B6D8C2" strokeWidth="1.5" className="mt-0.5 flex-shrink-0">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
                 </svg>
                 25 W 47th St, Booth #8, New York, NY 10036
               </p>
               <p className="flex items-center gap-2">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B6D8C2" strokeWidth="1.5">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.61 4.9 2 2 0 0 1 3.59 2.72h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 10.1a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                 </svg>
                 (917) 599-3862
               </p>
               <p className="flex items-center gap-2">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B6D8C2" strokeWidth="1.5">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
                 </svg>
                 Parkavejewelers1@gmail.com
@@ -68,7 +68,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {['Rings', 'Necklaces', 'Bracelets', 'Earrings', 'Pendants', 'Watches', 'Custom Jewellery'].map(cat => (
                 <li key={cat}>
-                  <Link to={`/shop?category=${cat}`} className="text-[#666] hover:text-[#C9A84C] text-sm transition-colors duration-200">
+                  <Link to={`/shop?category=${cat}`} className="text-[#BDD0C3] hover:text-[#B6D8C2] text-sm transition-colors duration-200">
                     {cat}
                   </Link>
                 </li>
@@ -90,7 +90,7 @@ export default function Footer() {
                 { label: 'Return Policy', to: '/about#policies' },
               ].map(l => (
                 <li key={l.label}>
-                  <Link to={l.to} className="text-[#666] hover:text-[#C9A84C] text-sm transition-colors duration-200">
+                  <Link to={l.to} className="text-[#BDD0C3] hover:text-[#B6D8C2] text-sm transition-colors duration-200">
                     {l.label}
                   </Link>
                 </li>
@@ -101,9 +101,9 @@ export default function Footer() {
           {/* Newsletter + Hours */}
           <div>
             <h4 className="text-white text-xs tracking-[3px] uppercase font-semibold mb-5">Newsletter</h4>
-            <p className="text-[#666] text-sm mb-4">Be the first to know about new arrivals and exclusive events.</p>
+            <p className="text-[#BDD0C3] text-sm mb-4">Be the first to know about new arrivals and exclusive events.</p>
             {subscribed ? (
-              <p className="text-[#C9A84C] text-sm">Thank you for subscribing.</p>
+              <p className="text-[#B6D8C2] text-sm">Thank you for subscribing.</p>
             ) : (
               <form onSubmit={handleNewsletter} className="space-y-3">
                 <input
@@ -122,7 +122,7 @@ export default function Footer() {
 
             <div className="mt-8">
               <h4 className="text-white text-xs tracking-[3px] uppercase font-semibold mb-3">Hours</h4>
-              <div className="space-y-1 text-sm text-[#666]">
+              <div className="space-y-1 text-sm text-[#BDD0C3]">
                 <p>Mon – Fri: 10am – 5:30pm</p>
                 <p>Saturday: 11am – 5pm</p>
                 <p>Sunday: Closed</p>
@@ -132,8 +132,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-[#005b04] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[#444] text-xs">
+        <div className="border-t border-[#2F634B] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[#91AD9B] text-xs">
             © {new Date().getFullYear()} Park Ave Jewelers. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
@@ -161,21 +161,21 @@ export default function Footer() {
                 target={s.href === '#' ? undefined : '_blank'}
                 rel={s.href === '#' ? undefined : 'noopener noreferrer'}
                 aria-label={s.label}
-                className="text-[#444] hover:text-[#C9A84C] transition-colors duration-200"
+                className="text-[#91AD9B] hover:text-[#B6D8C2] transition-colors duration-200"
               >
                 {s.icon}
               </a>
             ))}
           </div>
-          <p className="text-[#333] text-xs">
+          <p className="text-[#789482] text-xs">
             Handcrafted in New York City
           </p>
         </div>
 
         <div className="text-center mt-6">
-          <p className="text-[#333] text-[11px]">
+          <p className="text-[#789482] text-[11px]">
             Created &amp; Designed by software engineer{' '}
-            <a href="https://hkhatib005.github.io/hatem" target="_blank" rel="noopener noreferrer" className="text-[#555] hover:text-[#C9A84C] transition-colors duration-200">
+            <a href="https://hkhatib005.github.io/hatem" target="_blank" rel="noopener noreferrer" className="text-[#A9C2B2] hover:text-[#B6D8C2] transition-colors duration-200">
               Hatem Alkhatib
             </a>
           </p>

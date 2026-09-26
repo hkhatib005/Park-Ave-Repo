@@ -15,17 +15,17 @@ export default function CartDrawer() {
       )}
 
       {/* Drawer */}
-      <div className={`fixed top-0 right-0 h-full w-full max-w-md bg-[#0c1714] border-l border-[#005b04] z-50 flex flex-col transform transition-transform duration-400 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed top-0 right-0 h-full w-full max-w-md bg-[#FFFFFF] border-l border-[#D8E3DC] z-50 flex flex-col transform transition-transform duration-400 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
 
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-[#005b04]">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-[#D8E3DC]">
           <div>
-            <h2 className="font-display text-xl font-bold text-white">Your Cart</h2>
-            <p className="text-[#555] text-xs mt-0.5">{count} {count === 1 ? 'item' : 'items'}</p>
+            <h2 className="font-display text-xl font-bold text-[#14291F]">Your Cart</h2>
+            <p className="text-[#6A7A71] text-xs mt-0.5">{count} {count === 1 ? 'item' : 'items'}</p>
           </div>
           <button
             onClick={() => setIsOpen(false)}
-            className="text-[#666] hover:text-white transition-colors"
+            className="text-[#5E6F66] hover:text-[#14291F] transition-colors"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -37,12 +37,12 @@ export default function CartDrawer() {
         <div className="flex-1 overflow-y-auto px-6 py-4">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="1" className="mb-4">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8C9991" strokeWidth="1" className="mb-4">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
                 <line x1="3" y1="6" x2="21" y2="6"/>
                 <path d="M16 10a4 4 0 0 1-8 0"/>
               </svg>
-              <p className="text-[#555] text-sm mb-6">Your cart is empty</p>
+              <p className="text-[#6A7A71] text-sm mb-6">Your cart is empty</p>
               <button
                 onClick={() => setIsOpen(false)}
                 className="btn-outline-gold text-xs"
@@ -53,9 +53,9 @@ export default function CartDrawer() {
           ) : (
             <div className="space-y-4">
               {items.map(item => (
-                <div key={item.id} className="flex gap-4 py-4 border-b border-[#005403]">
+                <div key={item.id} className="flex gap-4 py-4 border-b border-[#E3ECE6]">
                   {/* Image */}
-                  <div className="w-20 h-20 bg-[#003e02] flex-shrink-0 overflow-hidden">
+                  <div className="w-20 h-20 bg-[#EEF3EF] flex-shrink-0 overflow-hidden">
                     {item.images?.[0] ? (
                       <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
                     ) : (
@@ -65,29 +65,29 @@ export default function CartDrawer() {
 
                   {/* Details */}
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-display text-white text-sm font-semibold leading-tight mb-1 truncate">
+                    <h4 className="font-display text-[#14291F] text-sm font-semibold leading-tight mb-1 truncate">
                       {item.name}
                     </h4>
-                    <p className="text-[#555] text-xs mb-3">{item.category}</p>
+                    <p className="text-[#6A7A71] text-xs mb-3">{item.category}</p>
                     <div className="flex items-center justify-between">
                       {/* Qty */}
-                      <div className="flex items-center gap-2 border border-[#007605]">
+                      <div className="flex items-center gap-2 border border-[#C3D2C8]">
                         <button
                           onClick={() => updateQty(item.id, item.qty - 1)}
-                          className="w-7 h-7 flex items-center justify-center text-[#666] hover:text-white transition-colors"
+                          className="w-7 h-7 flex items-center justify-center text-[#5E6F66] hover:text-[#14291F] transition-colors"
                         >
                           −
                         </button>
-                        <span className="text-white text-sm w-5 text-center">{item.qty}</span>
+                        <span className="text-[#14291F] text-sm w-5 text-center">{item.qty}</span>
                         <button
                           onClick={() => updateQty(item.id, item.qty + 1)}
                           disabled={item.stock_qty != null && item.qty >= item.stock_qty}
-                          className="w-7 h-7 flex items-center justify-center text-[#666] hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-[#666]"
+                          className="w-7 h-7 flex items-center justify-center text-[#5E6F66] hover:text-[#14291F] transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:text-[#5E6F66]"
                         >
                           +
                         </button>
                       </div>
-                      <span className="text-[#C9A84C] font-semibold text-sm">
+                      <span className="text-[#0F5A3A] font-semibold text-sm">
                         ${(item.price * item.qty).toLocaleString()}
                       </span>
                     </div>
@@ -96,7 +96,7 @@ export default function CartDrawer() {
                   {/* Remove */}
                   <button
                     onClick={() => removeItem(item.id)}
-                    className="text-[#444] hover:text-[#C9A84C] transition-colors self-start mt-1"
+                    className="text-[#7A8980] hover:text-[#0F5A3A] transition-colors self-start mt-1"
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                       <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -110,12 +110,12 @@ export default function CartDrawer() {
 
         {/* Footer */}
         {items.length > 0 && (
-          <div className="px-6 py-6 border-t border-[#005b04]">
+          <div className="px-6 py-6 border-t border-[#D8E3DC]">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-[#666] text-sm">Subtotal</span>
-              <span className="text-white font-semibold">${total.toLocaleString()}</span>
+              <span className="text-[#5E6F66] text-sm">Subtotal</span>
+              <span className="text-[#14291F] font-semibold">${total.toLocaleString()}</span>
             </div>
-            <p className="text-[#444] text-xs mb-5">Taxes & shipping calculated at checkout</p>
+            <p className="text-[#7A8980] text-xs mb-5">Taxes & shipping calculated at checkout</p>
             <Link
               to="/checkout"
               onClick={() => setIsOpen(false)}
@@ -125,7 +125,7 @@ export default function CartDrawer() {
             </Link>
             <button
               onClick={() => setIsOpen(false)}
-              className="w-full text-center text-[#555] text-xs tracking-widest uppercase mt-3 hover:text-[#C9A84C] transition-colors"
+              className="w-full text-center text-[#6A7A71] text-xs tracking-widest uppercase mt-3 hover:text-[#0F5A3A] transition-colors"
             >
               Continue Shopping
             </button>
