@@ -13,41 +13,41 @@ export default function ProductCard({ product }) {
   const lowStock = product.in_stock !== 0 && product.stock_qty != null && product.stock_qty <= 3;
 
   return (
-    <div className="card-luxury group relative flex flex-col">
+    <article className="card-luxury group relative flex flex-col overflow-hidden">
       {/* Image */}
-      <Link to={`/product/${product.id}`} className="block relative overflow-hidden aspect-[3/4] bg-[#003e02]">
+      <Link to={`/product/${product.id}`} className="block relative overflow-hidden aspect-[4/5] bg-[#F4F7F4]">
         {image ? (
           <img
             src={image}
             alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
           />
         ) : (
           <div className="w-full h-full product-placeholder flex flex-col items-center justify-center gap-3">
-            <PlaceholderIcon width="40" height="40" className="text-[#C9A84C]/40" />
-            <span className="text-[#333] text-[10px] tracking-[3px] uppercase">{product.category}</span>
+            <PlaceholderIcon width="40" height="40" className="text-[#0F5A3A]/35" />
+            <span className="text-[#7A8980] text-[10px] tracking-[3px] uppercase">{product.category}</span>
           </div>
         )}
 
         {/* Badges */}
         <div className="absolute top-4 left-4 flex flex-col gap-2">
           {product.featured === 1 && (
-            <span className="bg-[#C9A84C] text-black text-[9px] tracking-[2px] uppercase font-bold px-2 py-1">
+            <span className="bg-[#0F5A3A] text-white text-[9px] tracking-[2px] uppercase font-bold px-2 py-1.5">
               Featured
             </span>
           )}
           {discountPct && (
-            <span className="bg-[#003102] text-[#C9A84C] border border-[#C9A84C]/30 text-[9px] tracking-[2px] uppercase font-bold px-2 py-1">
+            <span className="bg-white text-[#0F5A3A] border border-[#BFD0C5] text-[9px] tracking-[2px] uppercase font-bold px-2 py-1.5">
               -{discountPct}%
             </span>
           )}
           {product.in_stock === 0 && (
-            <span className="bg-[#005b04] text-[#666] text-[9px] tracking-[2px] uppercase font-bold px-2 py-1">
+            <span className="bg-[#14291F] text-white text-[9px] tracking-[2px] uppercase font-bold px-2 py-1.5">
               Sold Out
             </span>
           )}
           {lowStock && (
-            <span className="bg-[#003102] text-[#d29922] border border-[#d29922]/30 text-[9px] tracking-[2px] uppercase font-bold px-2 py-1">
+            <span className="bg-white text-[#8A5A20] border border-[#D9C3A5] text-[9px] tracking-[2px] uppercase font-bold px-2 py-1.5">
               Only {product.stock_qty} Left
             </span>
           )}
@@ -58,7 +58,7 @@ export default function ProductCard({ product }) {
           <button
             onClick={e => { e.preventDefault(); if (product.in_stock !== 0) addItem(product); }}
             disabled={product.in_stock === 0}
-            className="w-full bg-[#C9A84C] text-black text-[10px] tracking-[3px] uppercase font-bold py-3 hover:bg-[#E2C47A] transition-colors duration-200 disabled:bg-[#333] disabled:text-[#666] disabled:cursor-not-allowed"
+            className="w-full bg-[#0F5A3A] text-white text-[10px] tracking-[3px] uppercase font-bold py-3.5 hover:bg-[#143E2D] transition-colors duration-200 disabled:bg-[#D8E3DC] disabled:text-[#7A8980] disabled:cursor-not-allowed"
           >
             {product.in_stock === 0 ? 'Sold Out' : 'Add to Cart'}
           </button>
@@ -66,28 +66,28 @@ export default function ProductCard({ product }) {
       </Link>
 
       {/* Info */}
-      <div className="p-5 flex flex-col flex-1">
+      <div className="p-5 md:p-6 flex flex-col flex-1 bg-white">
         <Link to={`/product/${product.id}`}>
-          <p className="text-[#555] text-[10px] tracking-[3px] uppercase mb-1">{product.category}</p>
-          <h3 className="font-display text-white text-base font-semibold leading-snug mb-1 group-hover:text-[#C9A84C] transition-colors duration-300">
+          <p className="text-[#0F5A3A] text-[9px] font-semibold tracking-[3px] uppercase mb-2">{product.category}</p>
+          <h3 className="font-display text-[#14291F] text-xl font-semibold leading-[1.05] mb-2 group-hover:text-[#0F5A3A] transition-colors duration-300">
             {product.name}
           </h3>
           {product.material && (
-            <p className="text-[#555] text-xs mb-3">{product.material}</p>
+            <p className="text-[#6A7A71] text-xs mb-4">{product.material}</p>
           )}
         </Link>
 
         <div className="mt-auto flex items-center gap-3">
-          <span className="text-[#C9A84C] font-display text-lg font-semibold">
+          <span className="text-[#14291F] font-display text-xl font-semibold">
             ${product.price.toLocaleString()}
           </span>
           {hasDiscount && (
-            <span className="text-[#444] text-sm line-through">
+            <span className="text-[#8C9991] text-sm line-through">
               ${product.compare_price.toLocaleString()}
             </span>
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 }

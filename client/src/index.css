@@ -2,189 +2,129 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ink: #14291f;
+  --ink-soft: #53655b;
+  --emerald: #0f5a3a;
+  --emerald-bright: #1e7a52;
+  --emerald-pale: #eaf2ed;
+  --line: #d8e3dc;
+  --paper: #ffffff;
+  --paper-soft: #f4f7f4;
+}
+
 @layer base {
-  * {
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    background-color: #003102;
-    color: #ffffff;
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #003102;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #C9A84C;
-    border-radius: 3px;
-  }
-
-  ::selection {
-    background: #C9A84C;
-    color: #003102;
-  }
+  button, a, input, select, textarea { border-radius: 0; }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--paper-soft); }
+  ::-webkit-scrollbar-thumb { background: #a9beb1; }
+  ::selection { background: #cfe3d7; color: var(--ink); }
 }
 
 @layer components {
-  .gold-text {
-    color: #C9A84C;
-  }
-
-  .gold-border {
-    border-color: #C9A84C;
-  }
+  .gold-text { color: var(--emerald); }
+  .gold-border { border-color: var(--emerald); }
 
   .btn-gold {
-    @apply bg-[#C9A84C] text-black font-semibold px-8 py-3 tracking-widest text-xs uppercase transition-all duration-300 hover:bg-[#E2C47A] hover:shadow-[0_0_30px_rgba(201,168,76,0.3)];
+    @apply inline-flex items-center justify-center bg-[#0F5A3A] text-white font-semibold px-8 py-3 tracking-[0.18em] text-[11px] uppercase transition-all duration-300 hover:bg-[#143E2D] hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(15,90,58,0.18)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0F5A3A];
   }
 
   .btn-outline-gold {
-    @apply border border-[#C9A84C] text-[#C9A84C] font-semibold px-8 py-3 tracking-widest text-xs uppercase transition-all duration-300 hover:bg-[#C9A84C] hover:text-black;
+    @apply inline-flex items-center justify-center border border-[#0F5A3A] text-[#0F5A3A] font-semibold px-8 py-3 tracking-[0.18em] text-[11px] uppercase transition-all duration-300 hover:bg-[#0F5A3A] hover:text-white hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0F5A3A];
   }
 
   .section-label {
-    @apply text-[#C9A84C] text-xs tracking-[4px] uppercase font-medium mb-3;
+    @apply text-[#0F5A3A] text-[10px] tracking-[0.28em] uppercase font-semibold mb-3;
   }
 
   .section-title {
-    @apply font-display text-4xl md:text-5xl font-bold text-white leading-tight;
+    @apply font-display text-4xl md:text-5xl font-semibold text-[#14291F] leading-[1.08] tracking-[-0.02em];
   }
 
   .card-luxury {
-    @apply bg-[#003e02] border border-[#005b04] transition-all duration-500 hover:border-[#C9A84C]/40 hover:shadow-[0_8px_40px_rgba(201,168,76,0.08)];
+    @apply bg-white border border-[#D8E3DC] transition-all duration-500 hover:border-[#9BB7A5] hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(20,41,31,0.10)];
   }
 
   .input-luxury {
-    @apply w-full bg-[#003e02] border border-[#007605] text-white placeholder-[#555] px-4 py-3 text-sm focus:outline-none focus:border-[#C9A84C] transition-colors duration-200;
+    @apply w-full bg-white border border-[#C3D2C8] text-[#14291F] placeholder-[#8B9A91] px-4 py-3 text-sm focus:outline-none focus:border-[#0F5A3A] focus:ring-1 focus:ring-[#0F5A3A]/10 transition-all duration-200;
   }
 
-  .divider-gold {
-    @apply w-16 h-px bg-[#C9A84C] mx-auto my-6;
-  }
+  .divider-gold { @apply w-12 h-px bg-[#0F5A3A] mx-auto my-6; }
 }
 
-.font-display {
-  font-family: 'Playfair Display', serif;
-}
+.font-display { font-family: 'Cormorant Garamond', 'Playfair Display', serif; }
 
-/* Gold shimmer effect */
-.gold-shimmer {
-  background: linear-gradient(90deg, #C9A84C 0%, #E2C47A 50%, #C9A84C 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 3s linear infinite;
-}
-
-@keyframes shimmer {
-  to { background-position: 200% center; }
-}
-
-/* Page transitions */
-.page-enter {
-  animation: fadeUp 0.5s ease forwards;
-}
-
+.page-enter { animation: fadeUp 0.55s ease forwards; }
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Nav transparent to dark */
 .nav-scrolled {
-  background: rgba(10, 10, 10, 0.98) !important;
-  box-shadow: 0 1px 0 rgba(201, 168, 76, 0.15);
+  background: rgba(255, 255, 255, 0.96) !important;
+  box-shadow: 0 1px 0 rgba(20, 41, 31, 0.08);
+  backdrop-filter: blur(18px);
 }
 
-/* Product image zoom */
-.product-img-wrap {
-  overflow: hidden;
-}
-.product-img-wrap img {
-  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.product-img-wrap:hover img {
-  transform: scale(1.08);
-}
+.product-img-wrap { overflow: hidden; }
+.product-img-wrap img { transition: transform 0.8s cubic-bezier(0.2, 0.75, 0.25, 1); }
+.product-img-wrap:hover img { transform: scale(1.045); }
 
-/* Luxury placeholder for products without images */
 .product-placeholder {
-  background: linear-gradient(135deg, #003e02 0%, #005403 50%, #003e02 100%);
+  background: linear-gradient(145deg, #f7f9f7 0%, #eaf2ed 100%);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Store-locator map — muted to sit inside the dark theme instead of
-   dropping a raw, full-color Google embed onto the page */
+.editorial-grid {
+  background-image: linear-gradient(rgba(15,90,58,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(15,90,58,.06) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
 .map-frame {
   position: relative;
   aspect-ratio: 16 / 10;
-  border: 1px solid #005b04;
+  border: 1px solid var(--line);
   overflow: hidden;
 }
 .map-frame iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-  filter: grayscale(55%) brightness(0.8) contrast(1.15) saturate(1.1);
-  transition: filter 0.5s ease;
+  width: 100%; height: 100%; border: 0; display: block;
+  filter: grayscale(30%) saturate(.75) contrast(1.03);
+  transition: filter .5s ease;
 }
-.map-frame:hover iframe {
-  filter: grayscale(15%) brightness(0.95) contrast(1.05) saturate(1.05);
-}
+.map-frame:hover iframe { filter: grayscale(0) saturate(.95); }
 .map-frame-corner {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 22px;
-  height: 22px;
-  border-top: 1px solid rgba(201, 168, 76, 0.55);
-  border-left: 1px solid rgba(201, 168, 76, 0.55);
+  position: absolute; top: 10px; left: 10px; width: 22px; height: 22px;
+  border-top: 1px solid rgba(15,90,58,.55);
+  border-left: 1px solid rgba(15,90,58,.55);
   pointer-events: none;
 }
 .map-frame-cta {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(6, 11, 9, 0.85);
-  border: 1px solid rgba(201, 168, 76, 0.5);
-  color: #E2C47A;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 8px 12px;
-  opacity: 0;
-  transform: translateY(4px);
-  transition: all 0.3s ease;
+  position: absolute; bottom: 12px; right: 12px;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.94); border: 1px solid rgba(15,90,58,.35);
+  color: var(--emerald); font-size: 10px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; padding: 8px 12px;
+  opacity: 0; transform: translateY(4px); transition: all .3s ease;
 }
-.map-frame:hover .map-frame-cta {
-  opacity: 1;
-  transform: translateY(0);
-}
-.map-frame-cta:hover {
-  background: #C9A84C;
-  color: #060b09;
-  border-color: #C9A84C;
-}
+.map-frame:hover .map-frame-cta { opacity: 1; transform: none; }
+.map-frame-cta:hover { background: var(--emerald); color: #fff; }
+
 @media (hover: none) {
-  .map-frame iframe { filter: grayscale(35%) brightness(0.88) contrast(1.1); }
   .map-frame-cta { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }

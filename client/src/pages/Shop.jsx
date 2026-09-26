@@ -50,20 +50,20 @@ export default function Shop() {
   return (
     <div className="pt-20 min-h-screen page-enter">
       {/* Header */}
-      <div className="bg-[#002902] border-b border-[#005b04] py-12 px-6 text-center">
+      <div className="bg-[#F4F7F4] border-b border-[#D8E3DC] py-12 px-6 text-center">
         <p className="section-label">Discover</p>
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-white">
+        <h1 className="font-display text-4xl md:text-5xl font-bold text-[#14291F]">
           {activeCategory === 'All' ? 'All Collections' : activeCategory}
         </h1>
         <div className="divider-gold" />
-        <p className="text-[#666] text-sm mb-3">{products.length} pieces</p>
+        <p className="text-[#5E6F66] text-sm mb-3">{products.length} pieces</p>
         <div className="flex items-center justify-center gap-2">
-          <div className="flex text-[#C9A84C]">
+          <div className="flex text-[#0F5A3A]">
             {Array.from({ length: 5 }).map((_, i) => (
               <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
             ))}
           </div>
-          <span className="text-[#888] text-xs">5.0 · 93 Google Reviews</span>
+          <span className="text-[#53655B] text-xs">5.0 · 93 Google Reviews</span>
         </div>
       </div>
 
@@ -76,8 +76,8 @@ export default function Shop() {
               onClick={() => setFilter('category', cat)}
               className={`flex-shrink-0 px-5 py-2 text-xs tracking-[2px] uppercase border transition-all duration-200 ${
                 activeCategory === cat
-                  ? 'border-[#C9A84C] text-[#C9A84C] bg-[#C9A84C]/5'
-                  : 'border-[#007605] text-[#666] hover:border-[#555] hover:text-white'
+                  ? 'border-[#0F5A3A] text-[#0F5A3A] bg-[#0F5A3A]/5'
+                  : 'border-[#C3D2C8] text-[#5E6F66] hover:border-[#6A7A71] hover:text-[#14291F]'
               }`}
             >
               {cat}
@@ -90,14 +90,14 @@ export default function Shop() {
           <aside className="hidden lg:block w-52 flex-shrink-0">
             <div className="sticky top-24 space-y-8">
               <div>
-                <h3 className="text-white text-[10px] tracking-[3px] uppercase font-semibold mb-4">Price Range</h3>
+                <h3 className="text-[#14291F] text-[10px] tracking-[3px] uppercase font-semibold mb-4">Price Range</h3>
                 <div className="space-y-2">
                   {PRICE_RANGES.map((r, i) => (
                     <button
                       key={r.label}
                       onClick={() => setFilter('price', i)}
                       className={`block text-sm w-full text-left transition-colors duration-200 ${
-                        activePriceIdx === i ? 'text-[#C9A84C]' : 'text-[#666] hover:text-white'
+                        activePriceIdx === i ? 'text-[#0F5A3A]' : 'text-[#5E6F66] hover:text-[#14291F]'
                       }`}
                     >
                       {r.label}
@@ -107,14 +107,14 @@ export default function Shop() {
               </div>
 
               <div>
-                <h3 className="text-white text-[10px] tracking-[3px] uppercase font-semibold mb-4">Material</h3>
+                <h3 className="text-[#14291F] text-[10px] tracking-[3px] uppercase font-semibold mb-4">Material</h3>
                 <div className="space-y-2">
                   {MATERIALS.map(m => (
                     <button
                       key={m}
                       onClick={() => setFilter('material', m)}
                       className={`block text-sm w-full text-left transition-colors duration-200 ${
-                        activeMaterial === m ? 'text-[#C9A84C]' : 'text-[#666] hover:text-white'
+                        activeMaterial === m ? 'text-[#0F5A3A]' : 'text-[#5E6F66] hover:text-[#14291F]'
                       }`}
                     >
                       {m}
@@ -130,7 +130,7 @@ export default function Shop() {
             {/* Mobile filter toggle */}
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="lg:hidden flex items-center gap-2 text-[#666] text-xs tracking-widest uppercase mb-5 hover:text-white transition-colors"
+              className="lg:hidden flex items-center gap-2 text-[#5E6F66] text-xs tracking-widest uppercase mb-5 hover:text-[#14291F] transition-colors"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/>
@@ -139,24 +139,24 @@ export default function Shop() {
             </button>
 
             {showFilters && (
-              <div className="lg:hidden mb-6 p-4 bg-[#003e02] border border-[#005b04] space-y-6">
+              <div className="lg:hidden mb-6 p-4 bg-[#EEF3EF] border border-[#D8E3DC] space-y-6">
                 <div>
-                  <h3 className="text-white text-[10px] tracking-[3px] uppercase font-semibold mb-3">Price Range</h3>
+                  <h3 className="text-[#14291F] text-[10px] tracking-[3px] uppercase font-semibold mb-3">Price Range</h3>
                   <div className="space-y-2">
                     {PRICE_RANGES.map((r, i) => (
                       <button key={r.label} onClick={() => { setFilter('price', i); setShowFilters(false); }}
-                        className={`block text-sm w-full text-left ${activePriceIdx === i ? 'text-[#C9A84C]' : 'text-[#666]'}`}>
+                        className={`block text-sm w-full text-left ${activePriceIdx === i ? 'text-[#0F5A3A]' : 'text-[#5E6F66]'}`}>
                         {r.label}
                       </button>
                     ))}
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-white text-[10px] tracking-[3px] uppercase font-semibold mb-3">Material</h3>
+                  <h3 className="text-[#14291F] text-[10px] tracking-[3px] uppercase font-semibold mb-3">Material</h3>
                   <div className="space-y-2">
                     {MATERIALS.map(m => (
                       <button key={m} onClick={() => { setFilter('material', m); setShowFilters(false); }}
-                        className={`block text-sm w-full text-left ${activeMaterial === m ? 'text-[#C9A84C]' : 'text-[#666]'}`}>
+                        className={`block text-sm w-full text-left ${activeMaterial === m ? 'text-[#0F5A3A]' : 'text-[#5E6F66]'}`}>
                         {m}
                       </button>
                     ))}
@@ -168,13 +168,13 @@ export default function Shop() {
             {loading ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-[#003e02] border border-[#005b04] aspect-[3/4] animate-pulse" />
+                  <div key={i} className="bg-[#EEF3EF] border border-[#D8E3DC] aspect-[3/4] animate-pulse" />
                 ))}
               </div>
             ) : products.length === 0 ? (
               <div className="text-center py-24">
-                <p className="text-[#555] text-lg font-display mb-2">No pieces found</p>
-                <p className="text-[#444] text-sm">Try adjusting your filters</p>
+                <p className="text-[#6A7A71] text-lg font-display mb-2">No pieces found</p>
+                <p className="text-[#7A8980] text-sm">Try adjusting your filters</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">

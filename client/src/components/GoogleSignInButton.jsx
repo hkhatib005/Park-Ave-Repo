@@ -37,11 +37,11 @@ export default function GoogleSignInButton({ onCredential, text = 'continue_with
 
   if (!CLIENT_ID) {
     return (
-      <button type="button" disabled className="w-full py-3 border border-[#007605] text-[#444] text-sm cursor-not-allowed">
+      <button type="button" disabled className="w-full py-3 border border-[#C3D2C8] text-[#7A8980] text-sm cursor-not-allowed">
         Google sign-in not configured
       </button>
     );
   }
 
-  return <div ref={ref} className={ready ? '' : 'h-11 bg-[#003e02] border border-[#007605] animate-pulse'} />;
+  return <div ref={ref} className={ready ? '' : 'h-11 bg-[#EEF3EF] border border-[#C3D2C8] animate-pulse'} />;
 }

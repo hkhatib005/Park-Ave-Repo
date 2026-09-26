@@ -34,8 +34,8 @@ export default function SearchBar({ onClose }) {
   return (
     <div className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-md flex flex-col items-center pt-24 px-6">
       <div className="w-full max-w-2xl">
-        <div className="relative flex items-center border-b-2 border-[#C9A84C] pb-3">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" className="flex-shrink-0">
+        <div className="relative flex items-center border-b-2 border-[#0F5A3A] pb-3">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F5A3A" strokeWidth="1.5" className="flex-shrink-0">
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
           </svg>
           <input
@@ -44,9 +44,9 @@ export default function SearchBar({ onClose }) {
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Search jewellery, watches..."
-            className="flex-1 bg-transparent text-white text-xl px-4 placeholder-[#444] focus:outline-none"
+            className="flex-1 bg-transparent text-[#14291F] text-xl px-4 placeholder-[#7A8980] focus:outline-none"
           />
-          <button onClick={onClose} className="text-[#555] hover:text-white transition-colors">
+          <button onClick={onClose} className="text-[#6A7A71] hover:text-[#14291F] transition-colors">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
@@ -54,7 +54,7 @@ export default function SearchBar({ onClose }) {
         </div>
 
         {loading && (
-          <p className="text-[#555] text-sm mt-6">Searching...</p>
+          <p className="text-[#6A7A71] text-sm mt-6">Searching...</p>
         )}
 
         {results.length > 0 && (
@@ -63,9 +63,9 @@ export default function SearchBar({ onClose }) {
               <button
                 key={p.id}
                 onClick={() => go(p.id)}
-                className="w-full flex items-center gap-4 p-3 hover:bg-[#003e02] transition-colors text-left group"
+                className="w-full flex items-center gap-4 p-3 hover:bg-[#EEF3EF] transition-colors text-left group"
               >
-                <div className="w-12 h-12 bg-[#003e02] flex-shrink-0 overflow-hidden">
+                <div className="w-12 h-12 bg-[#EEF3EF] flex-shrink-0 overflow-hidden">
                   {p.images?.[0] ? (
                     <img src={p.images[0]} alt={p.name} className="w-full h-full object-cover" />
                   ) : (
@@ -73,28 +73,28 @@ export default function SearchBar({ onClose }) {
                   )}
                 </div>
                 <div className="flex-1">
-                  <p className="text-white text-sm font-medium group-hover:text-[#C9A84C] transition-colors">{p.name}</p>
-                  <p className="text-[#555] text-xs">{p.category}</p>
+                  <p className="text-[#14291F] text-sm font-medium group-hover:text-[#0F5A3A] transition-colors">{p.name}</p>
+                  <p className="text-[#6A7A71] text-xs">{p.category}</p>
                 </div>
-                <span className="text-[#C9A84C] font-semibold text-sm">${p.price.toLocaleString()}</span>
+                <span className="text-[#0F5A3A] font-semibold text-sm">${p.price.toLocaleString()}</span>
               </button>
             ))}
           </div>
         )}
 
         {query && !loading && results.length === 0 && (
-          <p className="text-[#555] text-sm mt-6">No results for "{query}"</p>
+          <p className="text-[#6A7A71] text-sm mt-6">No results for "{query}"</p>
         )}
 
         {!query && (
           <div className="mt-8">
-            <p className="text-[#444] text-xs tracking-[3px] uppercase mb-4">Popular Searches</p>
+            <p className="text-[#7A8980] text-xs tracking-[3px] uppercase mb-4">Popular Searches</p>
             <div className="flex flex-wrap gap-2">
               {['Diamond Ring', 'Rolex', 'Gold Necklace', 'Earrings', 'Bracelet', 'Custom'].map(t => (
                 <button
                   key={t}
                   onClick={() => setQuery(t)}
-                  className="border border-[#007605] text-[#666] hover:border-[#C9A84C] hover:text-[#C9A84C] px-3 py-1.5 text-xs transition-colors"
+                  className="border border-[#C3D2C8] text-[#5E6F66] hover:border-[#0F5A3A] hover:text-[#0F5A3A] px-3 py-1.5 text-xs transition-colors"
                 >
                   {t}
                 </button>

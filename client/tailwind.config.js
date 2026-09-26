@@ -5,19 +5,19 @@ export default {
     extend: {
       colors: {
         gold: {
-          DEFAULT: '#C9A84C',
-          light: '#E2C47A',
-          dark: '#9B7A2E',
+          DEFAULT: '#0F5A3A',
+          light: '#1E7A52',
+          dark: '#143E2D',
         },
         dark: {
-          DEFAULT: '#003102',
-          50: '#005403',
-          100: '#002902',
-          200: '#003e02',
+          DEFAULT: '#FFFFFF',
+          50: '#EAF2ED',
+          100: '#F4F7F4',
+          200: '#EEF3EF',
         }
       },
       fontFamily: {
-        display: ['"Playfair Display"', 'serif'],
+        display: ['"Cormorant Garamond"', 'serif'],
         body: ['Inter', 'sans-serif'],
       },
       animation: {
