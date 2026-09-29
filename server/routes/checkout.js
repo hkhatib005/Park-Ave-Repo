@@ -1,5 +1,5 @@
 const express = require('express');
-const { v4: uuidv4 } = require('uuid');
+const { randomUUID } = require('crypto');
 const rateLimit = require('express-rate-limit');
 const db = require('../db/database');
 const { optionalCustomerAuth } = require('../middleware/customerAuth');
@@ -65,7 +65,7 @@ router.post('/create-session', checkoutLimiter, optionalCustomerAuth, async (req
     });
   }
 
-  const order_number = 'PAJ-' + uuidv4().slice(0, 8).toUpperCase();
+  const order_number = 'PAJ-' + randomUUID().slice(0, 8).toUpperCase();
   const total = subtotal;
 
   let session;

@@ -42,11 +42,15 @@ router.post('/', auth, (req, res) => {
   const { name, description, price, compare_price, category, material, images, featured, in_stock, stock_qty, sku } = req.body;
   if (!name || !category) return res.status(400).json({ error: 'name, price, category required' });
   if (!(Number(price) > 0)) return res.status(400).json({ error: 'price must be a positive number' });
+  const nextStockQty = stock_qty === '' || stock_qty == null ? 10 : Number(stock_qty);
+  if (!Number.isInteger(nextStockQty) || nextStockQty < 0) {
+    return res.status(400).json({ error: 'stock quantity must be a non-negative whole number' });
+  }
 
   const result = db.prepare(`
     INSERT INTO products (name, description, price, compare_price, category, material, images, featured, in_stock, stock_qty, sku)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `).run(name, description, price, compare_price || null, category, material, JSON.stringify(images || []), featured ? 1 : 0, in_stock !== false ? 1 : 0, stock_qty || 10, sku || null);
+  `).run(name, description, price, compare_price || null, category, material, JSON.stringify(images || []), featured ? 1 : 0, in_stock !== false && nextStockQty > 0 ? 1 : 0, nextStockQty, sku || null);
 
   res.status(201).json({ id: result.lastInsertRowid, message: 'Product created' });
 });
@@ -56,11 +60,15 @@ router.put('/:id', auth, (req, res) => {
   const existing = db.prepare('SELECT id FROM products WHERE id = ?').get(req.params.id);
   if (!existing) return res.status(404).json({ error: 'Not found' });
   if (!(Number(price) > 0)) return res.status(400).json({ error: 'price must be a positive number' });
+  const nextStockQty = stock_qty === '' || stock_qty == null ? 10 : Number(stock_qty);
+  if (!Number.isInteger(nextStockQty) || nextStockQty < 0) {
+    return res.status(400).json({ error: 'stock quantity must be a non-negative whole number' });
+  }
 
   db.prepare(`
     UPDATE products SET name=?, description=?, price=?, compare_price=?, category=?, material=?, images=?, featured=?, in_stock=?, sku=?
     WHERE id=?
-  `).run(name, description, price, compare_price || null, category, material, JSON.stringify(images || []), featured ? 1 : 0, in_stock !== false ? 1 : 0, sku || null, req.params.id);
+  `).run(name, description, price, compare_price || null, category, material, JSON.stringify(images || []), featured ? 1 : 0, in_stock !== false && nextStockQty > 0 ? 1 : 0, sku || null, req.params.id);
 
   // stock_qty is only touched when the admin actually changed it in the edit form
   // (previous_stock_qty is what the form loaded). Otherwise a stale value sitting
@@ -69,7 +77,6 @@ router.put('/:id', auth, (req, res) => {
   // since decremented it to. When it was changed, the update is conditioned on the
   // live value still matching what the admin saw, so a concurrent reservation
   // can't be clobbered by a stale save either.
-  const nextStockQty = stock_qty === '' || stock_qty == null ? 10 : Number(stock_qty);
   if (previous_stock_qty != null && Number(previous_stock_qty) !== nextStockQty) {
     const result = db.prepare('UPDATE products SET stock_qty = ? WHERE id = ? AND stock_qty = ?')
       .run(nextStockQty, req.params.id, Number(previous_stock_qty));
