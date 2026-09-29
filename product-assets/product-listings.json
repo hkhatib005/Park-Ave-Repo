@@ -142,5 +142,65 @@
     "in_stock": true,
     "featured": false,
     "image": "diamond-hamsa-pendant-10k.png"
+  },
+  {
+    "name": "2022 Rolex GMT-Master II Pepsi 126710BLRO",
+    "description": "2022 Rolex GMT-Master II Pepsi, reference 126710BLRO, with red-and-blue bezel and Jubilee bracelet. Full set.",
+    "price": 24500,
+    "category": "Watches",
+    "material": "Oystersteel",
+    "sku": "126710BLRO-PEPSI-2022",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "rolex-gmt-pepsi-126710blro-2022.png"
+  },
+  {
+    "name": "2025 Rolex GMT-Master II Pepsi 126710BLRO",
+    "description": "2025 Rolex GMT-Master II Pepsi, reference 126710BLRO, with red-and-blue bezel and Jubilee bracelet. Full set.",
+    "price": 26500,
+    "category": "Watches",
+    "material": "Oystersteel",
+    "sku": "126710BLRO-PEPSI-2025",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "rolex-gmt-pepsi-126710blro-2025.png"
+  },
+  {
+    "name": "2026 Rolex GMT-Master II Sprite 126710VTNR",
+    "description": "2026 Rolex GMT-Master II Sprite, reference 126710VTNR, with green-and-black bezel and Jubilee bracelet. Full set.",
+    "price": 17999,
+    "category": "Watches",
+    "material": "Oystersteel",
+    "sku": "126710VTNR-SPRITE-JUBILEE-2026",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "rolex-gmt-sprite-jubilee-126710vtnr-2026.png"
+  },
+  {
+    "name": "2024 Rolex GMT-Master II Sprite 126710VTNR",
+    "description": "2024 Rolex GMT-Master II Sprite, reference 126710VTNR, with green-and-black bezel and Oyster bracelet. Full set.",
+    "price": 16500,
+    "category": "Watches",
+    "material": "Oystersteel",
+    "sku": "126710VTNR-SPRITE-OYSTER-2024",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "rolex-gmt-sprite-oyster-126710vtnr-2024.png"
+  },
+  {
+    "name": "2026 Rolex Land-Dweller 40 127334",
+    "description": "2026 Rolex Land-Dweller 40 mm, reference 127334, with white honeycomb dial, fluted bezel, and integrated bracelet. Full set.",
+    "price": 25799,
+    "category": "Watches",
+    "material": "Oystersteel and white gold",
+    "sku": "127334-LAND-DWELLER-2026",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "rolex-land-dweller-127334-2026.png"
   }
 ]
