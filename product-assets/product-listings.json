@@ -202,5 +202,211 @@
     "in_stock": true,
     "featured": false,
     "image": "rolex-land-dweller-127334-2026.png"
+  },
+  {
+    "name": "2019 Rolex Submariner Hulk 116610LV",
+    "description": "2019 Rolex Submariner Hulk, reference 116610LV. Full set. Mint condition.",
+    "price": 19999,
+    "category": "Watches",
+    "material": "Oystersteel",
+    "sku": "116610LV-HULK-2019",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "october-2026/rolex-submariner-hulk-116610lv-white.jpg",
+    "images": [
+      "october-2026/rolex-submariner-hulk-116610lv-white.jpg",
+      "october-2026/rolex-submariner-hulk-116610lv-02.jpg",
+      "october-2026/rolex-submariner-hulk-116610lv-03.jpg",
+      "october-2026/rolex-submariner-hulk-116610lv-04.jpg"
+    ]
+  },
+  {
+    "name": "2023 Rolex Submariner Starbucks 126610LV",
+    "description": "2023 Rolex Submariner “Starbucks,” reference 126610LV. Full set. Mint condition.",
+    "price": 14499,
+    "category": "Watches",
+    "material": "Oystersteel",
+    "sku": "126610LV-STARBUCKS-2023",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "october-2026/rolex-submariner-starbucks-126610lv-white.jpg",
+    "images": [
+      "october-2026/rolex-submariner-starbucks-126610lv-white.jpg",
+      "october-2026/rolex-submariner-starbucks-126610lv-02.jpg",
+      "october-2026/rolex-submariner-starbucks-126610lv-03.jpg",
+      "october-2026/rolex-submariner-starbucks-126610lv-04.jpg"
+    ]
+  },
+  {
+    "name": "2025 Rolex Oyster Perpetual Pistachio 134300",
+    "description": "Brand-new 2025 Rolex Oyster Perpetual “Pistachio,” reference 134300. Full set.",
+    "price": 11000,
+    "category": "Watches",
+    "material": "Oystersteel",
+    "sku": "134300-PISTACHIO-2025",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "october-2026/rolex-oyster-perpetual-pistachio-134300-white.jpg",
+    "images": [
+      "october-2026/rolex-oyster-perpetual-pistachio-134300-white.jpg",
+      "october-2026/rolex-oyster-perpetual-pistachio-134300-02.jpg",
+      "october-2026/rolex-oyster-perpetual-pistachio-134300-03.jpg",
+      "october-2026/rolex-oyster-perpetual-pistachio-134300-04.jpg"
+    ]
+  },
+  {
+    "name": "2023 Rolex Oyster Perpetual 134300",
+    "description": "2023 Rolex Oyster Perpetual, reference 134300. Full set. Mint condition.",
+    "price": 10000,
+    "category": "Watches",
+    "material": "Oystersteel",
+    "sku": "134300-2023-MINT",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "october-2026/rolex-oyster-perpetual-green-134300-white.jpg",
+    "images": [
+      "october-2026/rolex-oyster-perpetual-green-134300-white.jpg",
+      "october-2026/rolex-oyster-perpetual-green-134300-02.jpg",
+      "october-2026/rolex-oyster-perpetual-green-134300-03.jpg",
+      "october-2026/rolex-oyster-perpetual-green-134300-04.jpg"
+    ]
+  },
+  {
+    "name": "2026 Rolex Factory Diamond Bezel Wimbledon 126284RBR",
+    "description": "Brand-new 2026 Rolex with factory diamond bezel and Wimbledon dial, reference 126284RBR. Full set.",
+    "price": 20000,
+    "category": "Watches",
+    "material": "Stainless steel",
+    "sku": "126284RBR-WIMBLEDON-2026",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "october-2026/rolex-wimbledon-126284rbr-white.jpg",
+    "images": [
+      "october-2026/rolex-wimbledon-126284rbr-white.jpg",
+      "october-2026/rolex-wimbledon-126284rbr-02.jpg",
+      "october-2026/rolex-wimbledon-126284rbr-03.jpg",
+      "october-2026/rolex-wimbledon-126284rbr-04.jpg"
+    ]
+  },
+  {
+    "name": "2024 Rolex GMT-Master II Batgirl 126710BLNR",
+    "description": "2024 Rolex GMT-Master II “Batgirl,” reference 126710BLNR. Full set. Mint condition.",
+    "price": 18499,
+    "category": "Watches",
+    "material": "Oystersteel",
+    "sku": "126710BLNR-BATGIRL-2024",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "october-2026/rolex-gmt-batgirl-126710blnr-2024-white.jpg",
+    "images": [
+      "october-2026/rolex-gmt-batgirl-126710blnr-2024-white.jpg",
+      "october-2026/rolex-gmt-batgirl-126710blnr-2024-02.jpg",
+      "october-2026/rolex-gmt-batgirl-126710blnr-2024-03.jpg",
+      "october-2026/rolex-gmt-batgirl-126710blnr-2024-04.jpg"
+    ]
+  },
+  {
+    "name": "2026 Rolex GMT-Master II Bruce Wayne Oyster 126710GRNR",
+    "description": "Brand-new 2026 Rolex GMT-Master II “Bruce Wayne” with Oyster bracelet, reference 126710GRNR. Full set.",
+    "price": 20000,
+    "category": "Watches",
+    "material": "Oystersteel",
+    "sku": "126710GRNR-BRUCE-WAYNE-OYSTER-2026",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "october-2026/rolex-gmt-bruce-wayne-oyster-126710grnr-white.jpg",
+    "images": [
+      "october-2026/rolex-gmt-bruce-wayne-oyster-126710grnr-white.jpg",
+      "october-2026/rolex-gmt-bruce-wayne-oyster-126710grnr-02.jpg",
+      "october-2026/rolex-gmt-bruce-wayne-oyster-126710grnr-03.jpg",
+      "october-2026/rolex-gmt-bruce-wayne-oyster-126710grnr-04.jpg"
+    ]
+  },
+  {
+    "name": "10K Diamond Money Bag Pendant — 0.90 CTW",
+    "description": "10K yellow-gold money bag pendant set with approximately 0.90 ct of natural diamonds.",
+    "price": 1500,
+    "category": "Pendants",
+    "material": "10K yellow gold with 0.90 ct natural diamonds",
+    "sku": "MONEYBAG-10K-090CT",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "october-2026/money-bag-pendant-10k-090ct-white.jpg",
+    "images": [
+      "october-2026/money-bag-pendant-10k-090ct-white.jpg",
+      "october-2026/money-bag-pendant-10k-090ct-02.jpg"
+    ]
+  },
+  {
+    "name": "10K Diamond Money Bag Pendant — 0.50 CTW",
+    "description": "10K yellow-gold money bag pendant set with approximately 0.50 ct of natural diamonds.",
+    "price": 1600,
+    "category": "Pendants",
+    "material": "10K yellow gold with 0.50 ct natural diamonds",
+    "sku": "MONEYBAG-10K-050CT",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "october-2026/money-bag-pendant-10k-050ct-white.jpg",
+    "images": [
+      "october-2026/money-bag-pendant-10k-050ct-white.jpg",
+      "october-2026/money-bag-pendant-10k-050ct-02.jpg"
+    ]
+  },
+  {
+    "name": "10K Diamond Barber Pendant",
+    "description": "10K gold barber pendant set with approximately 0.50 ct of natural diamonds.",
+    "price": 1000,
+    "category": "Pendants",
+    "material": "10K gold with 0.50 ct natural diamonds",
+    "sku": "BARBER-10K-050CT",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "october-2026/barber-pendant-10k-050ct-white.jpg",
+    "images": [
+      "october-2026/barber-pendant-10k-050ct-white.jpg",
+      "october-2026/barber-pendant-10k-050ct-02.jpg"
+    ]
+  },
+  {
+    "name": "10K Diamond Dollar Sign Pendant",
+    "description": "10K yellow-gold dollar sign pendant set with approximately 1.50 ct of natural diamonds.",
+    "price": 2500,
+    "category": "Pendants",
+    "material": "10K yellow gold with 1.50 ct natural diamonds",
+    "sku": "DOLLAR-10K-150CT",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "october-2026/dollar-sign-pendant-10k-150ct-white.jpg",
+    "images": [
+      "october-2026/dollar-sign-pendant-10k-150ct-white.jpg",
+      "october-2026/dollar-sign-pendant-10k-150ct-02.jpg"
+    ]
+  },
+  {
+    "name": "10K Diamond Spade Pendant",
+    "description": "10K yellow-gold spade pendant set with approximately 1.50 ct of natural diamonds.",
+    "price": 2250,
+    "category": "Pendants",
+    "material": "10K yellow gold with 1.50 ct natural diamonds",
+    "sku": "SPADE-10K-150CT",
+    "stock_quantity": 1,
+    "in_stock": true,
+    "featured": false,
+    "image": "october-2026/spade-pendant-10k-150ct-white.jpg",
+    "images": [
+      "october-2026/spade-pendant-10k-150ct-white.jpg",
+      "october-2026/spade-pendant-10k-150ct-02.jpg"
+    ]
   }
 ]
